@@ -8,6 +8,10 @@
 
 `asciisama` is a gallery of 82 animated ASCII patterns you can preview, tune, and copy into any `div`.
 
+Live site: https://jadechip.github.io/asciisama/
+
 GitHub Pages deployment is handled by `.github/workflows/pages.yml`. It publishes the static site from `index.html` on pushes to `main`.
 
 For local use, open `index.html` directly in a browser or serve the repo with any static file server.
+
+License: MIT. See `LICENSE`.
