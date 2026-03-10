@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASCII Background Animations</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --text: #e8e8f0;
+    --muted: #555570;
+    --accent1: #00ffcc;
+    --accent2: #ff4466;
+    --accent3: #4488ff;
+    --accent4: #ffaa00;
+    --accent5: #cc44ff;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.4rem;
+    background: linear-gradient(135deg, var(--accent1), var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .card:hover { border-color: var(--muted); }
+
+  /* THE ASCII CANVAS */
+  .ascii-bg {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    cursor: default;
+    user-select: none;
+  }
+
+  .ascii-bg pre {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0.6rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    line-height: 1.3;
+    letter-spacing: 0.05em;
+    white-space: pre;
+    pointer-events: none;
+  }
+
+  /* Color themes per animation */
+  .wave-bg     { background: #060610; }
+  .wave-bg pre { color: var(--accent1); }
+
+  .rain-bg     { background: #060f0a; }
+  .rain-bg pre { color: #00cc77; }
+
+  .plasma-bg   { background: #0f0610; }
+  .plasma-bg pre { color: var(--accent5); }
+
+  .ripple-bg   { background: #0a0810; }
+  .ripple-bg pre { color: var(--accent3); }
+
+  .noise-bg    { background: #100a06; }
+  .noise-bg pre { color: var(--accent4); }
+
+  /* New animation themes */
+  .vortex-bg   { background: #10060a; }
+  .vortex-bg pre { color: #ff4466; }
+
+  .fire-bg     { background: #0f0400; }
+  .fire-bg pre { color: #ff7722; }
+
+  .stars-bg    { background: #000008; }
+  .stars-bg pre { color: #c8d8ff; }
+
+  .dna-bg      { background: #061010; }
+  .dna-bg pre  { color: #00ffaa; }
+
+  .binary-bg   { background: #030f06; }
+  .binary-bg pre { color: #33ff77; }
+
+  .radar-bg    { background: #020d04; }
+  .radar-bg pre { color: #00ee55; }
+
+  .worms-bg    { background: #080614; }
+  .worms-bg pre { color: #aa77ff; }
+
+  .tunnel-bg   { background: #0f0a00; }
+  .tunnel-bg pre { color: #ffaa00; }
+
+  .sand-bg     { background: #100a02; }
+  .sand-bg pre { color: #ffcc55; }
+
+  .ekg-bg      { background: #100306; }
+  .ekg-bg pre  { color: #ff2244; }
+
+  /* ── batch 3 themes ── */
+  .life-bg      { background: #040e0a; }
+  .life-bg pre  { color: #00ddaa; }
+
+  .cube-bg      { background: #080814; }
+  .cube-bg pre  { color: #8899ff; }
+
+  .lissajous-bg      { background: #10040c; }
+  .lissajous-bg pre  { color: #ff66cc; }
+
+  .snow-bg      { background: #06080e; }
+  .snow-bg pre  { color: #ddeeff; }
+
+  .mandel-bg    { background: #040408; }
+  .mandel-bg pre { color: #00ffcc; }
+
+  .ant-bg       { background: #080a04; }
+  .ant-bg pre   { color: #aaff44; }
+
+  .orbits-bg    { background: #040408; }
+  .orbits-bg pre { color: #ffdd44; }
+
+  .smoke-bg     { background: #08080e; }
+  .smoke-bg pre { color: #99aabb; }
+
+  .lightning-bg     { background: #060814; }
+  .lightning-bg pre { color: #aaccff; }
+
+  .rule30-bg    { background: #0e0600; }
+  .rule30-bg pre { color: #ff8833; }
+
+  .meta-bg      { background: #100408; }
+  .meta-bg pre  { color: #ff6688; }
+
+  .maze-bg      { background: #05050f; }
+  .maze-bg pre  { color: #5599ff; }
+
+  .bubbles-bg     { background: #040a12; }
+  .bubbles-bg pre { color: #66ccff; }
+
+  .react-bg     { background: #040c04; }
+  .react-bg pre { color: #66ff88; }
+
+  .glitch-bg    { background: #100010; }
+  .glitch-bg pre { color: #ff22ff; }
+
+  .dla-bg       { background: #040c0e; }
+  .dla-bg pre   { color: #44ccee; }
+
+  .torus-bg     { background: #080510; }
+  .torus-bg pre { color: #cc88ff; }
+
+  .waterfall-bg     { background: #040c08; }
+  .waterfall-bg pre { color: #00ff88; }
+
+  .fountain-bg     { background: #0a0604; }
+  .fountain-bg pre { color: #ffaa44; }
+
+  .sierpinski-bg     { background: #04040e; }
+  .sierpinski-bg pre { color: #6688ff; }
+
+  /* Card meta */
+  .card-info {
+    padding: 1rem 1.2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+  }
+
+  .card-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.2em 0.6em;
+    border-radius: 2px;
+  }
+
+  /* Copy button */
+  .copy-btn {
+    display: block;
+    width: calc(100% - 2.4rem);
+    margin: 0 1.2rem 1rem;
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+    border-radius: 2px;
+  }
+
+  .copy-btn:hover {
+    border-color: var(--accent1);
+    color: var(--accent1);
+  }
+
+  .copy-btn.copied {
+    border-color: var(--accent1);
+    color: var(--accent1);
+    background: rgba(0,255,204,0.05);
+  }
+
+  /* Usage section */
+  .usage {
+    margin-top: 3rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .usage-header {
+    background: var(--surface);
+    padding: 0.8rem 1.2rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .usage pre {
+    padding: 1.2rem;
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: #8888aa;
+    overflow-x: auto;
+  }
+
+  .usage pre .kw  { color: var(--accent3); }
+  .usage pre .str { color: var(--accent1); }
+  .usage pre .fn  { color: var(--accent5); }
+  .usage pre .cmt { color: #444460; font-style: italic; }
+</style>
+</head>
+<body>
+
+<h1>ASCII Backgrounds</h1>
+<p class="subtitle">35 animated patterns · drop into any div</p>
+
+<div class="grid">
+
+  <!-- 1. OCEAN WAVE -->
+  <div class="card">
+    <div class="ascii-bg wave-bg" id="wave-demo"><pre id="wave-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Ocean Wave</span>
+      <span class="card-tag">sine scroll</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('wave')">copy code</button>
+  </div>
+
+  <!-- 2. MATRIX RAIN -->
+  <div class="card">
+    <div class="ascii-bg rain-bg" id="rain-demo"><pre id="rain-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Digital Rain</span>
+      <span class="card-tag">column fall</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('rain')">copy code</button>
+  </div>
+
+  <!-- 3. PLASMA -->
+  <div class="card">
+    <div class="ascii-bg plasma-bg" id="plasma-demo"><pre id="plasma-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Plasma Field</span>
+      <span class="card-tag">sin/cos field</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('plasma')">copy code</button>
+  </div>
+
+  <!-- 4. RIPPLE -->
+  <div class="card">
+    <div class="ascii-bg ripple-bg" id="ripple-demo"><pre id="ripple-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Ripple Pool</span>
+      <span class="card-tag">radial wave</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('ripple')">copy code</button>
+  </div>
+
+  <!-- 5. NOISE CRAWL -->
+  <div class="card">
+    <div class="ascii-bg noise-bg" id="noise-demo"><pre id="noise-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Static Noise</span>
+      <span class="card-tag">perlin-like</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('noise')">copy code</button>
+  </div>
+
+
+  <!-- 6. VORTEX -->
+  <div class="card">
+    <div class="ascii-bg vortex-bg"><pre id="vortex-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Vortex Spiral</span>
+      <span class="card-tag">angular spin</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('vortex')">copy code</button>
+  </div>
+
+  <!-- 7. FIRE -->
+  <div class="card">
+    <div class="ascii-bg fire-bg"><pre id="fire-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Fire Sim</span>
+      <span class="card-tag">cellular heat</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('fire')">copy code</button>
+  </div>
+
+  <!-- 8. STARFIELD -->
+  <div class="card">
+    <div class="ascii-bg stars-bg"><pre id="stars-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Starfield</span>
+      <span class="card-tag">3d warp</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('stars')">copy code</button>
+  </div>
+
+  <!-- 9. DNA HELIX -->
+  <div class="card">
+    <div class="ascii-bg dna-bg"><pre id="dna-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">DNA Helix</span>
+      <span class="card-tag">double strand</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('dna')">copy code</button>
+  </div>
+
+  <!-- 10. BINARY FALL -->
+  <div class="card">
+    <div class="ascii-bg binary-bg"><pre id="binary-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Binary Fall</span>
+      <span class="card-tag">bit stream</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('binary')">copy code</button>
+  </div>
+
+  <!-- 11. RADAR SWEEP -->
+  <div class="card">
+    <div class="ascii-bg radar-bg"><pre id="radar-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Radar Sweep</span>
+      <span class="card-tag">rotating scan</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('radar')">copy code</button>
+  </div>
+
+  <!-- 12. WORM TRAILS -->
+  <div class="card">
+    <div class="ascii-bg worms-bg"><pre id="worms-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Worm Trails</span>
+      <span class="card-tag">agent paths</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('worms')">copy code</button>
+  </div>
+
+  <!-- 13. TUNNEL ZOOM -->
+  <div class="card">
+    <div class="ascii-bg tunnel-bg"><pre id="tunnel-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Tunnel Zoom</span>
+      <span class="card-tag">wireframe depth</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('tunnel')">copy code</button>
+  </div>
+
+  <!-- 14. SAND FALL -->
+  <div class="card">
+    <div class="ascii-bg sand-bg"><pre id="sand-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Sand Fall</span>
+      <span class="card-tag">gravity automaton</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('sand')">copy code</button>
+  </div>
+
+  <!-- 15. EKG PULSE -->
+  <div class="card">
+    <div class="ascii-bg ekg-bg"><pre id="ekg-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">EKG Pulse</span>
+      <span class="card-tag">heartbeat scroll</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('ekg')">copy code</button>
+  </div>
+
+  <!-- 16. GAME OF LIFE -->
+  <div class="card">
+    <div class="ascii-bg life-bg"><pre id="life-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Game of Life</span>
+      <span class="card-tag">conway automaton</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('life')">copy code</button>
+  </div>
+
+  <!-- 17. 3D CUBE -->
+  <div class="card">
+    <div class="ascii-bg cube-bg"><pre id="cube-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Rotating Cube</span>
+      <span class="card-tag">3d wireframe</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('cube')">copy code</button>
+  </div>
+
+  <!-- 18. LISSAJOUS -->
+  <div class="card">
+    <div class="ascii-bg lissajous-bg"><pre id="lissajous-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Lissajous</span>
+      <span class="card-tag">oscilloscope</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('lissajous')">copy code</button>
+  </div>
+
+  <!-- 19. SNOWFALL -->
+  <div class="card">
+    <div class="ascii-bg snow-bg"><pre id="snow-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Snowfall</span>
+      <span class="card-tag">particle drift</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('snow')">copy code</button>
+  </div>
+
+  <!-- 20. MANDELBROT -->
+  <div class="card">
+    <div class="ascii-bg mandel-bg"><pre id="mandel-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Mandelbrot</span>
+      <span class="card-tag">fractal cycle</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('mandel')">copy code</button>
+  </div>
+
+  <!-- 21. LANGTON'S ANT -->
+  <div class="card">
+    <div class="ascii-bg ant-bg"><pre id="ant-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Langton's Ant</span>
+      <span class="card-tag">emergent agent</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('ant')">copy code</button>
+  </div>
+
+  <!-- 22. ORBITS -->
+  <div class="card">
+    <div class="ascii-bg orbits-bg"><pre id="orbits-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Orbit Sim</span>
+      <span class="card-tag">planetary motion</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('orbits')">copy code</button>
+  </div>
+
+  <!-- 23. SMOKE -->
+  <div class="card">
+    <div class="ascii-bg smoke-bg"><pre id="smoke-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Smoke Rise</span>
+      <span class="card-tag">fluid diffusion</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('smoke')">copy code</button>
+  </div>
+
+  <!-- 24. LIGHTNING -->
+  <div class="card">
+    <div class="ascii-bg lightning-bg"><pre id="lightning-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Lightning</span>
+      <span class="card-tag">branch strike</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('lightning')">copy code</button>
+  </div>
+
+  <!-- 25. RULE 30 -->
+  <div class="card">
+    <div class="ascii-bg rule30-bg"><pre id="rule30-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Rule 30</span>
+      <span class="card-tag">1d automaton</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('rule30')">copy code</button>
+  </div>
+
+  <!-- 26. METABALLS -->
+  <div class="card">
+    <div class="ascii-bg meta-bg"><pre id="meta-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Metaballs</span>
+      <span class="card-tag">lava blobs</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('meta')">copy code</button>
+  </div>
+
+  <!-- 27. MAZE -->
+  <div class="card">
+    <div class="ascii-bg maze-bg"><pre id="maze-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Maze Gen</span>
+      <span class="card-tag">backtracking</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('maze')">copy code</button>
+  </div>
+
+  <!-- 28. BUBBLES -->
+  <div class="card">
+    <div class="ascii-bg bubbles-bg"><pre id="bubbles-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Bubbles</span>
+      <span class="card-tag">rising wobble</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('bubbles')">copy code</button>
+  </div>
+
+  <!-- 29. REACTION DIFFUSION -->
+  <div class="card">
+    <div class="ascii-bg react-bg"><pre id="react-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Reaction Diffusion</span>
+      <span class="card-tag">gray-scott</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('react')">copy code</button>
+  </div>
+
+  <!-- 30. GLITCH -->
+  <div class="card">
+    <div class="ascii-bg glitch-bg"><pre id="glitch-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Glitch</span>
+      <span class="card-tag">data corrupt</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('glitch')">copy code</button>
+  </div>
+
+  <!-- 31. DLA CRYSTAL -->
+  <div class="card">
+    <div class="ascii-bg dla-bg"><pre id="dla-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Crystal Growth</span>
+      <span class="card-tag">dla aggregate</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('dla')">copy code</button>
+  </div>
+
+  <!-- 32. TORUS -->
+  <div class="card">
+    <div class="ascii-bg torus-bg"><pre id="torus-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Torus / Donut</span>
+      <span class="card-tag">3d rotation</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('torus')">copy code</button>
+  </div>
+
+  <!-- 33. WATERFALL -->
+  <div class="card">
+    <div class="ascii-bg waterfall-bg"><pre id="waterfall-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Waterfall</span>
+      <span class="card-tag">spectrogram</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('waterfall')">copy code</button>
+  </div>
+
+  <!-- 34. FOUNTAIN -->
+  <div class="card">
+    <div class="ascii-bg fountain-bg"><pre id="fountain-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Fountain</span>
+      <span class="card-tag">gravity particles</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('fountain')">copy code</button>
+  </div>
+
+  <!-- 35. SIERPINSKI -->
+  <div class="card">
+    <div class="ascii-bg sierpinski-bg"><pre id="sierpinski-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Sierpinski</span>
+      <span class="card-tag">chaos game</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('sierpinski')">copy code</button>
+  </div>
+
+</div>
+
+<!-- Usage -->
+<div class="usage">
+  <div class="usage-header">usage</div>
+  <pre><span class="cmt">// 1. Drop the target pre inside your div:</span>
+&lt;<span class="kw">div</span> <span class="str">class</span>=<span class="str">"my-div"</span>&gt; &lt;<span class="kw">pre</span> <span class="str">id</span>=<span class="str">"my-canvas"</span>&gt;&lt;/<span class="kw">pre</span>&gt; &lt;/<span class="kw">div</span>&gt;
+
+<span class="cmt">// 2. Style the wrapper:</span>
+.<span class="fn">my-div</span> { <span class="str">position: relative; overflow: hidden; background: #060610;</span> }
+.<span class="fn">my-div</span> <span class="kw">pre</span> { <span class="str">position: absolute; inset: 0; font-size: 10px; line-height: 1.3; color: #00ffcc; pointer-events: none;</span> }
+
+<span class="cmt">// 3. Copy the JS for whichever animation you want and call:</span>
+<span class="fn">asciiWave</span>(<span class="str">'my-canvas'</span>);    <span class="cmt">// Ocean Wave</span>
+<span class="fn">asciiRain</span>(<span class="str">'my-canvas'</span>);    <span class="cmt">// Digital Rain</span>
+<span class="fn">asciiPlasma</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Plasma Field</span>
+<span class="fn">asciiRipple</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Ripple Pool</span>
+<span class="fn">asciiNoise</span>(<span class="str">'my-canvas'</span>);  <span class="cmt">// Static Noise</span>
+<span class="fn">asciiVortex</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Vortex Spiral</span>
+<span class="fn">asciiFire</span>(<span class="str">'my-canvas'</span>);   <span class="cmt">// Fire Sim</span>
+<span class="fn">asciiStars</span>(<span class="str">'my-canvas'</span>);  <span class="cmt">// Starfield</span>
+<span class="fn">asciiDNA</span>(<span class="str">'my-canvas'</span>);    <span class="cmt">// DNA Helix</span>
+<span class="fn">asciiBinary</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Binary Fall</span>
+<span class="fn">asciiRadar</span>(<span class="str">'my-canvas'</span>);  <span class="cmt">// Radar Sweep</span>
+<span class="fn">asciiWorms</span>(<span class="str">'my-canvas'</span>);  <span class="cmt">// Worm Trails</span>
+<span class="fn">asciiTunnel</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Tunnel Zoom</span>
+<span class="fn">asciiSand</span>(<span class="str">'my-canvas'</span>);   <span class="cmt">// Sand Fall</span>
+<span class="fn">asciiEKG</span>(<span class="str">'my-canvas'</span>);    <span class="cmt">// EKG Pulse</span>
+<span class="fn">asciiLife</span>(<span class="str">'my-canvas'</span>);   <span class="cmt">// Game of Life</span>
+<span class="fn">asciiCube</span>(<span class="str">'my-canvas'</span>);   <span class="cmt">// Rotating Cube</span>
+<span class="fn">asciiLissajous</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Lissajous</span>
+<span class="fn">asciiSnow</span>(<span class="str">'my-canvas'</span>);   <span class="cmt">// Snowfall</span>
+<span class="fn">asciiMandel</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Mandelbrot</span>
+<span class="fn">asciiAnt</span>(<span class="str">'my-canvas'</span>);    <span class="cmt">// Langton's Ant</span>
+<span class="fn">asciiOrbits</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Orbit Sim</span>
+<span class="fn">asciiSmoke</span>(<span class="str">'my-canvas'</span>);  <span class="cmt">// Smoke Rise</span>
+<span class="fn">asciiLightning</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Lightning</span>
+<span class="fn">asciiRule30</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Rule 30</span>
+<span class="fn">asciiMeta</span>(<span class="str">'my-canvas'</span>);   <span class="cmt">// Metaballs</span>
+<span class="fn">asciiMaze</span>(<span class="str">'my-canvas'</span>);   <span class="cmt">// Maze Gen</span>
+<span class="fn">asciiBubbles</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Bubbles</span>
+<span class="fn">asciiReact</span>(<span class="str">'my-canvas'</span>);  <span class="cmt">// Reaction Diffusion</span>
+<span class="fn">asciiGlitch</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Glitch</span>
+<span class="fn">asciiDLA</span>(<span class="str">'my-canvas'</span>);    <span class="cmt">// Crystal Growth</span>
+<span class="fn">asciiTorus</span>(<span class="str">'my-canvas'</span>);  <span class="cmt">// Torus / Donut</span>
+<span class="fn">asciiWaterfall</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Waterfall</span>
+<span class="fn">asciiFountain</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Fountain</span>
+<span class="fn">asciiSierpinski</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Sierpinski</span></pre>
+</div>
+
+<script>
+/* ─── UTILITIES ────────────────────────────────── */
+function getDims(el) {
+  const cw = el.parentElement.clientWidth;
+  const ch = el.parentElement.clientHeight;
+  const cw_ = Math.floor(cw  / 6.3);  // approx char width @ 10px monospace
+  const ch_ = Math.floor(ch  / 13);   // approx line height @ 10px * 1.3
+  return { cols: cw_, rows: ch_ };
+}
+
+/* ─── 1. OCEAN WAVE ────────────────────────────── */
+function asciiWave(id) {
+  const el = document.getElementById(id);
+  const chars = ['·', '∘', '○', '◦', '~', '≈', '≋', '∼', '⌇', '∿'];
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const wave1 = Math.sin((x * 0.18) + (y * 0.25) - t * 1.4);
+        const wave2 = Math.sin((x * 0.09) - (y * 0.15) + t * 0.9);
+        const wave3 = Math.cos((x * 0.12) + (y * 0.08) + t * 0.5);
+        const combined = (wave1 + wave2 + wave3) / 3;
+        const idx = Math.floor(((combined + 1) / 2) * (chars.length - 1));
+        out += chars[Math.max(0, Math.min(chars.length - 1, idx))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.04;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 2. DIGITAL RAIN ──────────────────────────── */
+function asciiRain(id) {
+  const el = document.getElementById(id);
+  const kana = 'ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789';
+  let cols = 0, drops = [];
+
+  function init() {
+    const { cols: c, rows: r } = getDims(el);
+    cols = c;
+    drops = Array.from({ length: c }, () => ({
+      y: Math.random() * -r,
+      speed: 0.3 + Math.random() * 0.5,
+      len: 4 + Math.floor(Math.random() * 10),
+      chars: Array.from({ length: 20 }, () => kana[Math.floor(Math.random() * kana.length)])
+    }));
+  }
+
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (c !== cols) init();
+
+    const grid = Array.from({ length: r }, () => Array(c).fill(' '));
+
+    drops.forEach((d, x) => {
+      d.y += d.speed;
+      if (d.y - d.len > r) {
+        d.y = -d.len;
+        d.speed = 0.3 + Math.random() * 0.5;
+        d.len = 4 + Math.floor(Math.random() * 10);
+      }
+      // randomly swap a char
+      if (Math.random() < 0.08) {
+        const ci = Math.floor(Math.random() * d.chars.length);
+        d.chars[ci] = kana[Math.floor(Math.random() * kana.length)];
+      }
+      for (let i = 0; i < d.len; i++) {
+        const gy = Math.floor(d.y) - i;
+        if (gy >= 0 && gy < r) {
+          grid[gy][x] = d.chars[i % d.chars.length];
+        }
+      }
+    });
+
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+
+  init();
+  frame();
+}
+
+/* ─── 3. PLASMA FIELD ──────────────────────────── */
+function asciiPlasma(id) {
+  const el = document.getElementById(id);
+  const chars = ' ░▒▓█▓▒░ ·:;!|I1lL▌▐▀▄';
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const cx = x / cols, cy = y / rows;
+        const v1 = Math.sin(cx * 10 + t);
+        const v2 = Math.sin(cy * 8 - t * 0.7);
+        const v3 = Math.sin((cx + cy) * 7 + t * 0.5);
+        const v4 = Math.sin(Math.sqrt((cx - 0.5) ** 2 + (cy - 0.5) ** 2) * 14 - t);
+        const v = (v1 + v2 + v3 + v4 + 4) / 8;
+        const idx = Math.floor(v * (chars.length - 1));
+        out += chars[Math.max(0, Math.min(chars.length - 1, idx))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.045;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 4. RIPPLE POOL ───────────────────────────── */
+function asciiRipple(id) {
+  const el = document.getElementById(id);
+  const chars = ' .·:+*#@';
+  let t = 0;
+  let centers = [{ x: 0.5, y: 0.5 }, { x: 0.25, y: 0.7 }, { x: 0.75, y: 0.3 }];
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const cx = x / cols, cy = y / rows;
+        let v = 0;
+        centers.forEach((c, i) => {
+          const dx = cx - c.x, dy = cy - c.y;
+          const dist = Math.sqrt(dx * dx + dy * dy * 2.5);
+          v += Math.sin(dist * 20 - t * (1 + i * 0.3));
+        });
+        v = (v / centers.length + 1) / 2;
+        const idx = Math.floor(v * (chars.length - 1));
+        out += chars[Math.max(0, Math.min(chars.length - 1, idx))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.06;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 5. STATIC NOISE ──────────────────────────── */
+function asciiNoise(id) {
+  const el = document.getElementById(id);
+  const chars = ' ·.:!|/\\-+*#%@░▒';
+  // simple smooth noise via layered sines
+  function noise(x, y, t) {
+    return (
+      Math.sin(x * 3.1 + t) * Math.cos(y * 2.7 - t * 0.6) +
+      Math.sin(x * 1.5 - t * 0.4) * Math.sin(y * 4.2 + t * 0.8) +
+      Math.cos(x * 5.3 + y * 2.1 + t * 0.3)
+    ) / 3;
+  }
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const v = (noise(x * 0.15, y * 0.22, t) + 1) / 2;
+        const idx = Math.floor(v * (chars.length - 1));
+        out += chars[Math.max(0, Math.min(chars.length - 1, idx))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.025;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 6. VORTEX SPIRAL ─────────────────────────── */
+function asciiVortex(id) {
+  const el = document.getElementById(id);
+  const chars = ' ·∙•◦○◎@#';
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    const cx = cols * 0.5, cy = rows * 0.5;
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const dx = (x - cx) / cols;
+        const dy = (y - cy) / rows * 2;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx);
+        const v = Math.sin(dist * 18 - t * 2.5 + angle * 4) * 0.5
+                + Math.sin(dist * 10 + angle * 2 - t) * 0.5;
+        const idx = Math.floor(((v + 1) / 2) * (chars.length - 1));
+        out += chars[Math.max(0, Math.min(chars.length - 1, idx))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.045;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 7. FIRE SIM ──────────────────────────────── */
+function asciiFire(id) {
+  const el = document.getElementById(id);
+  const chars = ' `·,:;=+*#%@▒▓█';
+  let grid = null, cols = 0, rows = 0;
+  function init(c, r) {
+    cols = c; rows = r;
+    grid = Array.from({ length: r }, () => new Float32Array(c));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!grid || c !== cols || r !== rows) init(c, r);
+    for (let x = 0; x < cols; x++) {
+      grid[rows - 1][x] = Math.random() > 0.25 ? 0.7 + Math.random() * 0.3 : 0;
+    }
+    for (let y = rows - 2; y >= 0; y--) {
+      for (let x = 0; x < cols; x++) {
+        const l = x > 0 ? grid[y + 1][x - 1] : 0;
+        const m = grid[y + 1][x];
+        const r2 = x < cols - 1 ? grid[y + 1][x + 1] : 0;
+        grid[y][x] = ((l + m + m + r2) / 4) * 0.94;
+      }
+    }
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const v = Math.max(0, Math.min(1, grid[y][x]));
+        out += chars[Math.floor(v * (chars.length - 1))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 8. STARFIELD ─────────────────────────────── */
+function asciiStars(id) {
+  const el = document.getElementById(id);
+  const chars = '·∙•*+✦';
+  const N = 120;
+  function mkStar() {
+    return { x: (Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2, z: Math.random() };
+  }
+  let stars = Array.from({ length: N }, mkStar);
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    stars.forEach(s => {
+      s.z -= 0.012;
+      if (s.z <= 0) { Object.assign(s, mkStar()); s.z = 1; }
+      const sx = Math.floor(s.x / s.z * cols * 0.35 + cols * 0.5);
+      const sy = Math.floor(s.y / s.z * rows * 0.7 + rows * 0.5);
+      const ci = Math.min(Math.floor((1 - s.z) * chars.length), chars.length - 1);
+      if (sx >= 0 && sx < cols && sy >= 0 && sy < rows) grid[sy][sx] = chars[ci];
+    });
+    el.textContent = grid.map(r => r.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 9. DNA HELIX ─────────────────────────────── */
+function asciiDNA(id) {
+  const el = document.getElementById(id);
+  const pairs = [['A','T'],['T','A'],['G','C'],['C','G']];
+  const N = 200;
+  const seq = Array.from({ length: N }, () => pairs[Math.floor(Math.random() * 4)]);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const mid = rows * 0.5, amp = rows * 0.38;
+    for (let x = 0; x < cols; x++) {
+      const phase = (x / cols) * Math.PI * 2 * 5 - t;
+      const y1 = Math.round(mid + Math.sin(phase) * amp);
+      const y2 = Math.round(mid + Math.sin(phase + Math.PI) * amp);
+      const pi = Math.floor((((x / cols * 5 - t / (Math.PI * 2)) % 1) + 10) % 1 * N);
+      if (y1 >= 0 && y1 < rows) grid[y1][x] = seq[pi][0];
+      if (y2 >= 0 && y2 < rows) grid[y2][x] = seq[pi][1];
+      if (x % 5 === 0) {
+        const yMin = Math.min(y1, y2) + 1, yMax = Math.max(y1, y2) - 1;
+        for (let y = yMin; y <= yMax; y++) {
+          if (y >= 0 && y < rows && grid[y][x] === ' ') grid[y][x] = '─';
+        }
+      }
+    }
+    el.textContent = grid.map(r => r.join('')).join('\n');
+    t += 0.04;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 10. BINARY FALL ──────────────────────────── */
+function asciiBinary(id) {
+  const el = document.getElementById(id);
+  let cols = 0, drops = [];
+  function init() {
+    const { cols: c, rows: r } = getDims(el);
+    cols = c;
+    drops = Array.from({ length: Math.ceil(c / 2) }, (_, i) => ({
+      x: i * 2,
+      y: Math.random() * -r,
+      speed: 0.15 + Math.random() * 0.35,
+      len: 5 + Math.floor(Math.random() * 12),
+      bits: Array.from({ length: 24 }, () => Math.random() > 0.5 ? '1' : '0')
+    }));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (Math.ceil(c / 2) !== drops.length) init();
+    const grid = Array.from({ length: r }, () => Array(c).fill(' '));
+    drops.forEach(d => {
+      d.y += d.speed;
+      if (d.y - d.len > r) {
+        d.y = -d.len; d.speed = 0.15 + Math.random() * 0.35;
+        d.len = 5 + Math.floor(Math.random() * 12);
+      }
+      if (Math.random() < 0.04) {
+        const i = Math.floor(Math.random() * d.bits.length);
+        d.bits[i] = d.bits[i] === '0' ? '1' : '0';
+      }
+      for (let i = 0; i < d.len; i++) {
+        const gy = Math.floor(d.y) - i;
+        if (gy >= 0 && gy < r && d.x < c) grid[gy][d.x] = d.bits[i % d.bits.length];
+      }
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+  init(); frame();
+}
+
+/* ─── 11. RADAR SWEEP ──────────────────────────── */
+function asciiRadar(id) {
+  const el = document.getElementById(id);
+  let t = 0, blips = [];
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const cx = cols * 0.5, cy = rows * 0.5;
+    const maxR = Math.min(cx * 0.92, cy * 0.92);
+    const sweep = (t * 1.5) % (Math.PI * 2);
+    if (Math.random() < 0.04) {
+      const a = sweep + (Math.random() - 0.5) * 0.4;
+      const r = (0.2 + Math.random() * 0.65) * maxR;
+      blips.push({ x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r * 0.5, life: 1.0 });
+    }
+    blips = blips.filter(b => b.life > 0.05);
+    blips.forEach(b => { b.life *= 0.975; });
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const dx = (x - cx) / maxR, dy = (y - cy) / (maxR * 0.5);
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > 1.05) { out += ' '; continue; }
+        if (dist > 0.98) { out += '·'; continue; }
+        let v = 0;
+        const ringFrac = (dist * 3) % 1;
+        if (ringFrac > 0.94) v = Math.max(v, 0.2);
+        const angle = Math.atan2(dy, dx);
+        let da = ((sweep - angle) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+        if (da < 1.0) v = Math.max(v, (1 - da / 1.0) * 0.95);
+        blips.forEach(b => {
+          const bdx = x - b.x, bdy = y - b.y;
+          if (bdx * bdx + bdy * bdy < 3.5) v = Math.max(v, b.life * 0.9);
+        });
+        if (v < 0.08) { out += ' '; continue; }
+        if (v < 0.22) { out += '·'; continue; }
+        if (v < 0.40) { out += ':'; continue; }
+        if (v < 0.60) { out += '+'; continue; }
+        if (v < 0.80) { out += '*'; continue; }
+        out += '@';
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.025;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 12. WORM TRAILS ──────────────────────────── */
+function asciiWorms(id) {
+  const el = document.getElementById(id);
+  const trailChars = ' ·∙•○◎';
+  let grid = null, cols = 0, rows = 0, worms = [];
+  function init(c, r) {
+    cols = c; rows = r;
+    grid = Array.from({ length: r }, () => new Float32Array(c));
+    worms = Array.from({ length: 8 }, () => ({
+      x: Math.random() * c, y: Math.random() * r,
+      a: Math.random() * Math.PI * 2,
+      spd: 0.4 + Math.random() * 0.6,
+      turn: (Math.random() - 0.5) * 0.18
+    }));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!grid || c !== cols || r !== rows) init(c, r);
+    for (let y = 0; y < rows; y++)
+      for (let x = 0; x < cols; x++)
+        if (grid[y][x] > 0) grid[y][x] = Math.max(0, grid[y][x] - 0.014);
+    worms.forEach(w => {
+      w.a += w.turn + (Math.random() - 0.5) * 0.1;
+      w.x = (w.x + Math.cos(w.a) * w.spd + cols) % cols;
+      w.y = (w.y + Math.sin(w.a) * w.spd * 0.5 + rows) % rows;
+      const gx = Math.floor(w.x), gy = Math.floor(w.y);
+      if (gx >= 0 && gx < cols && gy >= 0 && gy < rows) grid[gy][gx] = 1.0;
+    });
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const v = grid[y][x];
+        if (v < 0.05) { out += ' '; continue; }
+        out += trailChars[Math.min(Math.floor(v * (trailChars.length - 1)) + 1, trailChars.length - 1)];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 13. TUNNEL ZOOM ──────────────────────────── */
+function asciiTunnel(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const cx = cols * 0.5, cy = rows * 0.5;
+    // diagonal guide lines to corners
+    [[0,0],[cols-1,0],[0,rows-1],[cols-1,rows-1]].forEach(([ex, ey]) => {
+      const steps = Math.max(Math.abs(ex - cx), Math.abs(ey - cy)) * 2;
+      for (let i = 0; i <= steps; i++) {
+        const gx = Math.round(cx + (ex - cx) * i / steps);
+        const gy = Math.round(cy + (ey - cy) * i / steps);
+        if (gx >= 0 && gx < cols && gy >= 0 && gy < rows) grid[gy][gx] = '·';
+      }
+    });
+    // concentric rectangles zooming outward
+    for (let i = 0; i < 9; i++) {
+      const z = ((i / 9) + t * 0.22) % 1;
+      const W = Math.round(cx * z * 1.9);
+      const H = Math.round(cy * z * 1.9);
+      const x0 = Math.round(cx - W), x1 = Math.round(cx + W);
+      const y0 = Math.round(cy - H), y1 = Math.round(cy + H);
+      const ch = z < 0.3 ? '·' : z < 0.6 ? '+' : z < 0.85 ? '─' : '█';
+      for (let x = x0; x <= x1; x++) {
+        if (x >= 0 && x < cols) {
+          if (y0 >= 0 && y0 < rows) grid[y0][x] = ch;
+          if (y1 >= 0 && y1 < rows) grid[y1][x] = ch;
+        }
+      }
+      for (let y = y0; y <= y1; y++) {
+        if (y >= 0 && y < rows) {
+          if (x0 >= 0 && x0 < cols) grid[y][x0] = ch;
+          if (x1 >= 0 && x1 < cols) grid[y][x1] = ch;
+        }
+      }
+    }
+    el.textContent = grid.map(r => r.join('')).join('\n');
+    t += 0.015;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 14. SAND FALL ────────────────────────────── */
+function asciiSand(id) {
+  const el = document.getElementById(id);
+  let grid = null, cols = 0, rows = 0;
+  function init(c, r) {
+    cols = c; rows = r;
+    grid = Array.from({ length: r }, () => new Uint8Array(c));
+  }
+  function step() {
+    for (let y = rows - 2; y >= 0; y--) {
+      for (let x = 0; x < cols; x++) {
+        if (!grid[y][x]) continue;
+        if (!grid[y + 1][x]) {
+          grid[y + 1][x] = grid[y][x]; grid[y][x] = 0;
+        } else {
+          const d = Math.random() > 0.5 ? 1 : -1;
+          const nx = x + d;
+          if (nx >= 0 && nx < cols && !grid[y + 1][nx]) {
+            grid[y + 1][nx] = grid[y][x]; grid[y][x] = 0;
+          }
+        }
+      }
+    }
+    if (Math.random() < 0.38) {
+      const x = 1 + Math.floor(Math.random() * (cols - 2));
+      if (!grid[0][x]) grid[0][x] = 1;
+    }
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!grid || c !== cols || r !== rows) init(c, r);
+    step();
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) out += grid[y][x] ? '░' : ' ';
+      out += '\n';
+    }
+    el.textContent = out;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 15. EKG PULSE ────────────────────────────── */
+function asciiEKG(id) {
+  const el = document.getElementById(id);
+  let offset = 0;
+  function hb(p) {
+    p = ((p % 1) + 1) % 1;
+    if (p < 0.30) return Math.sin(p * Math.PI / 0.30) * 0.18;
+    if (p < 0.42) return 0;
+    if (p < 0.46) return -0.55;
+    if (p < 0.51) return 1.0;
+    if (p < 0.56) return -0.40;
+    if (p < 0.62) return 0;
+    if (p < 0.82) return Math.sin((p - 0.62) * Math.PI / 0.20) * 0.30;
+    return 0;
+  }
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const mid = Math.floor(rows * 0.5);
+    const cycleLen = Math.max(18, Math.round(cols * 0.38));
+    for (let x = 0; x < cols; x++) grid[mid][x] = '·';
+    let prevY = null;
+    for (let x = 0; x < cols; x++) {
+      const v = hb((x + offset) / cycleLen);
+      const y = Math.round(mid - v * rows * 0.38);
+      if (y >= 0 && y < rows) {
+        const bright = x > cols * 0.72;
+        grid[y][x] = bright ? '█' : (Math.abs(v) > 0.4 ? '#' : '─');
+        if (prevY !== null && Math.abs(y - prevY) > 1) {
+          const mn = Math.min(y, prevY), mx = Math.max(y, prevY);
+          for (let yy = mn; yy <= mx; yy++) {
+            if (yy >= 0 && yy < rows) grid[yy][x] = bright ? '█' : '|';
+          }
+        }
+      }
+      prevY = y;
+    }
+    el.textContent = grid.map(r => r.join('')).join('\n');
+    offset += 0.55;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 16. GAME OF LIFE ─────────────────────────── */
+function asciiLife(id) {
+  const el = document.getElementById(id);
+  let grid = null, cols = 0, rows = 0, fc = 0;
+  function init(c, r) {
+    cols = c; rows = r;
+    grid = Array.from({length: r}, () => Uint8Array.from({length: c}, () => Math.random() < 0.3 ? 1 : 0));
+  }
+  function step() {
+    const next = Array.from({length: rows}, () => new Uint8Array(cols));
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      let n = 0;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        if (!dx && !dy) continue;
+        n += grid[(y+dy+rows)%rows][(x+dx+cols)%cols];
+      }
+      next[y][x] = grid[y][x] ? (n===2||n===3?1:0) : (n===3?1:0);
+    }
+    grid = next;
+  }
+  function frame() {
+    const {cols:c,rows:r} = getDims(el);
+    if (!grid || c!==cols || r!==rows) init(c, r);
+    if (fc++ % 200 === 0) for (let y=0;y<rows;y++) for (let x=0;x<cols;x++) if (Math.random()<0.04) grid[y][x]=1;
+    step();
+    let out = '';
+    for (let y=0;y<rows;y++){for(let x=0;x<cols;x++) out+=grid[y][x]?'█':' '; out+='\n';}
+    el.textContent = out;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 17. ROTATING CUBE ────────────────────────── */
+function asciiCube(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  const V = [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
+  const E = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+  function rx(p,a){return[p[0],p[1]*Math.cos(a)-p[2]*Math.sin(a),p[1]*Math.sin(a)+p[2]*Math.cos(a)]}
+  function ry(p,a){return[p[0]*Math.cos(a)+p[2]*Math.sin(a),p[1],-p[0]*Math.sin(a)+p[2]*Math.cos(a)]}
+  function rz(p,a){return[p[0]*Math.cos(a)-p[1]*Math.sin(a),p[0]*Math.sin(a)+p[1]*Math.cos(a),p[2]]}
+  function proj(p,cx,cy,cols,rows){const z=p[2]+3.8,f=2.8/z;return[Math.round(cx+p[0]*f*cols*0.24),Math.round(cy+p[1]*f*rows*0.44)]}
+  function bline(grid,x0,y0,x1,y1,rows,cols){const dx=Math.abs(x1-x0),dy=Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1;let e=dx-dy;while(1){if(x0>=0&&x0<cols&&y0>=0&&y0<rows)grid[y0][x0]='+';if(x0===x1&&y0===y1)break;const e2=2*e;if(e2>-dy){e-=dy;x0+=sx}if(e2<dx){e+=dx;y0+=sy}}}
+  function frame() {
+    const {cols,rows}=getDims(el);
+    const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
+    const cx=cols/2,cy=rows/2;
+    const pts=V.map(v=>{let p=rx(v,t*.7);p=ry(p,t);p=rz(p,t*.4);return proj(p,cx,cy,cols,rows)});
+    E.forEach(([a,b])=>bline(grid,pts[a][0],pts[a][1],pts[b][0],pts[b][1],rows,cols));
+    pts.forEach(([x,y])=>{if(x>=0&&x<cols&&y>=0&&y<rows)grid[y][x]='●'});
+    el.textContent=grid.map(r=>r.join('')).join('\n');
+    t+=0.025; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 18. LISSAJOUS ────────────────────────────── */
+function asciiLissajous(id) {
+  const el = document.getElementById(id);
+  let phase = 0;
+  function frame() {
+    const {cols,rows}=getDims(el);
+    const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
+    const cx=cols/2,cy=rows/2;
+    const a=3,b=2+Math.sin(phase*0.0008)*1.5;
+    const delta=phase*0.008;
+    const STEPS=2400;
+    for(let i=0;i<STEPS;i++){
+      const t=(i/STEPS)*Math.PI*2*6;
+      const x=Math.floor(cx+Math.sin(a*t+delta)*cx*0.88);
+      const y=Math.floor(cy+Math.sin(b*t)*cy*0.82);
+      if(x>=0&&x<cols&&y>=0&&y<rows){
+        const c=grid[y][x];
+        grid[y][x]=c===' '?'·':c==='·'?':':(c===':'?'+':(c==='+'?'*':'#'));
+      }
+    }
+    el.textContent=grid.map(r=>r.join('')).join('\n');
+    phase++; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 19. SNOWFALL ─────────────────────────────── */
+function asciiSnow(id) {
+  const el = document.getElementById(id);
+  const FC = ['*','·','+','∗','∘','o'];
+  let cols=0,flakes=[];
+  function init(c,r){cols=c;flakes=Array.from({length:Math.floor(c*.45)},()=>({x:Math.random()*c,y:Math.random()*r,spd:.06+Math.random()*.14,drift:(Math.random()-.5)*.08,ch:FC[Math.floor(Math.random()*FC.length)],w:Math.random()*Math.PI*2}))}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);
+    if(c!==cols)init(c,r);
+    const grid=Array.from({length:r},()=>Array(c).fill(' '));
+    flakes.forEach(f=>{f.y+=f.spd;f.x+=f.drift+Math.sin(f.y*.4+f.w)*.05;if(f.y>=r){f.y=-1;f.x=Math.random()*c}f.x=((f.x%c)+c)%c;const gx=Math.floor(f.x),gy=Math.floor(f.y);if(gx>=0&&gx<c&&gy>=0&&gy<r)grid[gy][gx]=f.ch});
+    el.textContent=grid.map(r=>r.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+  init(0,0); frame();
+}
+
+/* ─── 20. MANDELBROT ───────────────────────────── */
+function asciiMandel(id) {
+  const el = document.getElementById(id);
+  const chars = ' .·:;=+*#%@';
+  let cs = 0;
+  function mandel(cr,ci,max){let zr=0,zi=0,i=0;while(zr*zr+zi*zi<4&&i<max){const tmp=zr*zr-zi*zi+cr;zi=2*zr*zi+ci;zr=tmp;i++}return i}
+  function frame(){
+    const{cols,rows}=getDims(el);
+    let out='';
+    const max=36;
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const cr=(x-cols/2)/(cols*.28)-.745,ci=(y-rows/2)/(rows*.56)+.1;const it=mandel(cr,ci,max);if(it===max){out+=' ';continue}const v=((it+cs)%(chars.length-1))/(chars.length-2);out+=chars[Math.floor(v*(chars.length-2))+1]}out+='\n'}
+    el.textContent=out;
+    cs+=.18; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 21. LANGTON'S ANT ────────────────────────── */
+function asciiAnt(id) {
+  const el = document.getElementById(id);
+  let grid=null,cols=0,rows=0,ax,ay,ad;
+  const DX=[0,1,0,-1],DY=[-1,0,1,0];
+  function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Uint8Array(c));ax=Math.floor(c/2);ay=Math.floor(r/2);ad=0}
+  function steps(n){for(let i=0;i<n;i++){const cell=grid[ay][ax];ad=cell?(ad+3)%4:(ad+1)%4;grid[ay][ax]=cell?0:1;ax=(ax+DX[ad]+cols)%cols;ay=(ay+DY[ad]+rows)%rows}}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);
+    if(!grid||c!==cols||r!==rows)init(c,r);
+    steps(15);
+    let out='';
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=(x===ax&&y===ay)?'@':(grid[y][x]?'·':' ');out+='\n'}
+    el.textContent=out;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 22. ORBIT SIM ────────────────────────────── */
+function asciiOrbits(id) {
+  const el = document.getElementById(id);
+  let t=0;
+  const planets=[{r:.14,spd:4.0,ch:'·'},{r:.28,spd:2.4,ch:'○'},{r:.44,spd:1.4,ch:'●'},{r:.60,spd:.85,ch:'◎'}];
+  const trails=planets.map(()=>[]);
+  function frame(){
+    const{cols,rows}=getDims(el);
+    const cx=cols*.5,cy=rows*.5,mR=Math.min(cx*.9,cy*1.8);
+    const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
+    // star
+    if(cy>0&&cx>0){const sx=Math.floor(cx),sy=Math.floor(cy);if(sy<rows&&sx<cols)grid[sy][sx]='✦'}
+    // orbit rings
+    planets.forEach(p=>{for(let a=0;a<Math.PI*2;a+=0.18){const ox=Math.round(cx+Math.cos(a)*p.r*mR),oy=Math.round(cy+Math.sin(a)*p.r*mR*.5);if(ox>=0&&ox<cols&&oy>=0&&oy<rows&&grid[oy][ox]===' ')grid[oy][ox]='·'}});
+    // planets + trails
+    planets.forEach((p,i)=>{
+      const a=t*p.spd*.018,px=cx+Math.cos(a)*p.r*mR,py=cy+Math.sin(a)*p.r*mR*.5;
+      trails[i].push({x:px,y:py});if(trails[i].length>7)trails[i].shift();
+      trails[i].forEach((tp,j)=>{const gx=Math.round(tp.x),gy=Math.round(tp.y);if(gx>=0&&gx<cols&&gy>=0&&gy<rows)grid[gy][gx]=j===trails[i].length-1?p.ch:'·'});
+    });
+    el.textContent=grid.map(r=>r.join('')).join('\n');
+    t++; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 23. SMOKE RISE ───────────────────────────── */
+function asciiSmoke(id) {
+  const el = document.getElementById(id);
+  const chars=' ·:;░▒▓';
+  let grid=null,cols=0,rows=0;
+  function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Float32Array(c))}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);
+    if(!grid||c!==cols||r!==rows)init(c,r);
+    const now=performance.now()*.001;
+    for(let y=0;y<rows-1;y++)for(let x=0;x<cols;x++){const drift=Math.sin(y*.4+now)*0.6,sx=x+drift,x0=Math.floor(sx),x1=Math.min(x0+1,c-1),fr=sx-x0;grid[y][x]=((x0>=0?grid[y+1][x0]:0)*(1-fr)+grid[y+1][x1]*fr)*.95}
+    const cx=Math.floor(c/2);
+    for(let x=cx-3;x<=cx+3;x++)if(x>=0&&x<c&&Math.random()<.55)grid[r-1][x]=Math.max(grid[r-1][x],.55+Math.random()*.45);
+    let out='';
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=chars[Math.floor(Math.max(0,Math.min(1,grid[y][x]))*(chars.length-1))];out+='\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 24. LIGHTNING ────────────────────────────── */
+function asciiLightning(id) {
+  const el = document.getElementById(id);
+  let segs=[],cd=0;
+  function bolt(cols,rows){
+    const s=[];
+    function branch(x,y,depth){
+      if(depth<=0||y>=rows)return;
+      const steps=2+Math.floor(Math.random()*3);
+      const nx=Math.max(0,Math.min(cols-1,x+Math.floor((Math.random()-.4)*6)));
+      const ny=Math.min(rows-1,y+steps);
+      const life=.8/(depth*.25+.7);
+      // bresenham line to segment array
+      let x0=x,y0=y,x1=nx,y1=ny;
+      const dx=Math.abs(x1-x0),dy=Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1;let e=dx-dy;
+      while(1){s.push({x:x0,y:y0,life});if(x0===x1&&y0===y1)break;const e2=2*e;if(e2>-dy){e-=dy;x0+=sx}if(e2<dx){e+=dx;y0+=sy}}
+      branch(nx,ny,depth-1);
+      if(Math.random()<.28&&depth>2)branch(x+Math.floor((Math.random()-.5)*6),y+1,depth-2);
+    }
+    branch(Math.floor(cols*.2+Math.random()*cols*.6),0,5);
+    return s;
+  }
+  function frame(){
+    const{cols,rows}=getDims(el);
+    if(--cd<=0){segs=bolt(cols,rows);cd=35+Math.floor(Math.random()*55)}
+    segs.forEach(s=>s.life*=.91);
+    const ig=Array.from({length:rows},()=>new Float32Array(cols));
+    segs.forEach(s=>{if(s.x>=0&&s.x<cols&&s.y>=0&&s.y<rows)ig[s.y][s.x]=Math.max(ig[s.y][s.x],s.life)});
+    let out='';
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const v=ig[y][x];out+=v<.05?' ':v<.2?'│':v<.5?'║':v<.8?'▎':'█'}out+='\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 25. RULE 30 ──────────────────────────────── */
+function asciiRule30(id) {
+  const el = document.getElementById(id);
+  const RULE=30;
+  const rs=Array.from({length:8},(_,i)=>(RULE>>i)&1);
+  let cur=null,hist=[],fc=0;
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);
+    if(!cur||cur.length!==c){cur=new Uint8Array(c);cur[Math.floor(c/2)]=1;hist=[]}
+    if(fc++%3===0){const next=cur.map((_,i)=>rs[(cur[(i-1+c)%c]<<2)|(cur[i]<<1)|cur[(i+1)%c]]);cur=next;hist.unshift(cur);if(hist.length>r)hist.pop()}
+    let out='';
+    for(let y=0;y<r;y++){const row=hist[y]||new Uint8Array(c);for(let x=0;x<c;x++)out+=row[x]?'█':' ';out+='\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 26. METABALLS ────────────────────────────── */
+function asciiMeta(id) {
+  const el = document.getElementById(id);
+  const chars=' ·:+*#@█';
+  const balls=Array.from({length:4},()=>({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.005,vy:(Math.random()-.5)*.003,r:.08+Math.random()*.08}));
+  function frame(){
+    const{cols,rows}=getDims(el);
+    balls.forEach(b=>{b.x+=b.vx;b.y+=b.vy;if(b.x<0||b.x>1)b.vx*=-1;if(b.y<0||b.y>1)b.vy*=-1});
+    let out='';
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const nx=x/cols,ny=y/rows;let f=0;balls.forEach(b=>{const dx=nx-b.x,dy=(ny-b.y)*(rows/cols*2);f+=(b.r*b.r)/(dx*dx+dy*dy+.001)});const v=Math.min(1,f/2);out+=chars[Math.floor(v*(chars.length-1))]}out+='\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 27. MAZE GEN ─────────────────────────────── */
+function asciiMaze(id) {
+  const el = document.getElementById(id);
+  let vg=null,cols=0,rows=0,vis=null,stack=[],mW,mH,done=false,rst=0;
+  const DX=[1,-1,0,0],DY=[0,0,1,-1];
+  function init(c,r){cols=c;rows=r;mW=Math.max(1,Math.floor((c-1)/2));mH=Math.max(1,Math.floor((r-1)/2));vg=Array.from({length:r},()=>new Uint8Array(c));vis=Array.from({length:mH},()=>new Uint8Array(mW));const sx=Math.floor(Math.random()*mW),sy=Math.floor(Math.random()*mH);vis[sy][sx]=1;vg[sy*2+1][sx*2+1]=1;stack=[[sx,sy]];done=false}
+  function stepMaze(n){for(let i=0;i<n&&stack.length;i++){const[cx,cy]=stack[stack.length-1];const dirs=[0,1,2,3].filter(d=>{const nx=cx+DX[d],ny=cy+DY[d];return nx>=0&&nx<mW&&ny>=0&&ny<mH&&!vis[ny][nx]});if(!dirs.length){stack.pop();continue}const d=dirs[Math.floor(Math.random()*dirs.length)];const nx=cx+DX[d],ny=cy+DY[d];vg[cy*2+1+DY[d]][cx*2+1+DX[d]]=1;vg[ny*2+1][nx*2+1]=1;vis[ny][nx]=1;stack.push([nx,ny])}}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);
+    if(!vg||c!==cols||r!==rows)init(c,r);
+    if(!done){stepMaze(3);if(!stack.length){done=true;rst=130}}
+    else if(--rst<=0)init(c,r);
+    let out='';
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=vg[y][x]?' ':'█';out+='\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 28. BUBBLES ──────────────────────────────── */
+function asciiBubbles(id) {
+  const el = document.getElementById(id);
+  const BS=['O','o','∘','°','.'];
+  let cols=0,bubs=[];
+  function init(c,r){cols=c;bubs=Array.from({length:Math.floor(c*.3)},()=>({x:Math.random()*c,y:r+Math.random()*r,spd:.08+Math.random()*.18,ch:BS[Math.floor(Math.random()*BS.length)],w:Math.random()*Math.PI*2,ws:.02+Math.random()*.04}))}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);
+    if(c!==cols)init(c,r);
+    const grid=Array.from({length:r},()=>Array(c).fill(' '));
+    bubs.forEach(b=>{b.y-=b.spd;b.w+=b.ws;b.x+=Math.sin(b.w)*.15;if(b.y<0){b.y=r+Math.random()*5;b.x=Math.random()*c}b.x=((b.x%c)+c)%c;const gx=Math.floor(b.x),gy=Math.floor(b.y);if(gx>=0&&gx<c&&gy>=0&&gy<r)grid[gy][gx]=b.ch});
+    el.textContent=grid.map(r=>r.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+  init(0,0); frame();
+}
+
+/* ─── 29. REACTION DIFFUSION ───────────────────── */
+function asciiReact(id) {
+  const el = document.getElementById(id);
+  const chars=' ·:;=+*#%@';
+  let A=null,B=null,cols=0,rows=0;
+  const Da=1,Db=.5,f=.055,k=.062;
+  function init(c,r){cols=c;rows=r;A=Array.from({length:r},()=>new Float32Array(c).fill(1));B=Array.from({length:r},()=>new Float32Array(c).fill(0));for(let i=0;i<4;i++){const sx=Math.floor(Math.random()*c),sy=Math.floor(Math.random()*r);for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){const x=(sx+dx+c)%c,y=(sy+dy+r)%r;A[y][x]=.5;B[y][x]=.25}}}
+  function lap(G,x,y){const c=cols,r=rows;return G[y][x]*-1+G[y][(x-1+c)%c]*.2+G[y][(x+1)%c]*.2+G[(y-1+r)%r][x]*.2+G[(y+1)%r][x]*.2+G[(y-1+r)%r][(x-1+c)%c]*.05+G[(y-1+r)%r][(x+1)%c]*.05+G[(y+1)%r][(x-1+c)%c]*.05+G[(y+1)%r][(x+1)%c]*.05}
+  function step(){const nA=Array.from({length:rows},()=>new Float32Array(cols)),nB=Array.from({length:rows},()=>new Float32Array(cols));for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const a=A[y][x],b=B[y][x],lA=lap(A,x,y),lB=lap(B,x,y),rxn=a*b*b;nA[y][x]=Math.max(0,Math.min(1,a+Da*lA-rxn+f*(1-a)));nB[y][x]=Math.max(0,Math.min(1,b+Db*lB+rxn-(k+f)*b))}A=nA;B=nB}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);
+    if(!A||c!==cols||r!==rows)init(c,r);
+    for(let i=0;i<4;i++)step();
+    let out='';
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const v=A[y][x]-B[y][x];out+=chars[Math.max(0,Math.min(chars.length-1,Math.floor(((v+1)/2)*(chars.length-1))))]}out+='\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 30. GLITCH ───────────────────────────────── */
+function asciiGlitch(id) {
+  const el = document.getElementById(id);
+  const chars='▓▒░│─┼╪═║╔╗╚╝◊▮▯▌▐';
+  let t=0;
+  function base(x,y,t){const v=Math.sin(x*.3+t*.08)*Math.cos(y*.4-t*.06)+Math.sin((x+y)*.18-t*.04)*.5;return chars[Math.max(0,Math.min(chars.length-1,Math.floor(((v+1.5)/3)*(chars.length-1))))]}
+  function frame(){
+    const{cols,rows}=getDims(el);
+    const grid=Array.from({length:rows},(_,y)=>Array.from({length:cols},(_,x)=>base(x,y,t)));
+    for(let g=0;g<Math.floor(Math.random()*5);g++){if(Math.random()<.5){const gy=Math.floor(Math.random()*rows),off=Math.floor((Math.random()-.5)*14);grid[gy]=Array.from({length:cols},(_,x)=>base(((x-off)%cols+cols)%cols,gy,t))}}
+    if(Math.random()<.07){const gy=Math.floor(Math.random()*rows);for(let x=0;x<cols;x++)grid[gy][x]=chars[Math.floor(Math.random()*chars.length)]}
+    if(Math.random()<.05){const bx=Math.floor(Math.random()*cols),by=Math.floor(Math.random()*rows),bw=2+Math.floor(Math.random()*10),bh=1+Math.floor(Math.random()*3),bc=chars[Math.floor(Math.random()*chars.length)];for(let y=by;y<Math.min(rows,by+bh);y++)for(let x=bx;x<Math.min(cols,bx+bw);x++)grid[y][x]=bc}
+    el.textContent=grid.map(r=>r.join('')).join('\n');
+    t++; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 31. DLA CRYSTAL ──────────────────────────── */
+function asciiDLA(id) {
+  const el = document.getElementById(id);
+  let grid=null,cols=0,rows=0,walkers=[];
+  const D8X=[-1,0,1,-1,1,-1,0,1],D8Y=[-1,-1,-1,0,0,1,1,1];
+  function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Uint8Array(c));for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const x=Math.floor(c/2)+dx,y=Math.floor(r/2)+dy;if(x>=0&&x<c&&y>=0&&y<r)grid[y][x]=1}walkers=Array.from({length:40},()=>({x:Math.random()*c,y:Math.random()*r}))}
+  function step(n){for(let i=0;i<n;i++){const nw=[];walkers.forEach(w=>{const d=Math.floor(Math.random()*8);w.x=(w.x+D8X[d]+cols)%cols;w.y=(w.y+D8Y[d]+rows)%rows;const gx=Math.floor(w.x),gy=Math.floor(w.y);let stuck=false;for(let k=0;k<8;k++){const nx=(gx+D8X[k]+cols)%cols,ny=(gy+D8Y[k]+rows)%rows;if(grid[ny][nx]){stuck=true;break}}if(stuck&&!grid[gy][gx]){grid[gy][gx]=1;nw.push({x:Math.random()*cols,y:Math.random()*rows})}else nw.push(w)});walkers=nw}}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);
+    if(!grid||c!==cols||r!==rows)init(c,r);
+    step(4);
+    let cnt=0;for(let y=0;y<rows;y++)for(let x=0;x<cols;x++)if(grid[y][x])cnt++;
+    if(cnt>cols*rows*.35)init(c,r);
+    let out='';
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=grid[y][x]?'·':' ';out+='\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 32. TORUS (DONUT) ────────────────────────── */
+function asciiTorus(id) {
+  const el = document.getElementById(id);
+  const chars='.,-~:;=!*#$@';
+  let A=0,B=0;
+  function frame(){
+    const{cols,rows}=getDims(el);
+    const out=new Array(rows*cols).fill(' ');
+    const zb=new Float32Array(rows*cols);
+    for(let j=0;j<Math.PI*2;j+=.07)for(let i=0;i<Math.PI*2;i+=.02){
+      const sI=Math.sin(i),cI=Math.cos(i),sJ=Math.sin(j),cJ=Math.cos(j),sA=Math.sin(A),cA=Math.cos(A),sB=Math.sin(B),cB=Math.cos(B);
+      const h=cJ+2,D=1/(sI*h*sA+sJ*cA+5),t2=sI*h*cA-sJ*sA;
+      const x=Math.floor(cols/2+(cols*.35)*D*(cI*h*cB-t2*sB));
+      const y=Math.floor(rows/2+(rows*.45)*D*(cI*h*sB+t2*cB));
+      const o=x+cols*y,L=cI*cJ*sB-cA*cJ*sI-sA*sJ+cB*(cA*sJ-sA*cJ*sI);
+      if(y>=0&&y<rows&&x>=0&&x<cols&&D>zb[o]){zb[o]=D;const lum=Math.max(0,Math.floor(L*8));out[o]=chars[lum]||' '}
+    }
+    let res='';for(let y=0;y<rows;y++)res+=out.slice(y*cols,(y+1)*cols).join('')+'\n';
+    el.textContent=res;A+=.07;B+=.03;requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 33. WATERFALL ────────────────────────────── */
+function asciiWaterfall(id) {
+  const el = document.getElementById(id);
+  const chars=' ▁▂▃▄▅▆▇█';
+  let hist=[],t=0;
+  function spectrum(c){return Array.from({length:c},(_,x)=>{const f=x/c;let v=Math.exp(-Math.pow((f-.2)*10,2))*(.5+.5*Math.sin(t*.15))+Math.exp(-Math.pow((f-.52)*14,2))*(.6+.4*Math.sin(t*.09+1))+Math.exp(-Math.pow((f-.76)*11,2))*(.4+.4*Math.cos(t*.19+2))+Math.random()*.07;return Math.min(1,v)})}
+  function frame(){
+    const{cols,rows}=getDims(el);
+    hist.unshift(spectrum(cols));if(hist.length>rows)hist.pop();
+    let out='';
+    for(let y=0;y<rows;y++){const row=hist[y]||[];for(let x=0;x<cols;x++)out+=chars[Math.floor((row[x]||0)*(chars.length-1))];out+='\n'}
+    el.textContent=out;t++;requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 34. FOUNTAIN ─────────────────────────────── */
+function asciiFountain(id) {
+  const el = document.getElementById(id);
+  const PC='·∘○◦*+';
+  let parts=[],cols=0;
+  function emit(c,r){if(parts.length<100)parts.push({x:c/2+(Math.random()-.5)*4,y:r-1,vx:(Math.random()-.5)*.55,vy:-(1.6+Math.random()*2.4),life:1,ch:PC[Math.floor(Math.random()*PC.length)]})}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);
+    if(c!==cols)cols=c;
+    emit(c,r);emit(c,r);
+    const grid=Array.from({length:r},()=>Array(c).fill(' '));
+    parts=parts.filter(p=>{p.vy+=.1;p.x+=p.vx;p.y+=p.vy;p.life-=.014;if(p.life<=0||p.y>=r||p.y<0||p.x<0||p.x>=c)return false;const gx=Math.floor(p.x),gy=Math.floor(p.y);if(gx>=0&&gx<c&&gy>=0&&gy<r)grid[gy][gx]=p.life>.5?p.ch:'·';return true});
+    el.textContent=grid.map(r=>r.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 35. SIERPINSKI ───────────────────────────── */
+function asciiSierpinski(id) {
+  const el = document.getElementById(id);
+  let dots=null,cols=0,rows=0,cx=0,cy=0,fc=0;
+  function init(c,r){cols=c;rows=r;dots=Array.from({length:r},()=>new Uint8Array(c));cx=c/2;cy=r/2}
+  function step(n,c,r){const v=[[c/2,1],[1,r-1],[c-1,r-1]];for(let i=0;i<n;i++){const vi=v[Math.floor(Math.random()*3)];cx=(cx+vi[0])/2;cy=(cy+vi[1])/2;const gx=Math.floor(cx),gy=Math.floor(cy);if(gx>=0&&gx<c&&gy>=0&&gy<r)dots[gy][gx]=1}}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);
+    if(!dots||c!==cols||r!==rows)init(c,r);
+    step(300,c,r);
+    if(fc++%400===399)init(c,r);
+    let out='';
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=dots[y][x]?'·':' ';out+='\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── INIT ALL DEMOS ───────────────────────────── */
+asciiWave('wave-canvas');
+asciiRain('rain-canvas');
+asciiPlasma('plasma-canvas');
+asciiRipple('ripple-canvas');
+asciiNoise('noise-canvas');
+asciiVortex('vortex-canvas');
+asciiFire('fire-canvas');
+asciiStars('stars-canvas');
+asciiDNA('dna-canvas');
+asciiBinary('binary-canvas');
+asciiRadar('radar-canvas');
+asciiWorms('worms-canvas');
+asciiTunnel('tunnel-canvas');
+asciiSand('sand-canvas');
+asciiEKG('ekg-canvas');
+asciiLife('life-canvas');
+asciiCube('cube-canvas');
+asciiLissajous('lissajous-canvas');
+asciiSnow('snow-canvas');
+asciiMandel('mandel-canvas');
+asciiAnt('ant-canvas');
+asciiOrbits('orbits-canvas');
+asciiSmoke('smoke-canvas');
+asciiLightning('lightning-canvas');
+asciiRule30('rule30-canvas');
+asciiMeta('meta-canvas');
+asciiMaze('maze-canvas');
+asciiBubbles('bubbles-canvas');
+asciiReact('react-canvas');
+asciiGlitch('glitch-canvas');
+asciiDLA('dla-canvas');
+asciiTorus('torus-canvas');
+asciiWaterfall('waterfall-canvas');
+asciiFountain('fountain-canvas');
+asciiSierpinski('sierpinski-canvas');
+
+/* ─── COPY CODE ────────────────────────────────── */
+const snippets = {
+  wave: `function asciiWave(id) {
+  const el = document.getElementById(id);
+  const chars = ['·','∘','○','◦','~','≈','≋','∼','⌇','∿'];
+  let t = 0;
+  function getDims(el) {
+    return { cols: Math.floor(el.parentElement.clientWidth / 6.3),
+             rows: Math.floor(el.parentElement.clientHeight / 13) };
+  }
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const v = (Math.sin((x*.18)+(y*.25)-t*1.4)
+                 + Math.sin((x*.09)-(y*.15)+t*.9)
+                 + Math.cos((x*.12)+(y*.08)+t*.5)) / 3;
+        const idx = Math.floor(((v+1)/2)*(chars.length-1));
+        out += chars[Math.max(0,Math.min(chars.length-1,idx))];
+      }
+      out += '\\n';
+    }
+    el.textContent = out;
+    t += 0.04;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  rain: `function asciiRain(id) {
+  const el = document.getElementById(id);
+  const kana = 'ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789';
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  let cols=0, drops=[];
+  function init(){const{cols:c,rows:r}=getDims(el);cols=c;drops=Array.from({length:c},()=>({y:Math.random()*-r,speed:.3+Math.random()*.5,len:4+Math.floor(Math.random()*10),chars:Array.from({length:20},()=>kana[Math.floor(Math.random()*kana.length)])}))}
+  function frame(){const{cols:c,rows:r}=getDims(el);if(c!==cols)init();const grid=Array.from({length:r},()=>Array(c).fill(' '));drops.forEach((d,x)=>{d.y+=d.speed;if(d.y-d.len>r){d.y=-d.len;d.speed=.3+Math.random()*.5;d.len=4+Math.floor(Math.random()*10)}if(Math.random()<.08){const ci=Math.floor(Math.random()*d.chars.length);d.chars[ci]=kana[Math.floor(Math.random()*kana.length)]}for(let i=0;i<d.len;i++){const gy=Math.floor(d.y)-i;if(gy>=0&&gy<r)grid[gy][x]=d.chars[i%d.chars.length]}});el.textContent=grid.map(r=>r.join('')).join('\\n');requestAnimationFrame(frame)}
+  init(); frame();
+}`,
+  plasma: `function asciiPlasma(id) {
+  const el = document.getElementById(id);
+  const chars = ' ░▒▓█▓▒░ ·:;!|I1lL▌▐▀▄';
+  let t = 0;
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const cx=x/cols, cy=y/rows;
+        const v=(Math.sin(cx*10+t)+Math.sin(cy*8-t*.7)+Math.sin((cx+cy)*7+t*.5)+Math.sin(Math.sqrt((cx-.5)**2+(cy-.5)**2)*14-t)+4)/8;
+        const idx=Math.floor(v*(chars.length-1));
+        out+=chars[Math.max(0,Math.min(chars.length-1,idx))];
+      }
+      out+='\\n';
+    }
+    el.textContent=out; t+=0.045; requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  ripple: `function asciiRipple(id) {
+  const el = document.getElementById(id);
+  const chars = ' .·:+*#@';
+  const centers = [{x:.5,y:.5},{x:.25,y:.7},{x:.75,y:.3}];
+  let t = 0;
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function frame() {
+    const{cols,rows}=getDims(el); let out='';
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const cx=x/cols,cy=y/rows;let v=0;centers.forEach((c,i)=>{const dx=cx-c.x,dy=cy-c.y;v+=Math.sin(Math.sqrt(dx*dx+dy*dy*2.5)*20-t*(1+i*.3))});v=(v/centers.length+1)/2;const idx=Math.floor(v*(chars.length-1));out+=chars[Math.max(0,Math.min(chars.length-1,idx))]}out+='\\n'}
+    el.textContent=out; t+=0.06; requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  noise: `function asciiNoise(id) {
+  const el = document.getElementById(id);
+  const chars = ' ·.:!|/\\\\-+*#%@░▒';
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function noise(x,y,t){return(Math.sin(x*3.1+t)*Math.cos(y*2.7-t*.6)+Math.sin(x*1.5-t*.4)*Math.sin(y*4.2+t*.8)+Math.cos(x*5.3+y*2.1+t*.3))/3}
+  let t=0;
+  function frame(){const{cols,rows}=getDims(el);let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const v=(noise(x*.15,y*.22,t)+1)/2;const idx=Math.floor(v*(chars.length-1));out+=chars[Math.max(0,Math.min(chars.length-1,idx))]}out+='\\n'}el.textContent=out;t+=.025;requestAnimationFrame(frame)}
+  frame();
+}`,
+  vortex: `function asciiVortex(id) {
+  const el = document.getElementById(id);
+  const chars = ' ·∙•◦○◎@#';
+  let t = 0;
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function frame() {
+    const{cols,rows}=getDims(el); let out='';
+    const cx=cols*.5, cy=rows*.5;
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const dx=(x-cx)/cols,dy=(y-cy)/rows*2;const dist=Math.sqrt(dx*dx+dy*dy),angle=Math.atan2(dy,dx);const v=Math.sin(dist*18-t*2.5+angle*4)*.5+Math.sin(dist*10+angle*2-t)*.5;const idx=Math.floor(((v+1)/2)*(chars.length-1));out+=chars[Math.max(0,Math.min(chars.length-1,idx))]}out+='\\n'}
+    el.textContent=out; t+=.045; requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  fire: `function asciiFire(id) {
+  const el = document.getElementById(id);
+  const chars = ' \`·,:;=+*#%@▒▓█';
+  let grid=null,cols=0,rows=0;
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Float32Array(c))}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el); if(!grid||c!==cols||r!==rows)init(c,r);
+    for(let x=0;x<cols;x++)grid[rows-1][x]=Math.random()>.25?.7+Math.random()*.3:0;
+    for(let y=rows-2;y>=0;y--)for(let x=0;x<cols;x++){const l=x>0?grid[y+1][x-1]:0,m=grid[y+1][x],r2=x<cols-1?grid[y+1][x+1]:0;grid[y][x]=((l+m+m+r2)/4)*.94}
+    let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=chars[Math.floor(Math.max(0,Math.min(1,grid[y][x]))*(chars.length-1))];out+='\\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  stars: `function asciiStars(id) {
+  const el = document.getElementById(id);
+  const chars = '·∙•*+✦';
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function mk(){return{x:(Math.random()-.5)*2,y:(Math.random()-.5)*2,z:Math.random()}}
+  let stars=Array.from({length:120},mk);
+  function frame(){
+    const{cols,rows}=getDims(el);const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
+    stars.forEach(s=>{s.z-=.012;if(s.z<=0){Object.assign(s,mk());s.z=1}const sx=Math.floor(s.x/s.z*cols*.35+cols*.5),sy=Math.floor(s.y/s.z*rows*.7+rows*.5);const ci=Math.min(Math.floor((1-s.z)*chars.length),chars.length-1);if(sx>=0&&sx<cols&&sy>=0&&sy<rows)grid[sy][sx]=chars[ci]});
+    el.textContent=grid.map(r=>r.join('')).join('\\n'); requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  dna: `function asciiDNA(id) {
+  const el = document.getElementById(id);
+  const pairs=[['A','T'],['T','A'],['G','C'],['C','G']];
+  const seq=Array.from({length:200},()=>pairs[Math.floor(Math.random()*4)]);
+  let t=0;
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function frame(){
+    const{cols,rows}=getDims(el);const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
+    const mid=rows*.5,amp=rows*.38;
+    for(let x=0;x<cols;x++){const phase=(x/cols)*Math.PI*2*5-t;const y1=Math.round(mid+Math.sin(phase)*amp),y2=Math.round(mid+Math.sin(phase+Math.PI)*amp);const pi=Math.floor((((x/cols*5-t/(Math.PI*2))%1)+10)%1*200);if(y1>=0&&y1<rows)grid[y1][x]=seq[pi][0];if(y2>=0&&y2<rows)grid[y2][x]=seq[pi][1];if(x%5===0){const mn=Math.min(y1,y2)+1,mx=Math.max(y1,y2)-1;for(let y=mn;y<=mx;y++)if(y>=0&&y<rows&&grid[y][x]===' ')grid[y][x]='─'}}
+    el.textContent=grid.map(r=>r.join('')).join('\\n'); t+=.04; requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  binary: `function asciiBinary(id) {
+  const el = document.getElementById(id);
+  let cols=0,drops=[];
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function init(){const{cols:c,rows:r}=getDims(el);cols=c;drops=Array.from({length:Math.ceil(c/2)},(_, i)=>({x:i*2,y:Math.random()*-r,speed:.15+Math.random()*.35,len:5+Math.floor(Math.random()*12),bits:Array.from({length:24},()=>Math.random()>.5?'1':'0')}))}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);if(Math.ceil(c/2)!==drops.length)init();
+    const grid=Array.from({length:r},()=>Array(c).fill(' '));
+    drops.forEach(d=>{d.y+=d.speed;if(d.y-d.len>r){d.y=-d.len;d.speed=.15+Math.random()*.35;d.len=5+Math.floor(Math.random()*12)}if(Math.random()<.04){const i=Math.floor(Math.random()*d.bits.length);d.bits[i]=d.bits[i]==='0'?'1':'0'}for(let i=0;i<d.len;i++){const gy=Math.floor(d.y)-i;if(gy>=0&&gy<r&&d.x<c)grid[gy][d.x]=d.bits[i%d.bits.length]}});
+    el.textContent=grid.map(r=>r.join('')).join('\\n'); requestAnimationFrame(frame);
+  }
+  init(); frame();
+}`,
+  radar: `function asciiRadar(id) {
+  const el = document.getElementById(id);
+  let t=0,blips=[];
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function frame(){
+    const{cols,rows}=getDims(el);const cx=cols*.5,cy=rows*.5,maxR=Math.min(cx*.92,cy*.92);
+    const sweep=(t*1.5)%(Math.PI*2);
+    if(Math.random()<.04){const a=sweep+(Math.random()-.5)*.4,r=(.2+Math.random()*.65)*maxR;blips.push({x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r*.5,life:1.0})}
+    blips=blips.filter(b=>b.life>.05);blips.forEach(b=>{b.life*=.975});
+    let out='';
+    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const dx=(x-cx)/maxR,dy=(y-cy)/(maxR*.5);const dist=Math.sqrt(dx*dx+dy*dy);if(dist>1.05){out+=' ';continue}if(dist>.98){out+='·';continue}let v=0;if((dist*3)%1>.94)v=.2;const angle=Math.atan2(dy,dx),da=((sweep-angle)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);if(da<1.0)v=Math.max(v,(1-da/1.0)*.95);blips.forEach(b=>{const bdx=x-b.x,bdy=y-b.y;if(bdx*bdx+bdy*bdy<3.5)v=Math.max(v,b.life*.9)});if(v<.08){out+=' ';continue}if(v<.22){out+='·';continue}if(v<.4){out+=':';continue}if(v<.6){out+='+';continue}if(v<.8){out+='*';continue}out+='@'}out+='\\n'}
+    el.textContent=out; t+=.025; requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  worms: `function asciiWorms(id) {
+  const el = document.getElementById(id);
+  const tc=' ·∙•○◎'; let grid=null,cols=0,rows=0,worms=[];
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Float32Array(c));worms=Array.from({length:8},()=>({x:Math.random()*c,y:Math.random()*r,a:Math.random()*Math.PI*2,spd:.4+Math.random()*.6,turn:(Math.random()-.5)*.18}))}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);
+    for(let y=0;y<rows;y++)for(let x=0;x<cols;x++)if(grid[y][x]>0)grid[y][x]=Math.max(0,grid[y][x]-.014);
+    worms.forEach(w=>{w.a+=w.turn+(Math.random()-.5)*.1;w.x=(w.x+Math.cos(w.a)*w.spd+cols)%cols;w.y=(w.y+Math.sin(w.a)*w.spd*.5+rows)%rows;const gx=Math.floor(w.x),gy=Math.floor(w.y);if(gx>=0&&gx<cols&&gy>=0&&gy<rows)grid[gy][gx]=1.0});
+    let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const v=grid[y][x];if(v<.05){out+=' ';continue}out+=tc[Math.min(Math.floor(v*(tc.length-1))+1,tc.length-1)]}out+='\\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  tunnel: `function asciiTunnel(id) {
+  const el = document.getElementById(id);
+  let t=0;
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function frame(){
+    const{cols,rows}=getDims(el);const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
+    const cx=cols*.5,cy=rows*.5;
+    [[0,0],[cols-1,0],[0,rows-1],[cols-1,rows-1]].forEach(([ex,ey])=>{const steps=Math.max(Math.abs(ex-cx),Math.abs(ey-cy))*2;for(let i=0;i<=steps;i++){const gx=Math.round(cx+(ex-cx)*i/steps),gy=Math.round(cy+(ey-cy)*i/steps);if(gx>=0&&gx<cols&&gy>=0&&gy<rows)grid[gy][gx]='·'}});
+    for(let i=0;i<9;i++){const z=((i/9)+t*.22)%1,W=Math.round(cx*z*1.9),H=Math.round(cy*z*1.9);const x0=Math.round(cx-W),x1=Math.round(cx+W),y0=Math.round(cy-H),y1=Math.round(cy+H);const ch=z<.3?'·':z<.6?'+':z<.85?'─':'█';for(let x=x0;x<=x1;x++){if(x>=0&&x<cols){if(y0>=0&&y0<rows)grid[y0][x]=ch;if(y1>=0&&y1<rows)grid[y1][x]=ch}}for(let y=y0;y<=y1;y++){if(y>=0&&y<rows){if(x0>=0&&x0<cols)grid[y][x0]=ch;if(x1>=0&&x1<cols)grid[y][x1]=ch}}}
+    el.textContent=grid.map(r=>r.join('')).join('\\n'); t+=.015; requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  sand: `function asciiSand(id) {
+  const el = document.getElementById(id);
+  let grid=null,cols=0,rows=0;
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Uint8Array(c))}
+  function step(){for(let y=rows-2;y>=0;y--){for(let x=0;x<cols;x++){if(!grid[y][x])continue;if(!grid[y+1][x]){grid[y+1][x]=grid[y][x];grid[y][x]=0}else{const d=Math.random()>.5?1:-1,nx=x+d;if(nx>=0&&nx<cols&&!grid[y+1][nx]){grid[y+1][nx]=grid[y][x];grid[y][x]=0}}}}if(Math.random()<.38){const x=1+Math.floor(Math.random()*(cols-2));if(!grid[0][x])grid[0][x]=1}}
+  function frame(){
+    const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);step();
+    let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=grid[y][x]?'░':' ';out+='\\n'}
+    el.textContent=out; requestAnimationFrame(frame);
+  }
+  frame();
+}`,
+  life: `function asciiLife(id){const el=document.getElementById(id);let grid=null,cols=0,rows=0,fc=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>Uint8Array.from({length:c},()=>Math.random()<.3?1:0))}function step(){const n=Array.from({length:rows},()=>new Uint8Array(cols));for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){let nb=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;nb+=grid[(y+dy+rows)%rows][(x+dx+cols)%cols]}n[y][x]=grid[y][x]?(nb===2||nb===3?1:0):(nb===3?1:0)}grid=n}function frame(){const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);if(fc++%200===0)for(let y=0;y<rows;y++)for(let x=0;x<cols;x++)if(Math.random()<.04)grid[y][x]=1;step();let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=grid[y][x]?'█':' ';out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
+  cube: `function asciiCube(id){const el=document.getElementById(id);let t=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}const V=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];const E=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];function rx(p,a){return[p[0],p[1]*Math.cos(a)-p[2]*Math.sin(a),p[1]*Math.sin(a)+p[2]*Math.cos(a)]}function ry(p,a){return[p[0]*Math.cos(a)+p[2]*Math.sin(a),p[1],-p[0]*Math.sin(a)+p[2]*Math.cos(a)]}function rz(p,a){return[p[0]*Math.cos(a)-p[1]*Math.sin(a),p[0]*Math.sin(a)+p[1]*Math.cos(a),p[2]]}function proj(p,cx,cy,c,r){const z=p[2]+3.8,f=2.8/z;return[Math.round(cx+p[0]*f*c*.24),Math.round(cy+p[1]*f*r*.44)]}function line(g,x0,y0,x1,y1,r,c){const dx=Math.abs(x1-x0),dy=Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1;let e=dx-dy;while(1){if(x0>=0&&x0<c&&y0>=0&&y0<r)g[y0][x0]='+';if(x0===x1&&y0===y1)break;const e2=2*e;if(e2>-dy){e-=dy;x0+=sx}if(e2<dx){e+=dx;y0+=sy}}}function frame(){const{cols,rows}=getDims(el);const g=Array.from({length:rows},()=>Array(cols).fill(' '));const cx=cols/2,cy=rows/2;const pts=V.map(v=>{let p=rx(v,t*.7);p=ry(p,t);p=rz(p,t*.4);return proj(p,cx,cy,cols,rows)});E.forEach(([a,b])=>line(g,pts[a][0],pts[a][1],pts[b][0],pts[b][1],rows,cols));pts.forEach(([x,y])=>{if(x>=0&&x<cols&&y>=0&&y<rows)g[y][x]='●'});el.textContent=g.map(r=>r.join('')).join('\\n');t+=.025;requestAnimationFrame(frame)}frame()}`,
+  lissajous: `function asciiLissajous(id){const el=document.getElementById(id);let ph=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function frame(){const{cols,rows}=getDims(el);const g=Array.from({length:rows},()=>Array(cols).fill(' '));const cx=cols/2,cy=rows/2,b=2+Math.sin(ph*.0008)*1.5,d=ph*.008;for(let i=0;i<2400;i++){const t=(i/2400)*Math.PI*2*6,x=Math.floor(cx+Math.sin(3*t+d)*cx*.88),y=Math.floor(cy+Math.sin(b*t)*cy*.82);if(x>=0&&x<cols&&y>=0&&y<rows){const c=g[y][x];g[y][x]=c===' '?'·':c==='·'?':':(c===':'?'+':(c==='+'?'*':'#'))}}el.textContent=g.map(r=>r.join('')).join('\\n');ph++;requestAnimationFrame(frame)}frame()}`,
+  snow: `function asciiSnow(id){const el=document.getElementById(id);const FC=['*','·','+','∗','∘','o'];let cols=0,fl=[];function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;fl=Array.from({length:Math.floor(c*.45)},()=>({x:Math.random()*c,y:Math.random()*r,spd:.06+Math.random()*.14,drift:(Math.random()-.5)*.08,ch:FC[Math.floor(Math.random()*FC.length)],w:Math.random()*Math.PI*2}))}function frame(){const{cols:c,rows:r}=getDims(el);if(c!==cols)init(c,r);const g=Array.from({length:r},()=>Array(c).fill(' '));fl.forEach(f=>{f.y+=f.spd;f.x+=f.drift+Math.sin(f.y*.4+f.w)*.05;if(f.y>=r){f.y=-1;f.x=Math.random()*c}f.x=((f.x%c)+c)%c;const gx=Math.floor(f.x),gy=Math.floor(f.y);if(gx>=0&&gx<c&&gy>=0&&gy<r)g[gy][gx]=f.ch});el.textContent=g.map(r=>r.join('')).join('\\n');requestAnimationFrame(frame)}init(0,0);frame()}`,
+  mandel: `function asciiMandel(id){const el=document.getElementById(id);const chars=' .·:;=+*#%@';let cs=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function mb(cr,ci,max){let zr=0,zi=0,i=0;while(zr*zr+zi*zi<4&&i<max){const tmp=zr*zr-zi*zi+cr;zi=2*zr*zi+ci;zr=tmp;i++}return i}function frame(){const{cols,rows}=getDims(el);let out='';const max=36;for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const cr=(x-cols/2)/(cols*.28)-.745,ci=(y-rows/2)/(rows*.56)+.1;const it=mb(cr,ci,max);if(it===max){out+=' ';continue}const v=((it+cs)%(chars.length-1))/(chars.length-2);out+=chars[Math.floor(v*(chars.length-2))+1]}out+='\\n'}el.textContent=out;cs+=.18;requestAnimationFrame(frame)}frame()}`,
+  ant: `function asciiAnt(id){const el=document.getElementById(id);let grid=null,cols=0,rows=0,ax,ay,ad;const DX=[0,1,0,-1],DY=[-1,0,1,0];function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Uint8Array(c));ax=Math.floor(c/2);ay=Math.floor(r/2);ad=0}function steps(n){for(let i=0;i<n;i++){const cell=grid[ay][ax];ad=cell?(ad+3)%4:(ad+1)%4;grid[ay][ax]=cell?0:1;ax=(ax+DX[ad]+cols)%cols;ay=(ay+DY[ad]+rows)%rows}}function frame(){const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);steps(15);let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=(x===ax&&y===ay)?'@':(grid[y][x]?'·':' ');out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
+  orbits: `function asciiOrbits(id){const el=document.getElementById(id);let t=0;const pl=[{r:.14,spd:4,ch:'·'},{r:.28,spd:2.4,ch:'○'},{r:.44,spd:1.4,ch:'●'},{r:.6,spd:.85,ch:'◎'}];const tr=pl.map(()=>[]);function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function frame(){const{cols,rows}=getDims(el);const cx=cols*.5,cy=rows*.5,mR=Math.min(cx*.9,cy*1.8);const g=Array.from({length:rows},()=>Array(cols).fill(' '));if(cy>0&&cx>0){const sx=Math.floor(cx),sy=Math.floor(cy);if(sy<rows&&sx<cols)g[sy][sx]='✦'}pl.forEach(p=>{for(let a=0;a<Math.PI*2;a+=.18){const ox=Math.round(cx+Math.cos(a)*p.r*mR),oy=Math.round(cy+Math.sin(a)*p.r*mR*.5);if(ox>=0&&ox<cols&&oy>=0&&oy<rows&&g[oy][ox]===' ')g[oy][ox]='·'}});pl.forEach((p,i)=>{const a=t*p.spd*.018,px=cx+Math.cos(a)*p.r*mR,py=cy+Math.sin(a)*p.r*mR*.5;tr[i].push({x:px,y:py});if(tr[i].length>7)tr[i].shift();tr[i].forEach((tp,j)=>{const gx=Math.round(tp.x),gy=Math.round(tp.y);if(gx>=0&&gx<cols&&gy>=0&&gy<rows)g[gy][gx]=j===tr[i].length-1?p.ch:'·'})});el.textContent=g.map(r=>r.join('')).join('\\n');t++;requestAnimationFrame(frame)}frame()}`,
+  smoke: `function asciiSmoke(id){const el=document.getElementById(id);const chars=' ·:;░▒▓';let grid=null,cols=0,rows=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Float32Array(c))}function frame(){const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);const now=performance.now()*.001;for(let y=0;y<r-1;y++)for(let x=0;x<c;x++){const dr=Math.sin(y*.4+now)*.6,sx=x+dr,x0=Math.floor(sx),x1=Math.min(x0+1,c-1),fr=sx-x0;grid[y][x]=((x0>=0?grid[y+1][x0]:0)*(1-fr)+grid[y+1][x1]*fr)*.95}const cx=Math.floor(c/2);for(let x=cx-3;x<=cx+3;x++)if(x>=0&&x<c&&Math.random()<.55)grid[r-1][x]=Math.max(grid[r-1][x],.55+Math.random()*.45);let out='';for(let y=0;y<r;y++){for(let x=0;x<c;x++)out+=chars[Math.floor(Math.max(0,Math.min(1,grid[y][x]))*(chars.length-1))];out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
+  lightning: `function asciiLightning(id){const el=document.getElementById(id);let segs=[],cd=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function bolt(cols,rows){const s=[];function branch(x,y,depth){if(depth<=0||y>=rows)return;const steps=2+Math.floor(Math.random()*3),nx=Math.max(0,Math.min(cols-1,x+Math.floor((Math.random()-.4)*6))),ny=Math.min(rows-1,y+steps),life=.8/(depth*.25+.7);let x0=x,y0=y,x1=nx,y1=ny;const dx=Math.abs(x1-x0),dy=Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1;let e=dx-dy;while(1){s.push({x:x0,y:y0,life});if(x0===x1&&y0===y1)break;const e2=2*e;if(e2>-dy){e-=dy;x0+=sx}if(e2<dx){e+=dx;y0+=sy}}branch(nx,ny,depth-1);if(Math.random()<.28&&depth>2)branch(x+Math.floor((Math.random()-.5)*6),y+1,depth-2)}branch(Math.floor(cols*.2+Math.random()*cols*.6),0,5);return s}function frame(){const{cols,rows}=getDims(el);if(--cd<=0){segs=bolt(cols,rows);cd=35+Math.floor(Math.random()*55)}segs.forEach(s=>s.life*=.91);const ig=Array.from({length:rows},()=>new Float32Array(cols));segs.forEach(s=>{if(s.x>=0&&s.x<cols&&s.y>=0&&s.y<rows)ig[s.y][s.x]=Math.max(ig[s.y][s.x],s.life)});let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const v=ig[y][x];out+=v<.05?' ':v<.2?'│':v<.5?'║':v<.8?'▎':'█'}out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
+  rule30: `function asciiRule30(id){const el=document.getElementById(id);const rs=Array.from({length:8},(_,i)=>(30>>i)&1);let cur=null,hist=[],fc=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function frame(){const{cols:c,rows:r}=getDims(el);if(!cur||cur.length!==c){cur=new Uint8Array(c);cur[Math.floor(c/2)]=1;hist=[]}if(fc++%3===0){const next=cur.map((_,i)=>rs[(cur[(i-1+c)%c]<<2)|(cur[i]<<1)|cur[(i+1)%c]]);cur=next;hist.unshift(cur);if(hist.length>r)hist.pop()}let out='';for(let y=0;y<r;y++){const row=hist[y]||new Uint8Array(c);for(let x=0;x<c;x++)out+=row[x]?'█':' ';out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
+  meta: `function asciiMeta(id){const el=document.getElementById(id);const chars=' ·:+*#@█';const balls=Array.from({length:4},()=>({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.005,vy:(Math.random()-.5)*.003,r:.08+Math.random()*.08}));function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function frame(){const{cols,rows}=getDims(el);balls.forEach(b=>{b.x+=b.vx;b.y+=b.vy;if(b.x<0||b.x>1)b.vx*=-1;if(b.y<0||b.y>1)b.vy*=-1});let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const nx=x/cols,ny=y/rows;let f=0;balls.forEach(b=>{const dx=nx-b.x,dy=(ny-b.y)*(rows/cols*2);f+=(b.r*b.r)/(dx*dx+dy*dy+.001)});out+=chars[Math.floor(Math.min(1,f/2)*(chars.length-1))]}out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
+  maze: `function asciiMaze(id){const el=document.getElementById(id);let vg=null,cols=0,rows=0,vis=null,stack=[],mW,mH,done=false,rst=0;const DX=[1,-1,0,0],DY=[0,0,1,-1];function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;mW=Math.max(1,Math.floor((c-1)/2));mH=Math.max(1,Math.floor((r-1)/2));vg=Array.from({length:r},()=>new Uint8Array(c));vis=Array.from({length:mH},()=>new Uint8Array(mW));const sx=Math.floor(Math.random()*mW),sy=Math.floor(Math.random()*mH);vis[sy][sx]=1;vg[sy*2+1][sx*2+1]=1;stack=[[sx,sy]];done=false}function stepM(n){for(let i=0;i<n&&stack.length;i++){const[cx,cy]=stack[stack.length-1];const dirs=[0,1,2,3].filter(d=>{const nx=cx+DX[d],ny=cy+DY[d];return nx>=0&&nx<mW&&ny>=0&&ny<mH&&!vis[ny][nx]});if(!dirs.length){stack.pop();continue}const d=dirs[Math.floor(Math.random()*dirs.length)];const nx=cx+DX[d],ny=cy+DY[d];vg[cy*2+1+DY[d]][cx*2+1+DX[d]]=1;vg[ny*2+1][nx*2+1]=1;vis[ny][nx]=1;stack.push([nx,ny])}}function frame(){const{cols:c,rows:r}=getDims(el);if(!vg||c!==cols||r!==rows)init(c,r);if(!done){stepM(3);if(!stack.length){done=true;rst=130}}else if(--rst<=0)init(c,r);let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=vg[y][x]?' ':'█';out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
+  bubbles: `function asciiBubbles(id){const el=document.getElementById(id);const BS=['O','o','∘','°','.'];let cols=0,bubs=[];function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;bubs=Array.from({length:Math.floor(c*.3)},()=>({x:Math.random()*c,y:r+Math.random()*r,spd:.08+Math.random()*.18,ch:BS[Math.floor(Math.random()*BS.length)],w:Math.random()*Math.PI*2,ws:.02+Math.random()*.04}))}function frame(){const{cols:c,rows:r}=getDims(el);if(c!==cols)init(c,r);const g=Array.from({length:r},()=>Array(c).fill(' '));bubs.forEach(b=>{b.y-=b.spd;b.w+=b.ws;b.x+=Math.sin(b.w)*.15;if(b.y<0){b.y=r+Math.random()*5;b.x=Math.random()*c}b.x=((b.x%c)+c)%c;const gx=Math.floor(b.x),gy=Math.floor(b.y);if(gx>=0&&gx<c&&gy>=0&&gy<r)g[gy][gx]=b.ch});el.textContent=g.map(r=>r.join('')).join('\\n');requestAnimationFrame(frame)}init(0,0);frame()}`,
+  react: `function asciiReact(id){const el=document.getElementById(id);const chars=' ·:;=+*#%@';let A=null,B=null,cols=0,rows=0;const Da=1,Db=.5,f=.055,k=.062;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;A=Array.from({length:r},()=>new Float32Array(c).fill(1));B=Array.from({length:r},()=>new Float32Array(c).fill(0));for(let i=0;i<4;i++){const sx=Math.floor(Math.random()*c),sy=Math.floor(Math.random()*r);for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){const x=(sx+dx+c)%c,y=(sy+dy+r)%r;A[y][x]=.5;B[y][x]=.25}}}function lap(G,x,y){const c=cols,r=rows;return G[y][x]*-1+G[y][(x-1+c)%c]*.2+G[y][(x+1)%c]*.2+G[(y-1+r)%r][x]*.2+G[(y+1)%r][x]*.2+G[(y-1+r)%r][(x-1+c)%c]*.05+G[(y-1+r)%r][(x+1)%c]*.05+G[(y+1)%r][(x-1+c)%c]*.05+G[(y+1)%r][(x+1)%c]*.05}function step(){const nA=Array.from({length:rows},()=>new Float32Array(cols)),nB=Array.from({length:rows},()=>new Float32Array(cols));for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const a=A[y][x],b=B[y][x],lA=lap(A,x,y),lB=lap(B,x,y),rxn=a*b*b;nA[y][x]=Math.max(0,Math.min(1,a+Da*lA-rxn+f*(1-a)));nB[y][x]=Math.max(0,Math.min(1,b+Db*lB+rxn-(k+f)*b))}A=nA;B=nB}function frame(){const{cols:c,rows:r}=getDims(el);if(!A||c!==cols||r!==rows)init(c,r);for(let i=0;i<4;i++)step();let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const v=A[y][x]-B[y][x];out+=chars[Math.max(0,Math.min(chars.length-1,Math.floor(((v+1)/2)*(chars.length-1))))]}out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
+  glitch: `function asciiGlitch(id){const el=document.getElementById(id);const chars='▓▒░│─┼╪═║╔╗╚╝◊▮▯▌▐';let t=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function base(x,y,t){const v=Math.sin(x*.3+t*.08)*Math.cos(y*.4-t*.06)+Math.sin((x+y)*.18-t*.04)*.5;return chars[Math.max(0,Math.min(chars.length-1,Math.floor(((v+1.5)/3)*(chars.length-1))))]}function frame(){const{cols,rows}=getDims(el);const g=Array.from({length:rows},(_,y)=>Array.from({length:cols},(_,x)=>base(x,y,t)));for(let i=0;i<Math.floor(Math.random()*5);i++)if(Math.random()<.5){const gy=Math.floor(Math.random()*rows),off=Math.floor((Math.random()-.5)*14);g[gy]=Array.from({length:cols},(_,x)=>base(((x-off)%cols+cols)%cols,gy,t))}if(Math.random()<.07){const gy=Math.floor(Math.random()*rows);for(let x=0;x<cols;x++)g[gy][x]=chars[Math.floor(Math.random()*chars.length)]}if(Math.random()<.05){const bx=Math.floor(Math.random()*cols),by=Math.floor(Math.random()*rows),bw=2+Math.floor(Math.random()*10),bc=chars[Math.floor(Math.random()*chars.length)];for(let y=by;y<Math.min(rows,by+3);y++)for(let x=bx;x<Math.min(cols,bx+bw);x++)g[y][x]=bc}el.textContent=g.map(r=>r.join('')).join('\\n');t++;requestAnimationFrame(frame)}frame()}`,
+  dla: `function asciiDLA(id){const el=document.getElementById(id);let grid=null,cols=0,rows=0,walkers=[];const D8X=[-1,0,1,-1,1,-1,0,1],D8Y=[-1,-1,-1,0,0,1,1,1];function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Uint8Array(c));for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const x=Math.floor(c/2)+dx,y=Math.floor(r/2)+dy;if(x>=0&&x<c&&y>=0&&y<r)grid[y][x]=1}walkers=Array.from({length:40},()=>({x:Math.random()*c,y:Math.random()*r}))}function step(n){for(let i=0;i<n;i++){const nw=[];walkers.forEach(w=>{const d=Math.floor(Math.random()*8);w.x=(w.x+D8X[d]+cols)%cols;w.y=(w.y+D8Y[d]+rows)%rows;const gx=Math.floor(w.x),gy=Math.floor(w.y);let stuck=false;for(let k=0;k<8;k++){const nx=(gx+D8X[k]+cols)%cols,ny=(gy+D8Y[k]+rows)%rows;if(grid[ny][nx]){stuck=true;break}}if(stuck&&!grid[gy][gx]){grid[gy][gx]=1;nw.push({x:Math.random()*cols,y:Math.random()*rows})}else nw.push(w)});walkers=nw}}function frame(){const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);step(4);let cnt=0;for(let y=0;y<rows;y++)for(let x=0;x<cols;x++)if(grid[y][x])cnt++;if(cnt>cols*rows*.35)init(c,r);let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=grid[y][x]?'·':' ';out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
+  torus: `function asciiTorus(id){const el=document.getElementById(id);const chars='.,-~:;=!*#$@';let A=0,B=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function frame(){const{cols,rows}=getDims(el);const out=new Array(rows*cols).fill(' '),zb=new Float32Array(rows*cols);for(let j=0;j<Math.PI*2;j+=.07)for(let i=0;i<Math.PI*2;i+=.02){const sI=Math.sin(i),cI=Math.cos(i),sJ=Math.sin(j),cJ=Math.cos(j),sA=Math.sin(A),cA=Math.cos(A),sB=Math.sin(B),cB=Math.cos(B),h=cJ+2,D=1/(sI*h*sA+sJ*cA+5),t2=sI*h*cA-sJ*sA,x=Math.floor(cols/2+(cols*.35)*D*(cI*h*cB-t2*sB)),y=Math.floor(rows/2+(rows*.45)*D*(cI*h*sB+t2*cB)),o=x+cols*y,L=cI*cJ*sB-cA*cJ*sI-sA*sJ+cB*(cA*sJ-sA*cJ*sI);if(y>=0&&y<rows&&x>=0&&x<cols&&D>zb[o]){zb[o]=D;out[o]=chars[Math.max(0,Math.floor(L*8))]||' '}}let res='';for(let y=0;y<rows;y++)res+=out.slice(y*cols,(y+1)*cols).join('')+'\\n';el.textContent=res;A+=.07;B+=.03;requestAnimationFrame(frame)}frame()}`,
+  waterfall: `function asciiWaterfall(id){const el=document.getElementById(id);const chars=' ▁▂▃▄▅▆▇█';let hist=[],t=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function spec(c){return Array.from({length:c},(_,x)=>{const f=x/c;let v=Math.exp(-Math.pow((f-.2)*10,2))*(.5+.5*Math.sin(t*.15))+Math.exp(-Math.pow((f-.52)*14,2))*(.6+.4*Math.sin(t*.09+1))+Math.exp(-Math.pow((f-.76)*11,2))*(.4+.4*Math.cos(t*.19+2))+Math.random()*.07;return Math.min(1,v)})}function frame(){const{cols,rows}=getDims(el);hist.unshift(spec(cols));if(hist.length>rows)hist.pop();let out='';for(let y=0;y<rows;y++){const row=hist[y]||[];for(let x=0;x<cols;x++)out+=chars[Math.floor((row[x]||0)*(chars.length-1))];out+='\\n'}el.textContent=out;t++;requestAnimationFrame(frame)}frame()}`,
+  fountain: `function asciiFountain(id){const el=document.getElementById(id);const PC='·∘○◦*+';let parts=[],cols=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function emit(c,r){if(parts.length<100)parts.push({x:c/2+(Math.random()-.5)*4,y:r-1,vx:(Math.random()-.5)*.55,vy:-(1.6+Math.random()*2.4),life:1,ch:PC[Math.floor(Math.random()*PC.length)]})}function frame(){const{cols:c,rows:r}=getDims(el);if(c!==cols)cols=c;emit(c,r);emit(c,r);const g=Array.from({length:r},()=>Array(c).fill(' '));parts=parts.filter(p=>{p.vy+=.1;p.x+=p.vx;p.y+=p.vy;p.life-=.014;if(p.life<=0||p.y>=r||p.y<0||p.x<0||p.x>=c)return false;const gx=Math.floor(p.x),gy=Math.floor(p.y);if(gx>=0&&gx<c&&gy>=0&&gy<r)g[gy][gx]=p.life>.5?p.ch:'·';return true});el.textContent=g.map(r=>r.join('')).join('\\n');requestAnimationFrame(frame)}frame()}`,
+  sierpinski: `function asciiSierpinski(id){const el=document.getElementById(id);let dots=null,cols=0,rows=0,cx=0,cy=0,fc=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;dots=Array.from({length:r},()=>new Uint8Array(c));cx=c/2;cy=r/2}function step(n,c,r){const v=[[c/2,1],[1,r-1],[c-1,r-1]];for(let i=0;i<n;i++){const vi=v[Math.floor(Math.random()*3)];cx=(cx+vi[0])/2;cy=(cy+vi[1])/2;const gx=Math.floor(cx),gy=Math.floor(cy);if(gx>=0&&gx<c&&gy>=0&&gy<r)dots[gy][gx]=1}}function frame(){const{cols:c,rows:r}=getDims(el);if(!dots||c!==cols||r!==rows)init(c,r);step(300,c,r);if(fc++%400===399)init(c,r);let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=dots[y][x]?'·':' ';out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
+  ekg: `function asciiEKG(id) {
+  const el = document.getElementById(id);
+  let offset=0;
+  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function hb(p){p=((p%1)+1)%1;if(p<.30)return Math.sin(p*Math.PI/.30)*.18;if(p<.42)return 0;if(p<.46)return-.55;if(p<.51)return 1.0;if(p<.56)return-.40;if(p<.62)return 0;if(p<.82)return Math.sin((p-.62)*Math.PI/.20)*.30;return 0}
+  function frame(){
+    const{cols,rows}=getDims(el);const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
+    const mid=Math.floor(rows*.5),cycleLen=Math.max(18,Math.round(cols*.38));
+    for(let x=0;x<cols;x++)grid[mid][x]='·';
+    let prevY=null;
+    for(let x=0;x<cols;x++){const v=hb((x+offset)/cycleLen),y=Math.round(mid-v*rows*.38);if(y>=0&&y<rows){const b=x>cols*.72;grid[y][x]=b?'█':(Math.abs(v)>.4?'#':'─');if(prevY!==null&&Math.abs(y-prevY)>1){const mn=Math.min(y,prevY),mx=Math.max(y,prevY);for(let yy=mn;yy<=mx;yy++)if(yy>=0&&yy<rows)grid[yy][x]=b?'█':'|'}}prevY=y}
+    el.textContent=grid.map(r=>r.join('')).join('\\n'); offset+=.55; requestAnimationFrame(frame);
+  }
+  frame();
+}`
+};
+
+function copyCode(name) {
+  navigator.clipboard.writeText(snippets[name]).then(() => {
+    const btns = document.querySelectorAll('.copy-btn');
+    btns.forEach(b => { if (b.getAttribute('onclick').includes(name)) {
+      b.textContent = 'copied ✓';
+      b.classList.add('copied');
+      setTimeout(() => { b.textContent = 'copy code'; b.classList.remove('copied'); }, 2000);
+    }});
+  });
+}
+</script>
+</body>
+</html>
