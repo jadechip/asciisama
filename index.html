@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASCII Background Animations</title>
+<title>asciisama</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,25 +20,42 @@
     --accent3: #4488ff;
     --accent4: #ffaa00;
     --accent5: #cc44ff;
+    --font-sans: 'Geist Mono', 'SFMono-Regular', 'Menlo', 'Consolas', monospace;
+    --font-mono: 'Geist Mono', 'SFMono-Regular', 'Menlo', 'Consolas', monospace;
   }
 
   html, body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Space Mono', monospace;
+    font-family: var(--font-mono);
     min-height: 100vh;
     padding: 2rem;
   }
 
+  .hero {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-copy {
+    min-width: 0;
+  }
+
   h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    letter-spacing: -0.03em;
-    margin-bottom: 0.4rem;
-    background: linear-gradient(135deg, var(--accent1), var(--accent3));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(0.24rem, 0.78vw, 0.56rem);
+    line-height: 1.04;
+    letter-spacing: 0;
+    white-space: pre;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+    margin-bottom: 0.75rem;
+    color: #ffffff;
   }
 
   .subtitle {
@@ -46,7 +63,35 @@
     color: var(--muted);
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: 3rem;
+    margin-bottom: 0;
+  }
+
+  .repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    color: var(--text);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.68rem;
+    padding: 0.7rem 0.9rem;
+    transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+    flex: 0 0 auto;
+  }
+
+  .repo-link:hover {
+    border-color: var(--accent1);
+    background: rgba(0,255,204,0.05);
+    color: var(--accent1);
+  }
+
+  .repo-link svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    fill: currentColor;
   }
 
   .grid {
@@ -80,7 +125,7 @@
     inset: 0;
     margin: 0;
     padding: 0.6rem;
-    font-family: 'Space Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     line-height: 1.3;
     letter-spacing: 0.05em;
@@ -196,6 +241,149 @@
   .sierpinski-bg     { background: #04040e; }
   .sierpinski-bg pre { color: #6688ff; }
 
+  /* batch 4 themes */
+  .aurora-bg     { background: #03110c; }
+  .aurora-bg pre { color: #7fffd4; }
+
+  .circuit-bg     { background: #07100a; }
+  .circuit-bg pre { color: #7cff66; }
+
+  .moire-bg     { background: #11060f; }
+  .moire-bg pre { color: #ff77cc; }
+
+  .equalizer-bg     { background: #08050f; }
+  .equalizer-bg pre { color: #bb88ff; }
+
+  .hex-bg     { background: #0d0b04; }
+  .hex-bg pre { color: #ffdd66; }
+
+  .sunburst-bg     { background: #120600; }
+  .sunburst-bg pre { color: #ffbb44; }
+
+  .comets-bg     { background: #020610; }
+  .comets-bg pre { color: #dde8ff; }
+
+  .scanlines-bg     { background: #050505; }
+  .scanlines-bg pre { color: #66ff99; }
+
+  .topo-bg     { background: #040b10; }
+  .topo-bg pre { color: #66ddff; }
+
+  .glyph-bg     { background: #0d050d; }
+  .glyph-bg pre { color: #ff88ee; }
+
+  .pendulum-bg     { background: #081012; }
+  .pendulum-bg pre { color: #88ddff; }
+
+  .bloom-bg     { background: #10040a; }
+  .bloom-bg pre { color: #ff7799; }
+
+  .braid-bg     { background: #060c08; }
+  .braid-bg pre { color: #88ffbb; }
+
+  .swarm-bg     { background: #060812; }
+  .swarm-bg pre { color: #88aaff; }
+
+  .bitplane-bg     { background: #0b1004; }
+  .bitplane-bg pre { color: #c5ff55; }
+
+  .beacon-bg     { background: #091008; }
+  .beacon-bg pre { color: #44ffcc; }
+
+  .shatter-bg     { background: #0f0808; }
+  .shatter-bg pre { color: #ff9988; }
+
+  .horizon-bg     { background: #03070d; }
+  .horizon-bg pre { color: #77bbff; }
+
+  .lattice-bg     { background: #08080a; }
+  .lattice-bg pre { color: #ccccff; }
+
+  .pulse-bg     { background: #08030f; }
+  .pulse-bg pre { color: #cc66ff; }
+
+  /* batch 5 themes */
+  .nebula-bg     { background: #06040d; }
+  .nebula-bg pre { color: #c08cff; }
+
+  .cascade-bg     { background: #041008; }
+  .cascade-bg pre { color: #55ffbb; }
+
+  .isofield-bg     { background: #081010; }
+  .isofield-bg pre { color: #66ffee; }
+
+  .spinner-bg     { background: #090612; }
+  .spinner-bg pre { color: #a98cff; }
+
+  .quasar-bg     { background: #10040a; }
+  .quasar-bg pre { color: #ff88bb; }
+
+  .crystals-bg     { background: #040c12; }
+  .crystals-bg pre { color: #88e8ff; }
+
+  .braille-bg     { background: #050b06; }
+  .braille-bg pre { color: #a8ff7a; }
+
+  .helix-bg     { background: #081014; }
+  .helix-bg pre { color: #77ddff; }
+
+  .echo-bg     { background: #0a0810; }
+  .echo-bg pre { color: #9a8cff; }
+
+  .parallax-bg     { background: #030912; }
+  .parallax-bg pre { color: #89d1ff; }
+
+  .dunes-bg     { background: #110904; }
+  .dunes-bg pre { color: #ffd27a; }
+
+  .koi-bg     { background: #041014; }
+  .koi-bg pre { color: #ff9a66; }
+
+  .monsoon-bg     { background: #050910; }
+  .monsoon-bg pre { color: #8fbaff; }
+
+  .fronds-bg     { background: #041008; }
+  .fronds-bg pre { color: #66ff99; }
+
+  .signal-bg     { background: #0b0510; }
+  .signal-bg pre { color: #ff66cc; }
+
+  .lumen-bg     { background: #0d0a03; }
+  .lumen-bg pre { color: #fff18a; }
+
+  .knots-bg     { background: #08080f; }
+  .knots-bg pre { color: #d8c8ff; }
+
+  .veins-bg     { background: #0d0404; }
+  .veins-bg pre { color: #ff7766; }
+
+  .marquee-bg     { background: #0b0603; }
+  .marquee-bg pre { color: #ffb84d; }
+
+  .monolith-bg     { background: #05070b; }
+  .monolith-bg pre { color: #9db7d9; }
+
+  .driftgrid-bg     { background: #04100c; }
+  .driftgrid-bg pre { color: #66ffcc; }
+
+  .cinders-bg     { background: #120500; }
+  .cinders-bg pre { color: #ff9955; }
+
+  .phosphor-bg     { background: #030f05; }
+  .phosphor-bg pre { color: #7bff7b; }
+
+  .vault-bg     { background: #06060d; }
+  .vault-bg pre { color: #8ea0ff; }
+
+  .zenith-bg     { background: #020814; }
+  .zenith-bg pre { color: #b8d8ff; }
+
+  .parrot-bg     { background: #051109; }
+  .parrot-bg pre { color: #8dff88; }
+
+  .mascot-bg     { background: #0a0614; }
+  .mascot-bg pre { color: #f4f4ff; line-height: 1; }
+
   /* Card meta */
   .card-info {
     padding: 1rem 1.2rem;
@@ -206,7 +394,7 @@
   }
 
   .card-name {
-    font-family: 'Syne', sans-serif;
+    font-family: var(--font-sans);
     font-weight: 700;
     font-size: 0.9rem;
     letter-spacing: 0.01em;
@@ -231,7 +419,7 @@
     background: transparent;
     border: 1px solid var(--border);
     color: var(--muted);
-    font-family: 'Space Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -281,12 +469,358 @@
   .usage pre .str { color: var(--accent1); }
   .usage pre .fn  { color: var(--accent5); }
   .usage pre .cmt { color: #444460; font-style: italic; }
+
+  .editor-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 6, 10, 0.56);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+    z-index: 39;
+  }
+
+  .editor-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .editor {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    border-top: 1px solid rgba(120, 130, 170, 0.22);
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 96px),
+      linear-gradient(180deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 72px),
+      linear-gradient(180deg, rgba(7, 9, 14, 0.98), rgba(10, 11, 16, 0.995));
+    box-shadow: 0 -18px 56px rgba(0,0,0,0.36);
+    transform: translateY(calc(100% + 1rem));
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.18s ease;
+    max-height: min(82vh, 840px);
+  }
+
+  .editor.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .editor-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.015);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .editor-header-main {
+    min-width: 0;
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .editor-kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .editor-title {
+    font-family: var(--font-mono);
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .editor-copy,
+  .editor-close {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.015);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    padding: 0.65rem 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+
+  .editor-copy {
+    color: var(--accent1);
+    border-color: rgba(0,255,204,0.2);
+  }
+
+  .editor-copy:hover,
+  .editor-close:hover {
+    border-color: var(--accent1);
+    color: var(--accent1);
+    background: rgba(0,255,204,0.06);
+  }
+
+  .editor-copy.copied {
+    color: #10131a;
+    background: var(--accent1);
+    border-color: var(--accent1);
+  }
+
+  .editor-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(320px, 0.8fr);
+    gap: 0;
+    max-height: calc(min(82vh, 840px) - 68px);
+    overflow: auto;
+  }
+
+  .editor-preview {
+    position: relative;
+    min-height: 360px;
+    border-right: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .editor-preview pre {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.3;
+    letter-spacing: 0.05em;
+    white-space: pre;
+    pointer-events: none;
+  }
+
+  .editor-controls {
+    padding: 1.25rem;
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    background: rgba(255,255,255,0.015);
+  }
+
+  .editor-control {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .editor-control label,
+  .editor-inline span {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .editor-select,
+  .editor-range,
+  .editor-color {
+    width: 100%;
+  }
+
+  .editor-select {
+    background: #0b0d12;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 2px;
+  }
+
+  .editor-range {
+    accent-color: var(--accent1);
+  }
+
+  .editor-color {
+    height: 2.6rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: transparent;
+    padding: 0.2rem;
+    cursor: pointer;
+  }
+
+  .editor-inline {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .editor-meta {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .editor-check {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    color: var(--text);
+  }
+
+  .editor-check input {
+    accent-color: var(--accent1);
+  }
+
+  .editor-segment {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .editor-segment input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .editor-segment label {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.015);
+    color: var(--muted);
+    padding: 0.7rem 0.8rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.66rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+
+  .editor-segment input:checked + label {
+    color: var(--accent1);
+    border-color: rgba(0,255,204,0.24);
+    background: rgba(0,255,204,0.06);
+  }
+
+  .editor-help {
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: #8d8da8;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .editor-body {
+      grid-template-columns: 1fr;
+    }
+
+    .editor-preview {
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+      min-height: 260px;
+    }
+  }
 </style>
 </head>
 <body>
 
-<h1>ASCII Backgrounds</h1>
-<p class="subtitle">35 animated patterns · drop into any div</p>
+<div class="hero">
+  <div class="hero-copy">
+    <h1 aria-label="asciisama">░░      ░░░░      ░░░░      ░░░        ░░        ░░░      ░░░░      ░░░  ░░░░  ░░░      ░░
+▒  ▒▒▒▒  ▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒   ▒▒   ▒▒  ▒▒▒▒  ▒
+▓  ▓▓▓▓  ▓▓▓      ▓▓▓  ▓▓▓▓▓▓▓▓▓▓▓  ▓▓▓▓▓▓▓▓  ▓▓▓▓▓▓      ▓▓▓  ▓▓▓▓  ▓▓        ▓▓  ▓▓▓▓  ▓
+█        ████████  ██  ████  █████  ████████  ███████████  ██        ██  █  █  ██        █
+█  ████  ███      ████      ███        ██        ███      ███  ████  ██  ████  ██  ████  █</h1>
+    <p class="subtitle">82 animated patterns · drop into any div</p>
+  </div>
+  <a class="repo-link" href="https://github.com/jadechip/asciisama" target="_blank" rel="noreferrer">
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
+    </svg>
+    <span>Star asciisama</span>
+  </a>
+</div>
+
+<div class="editor-backdrop" id="editor-backdrop"></div>
+
+<section class="editor" id="editor-drawer" aria-hidden="true">
+  <div class="editor-header">
+    <div class="editor-header-main">
+      <div class="editor-kicker">Editor</div>
+      <div class="editor-title" id="editor-title">Animation Editor</div>
+    </div>
+    <div class="editor-actions">
+      <button class="editor-copy" id="editor-copy" type="button">copy</button>
+      <button class="editor-close" id="editor-close" type="button">close</button>
+    </div>
+  </div>
+  <div class="editor-body">
+    <div class="editor-preview" id="editor-preview">
+      <pre id="editor-canvas"></pre>
+    </div>
+    <div class="editor-controls">
+      <div class="editor-control">
+        <label for="editor-animation">Animation</label>
+        <select class="editor-select" id="editor-animation"></select>
+      </div>
+
+      <div class="editor-control">
+        <div class="editor-inline">
+          <label for="editor-speed">Speed</label>
+          <span id="editor-speed-value">1.00x</span>
+        </div>
+        <input class="editor-range" id="editor-speed" type="range" min="0.25" max="3" step="0.25" value="1">
+      </div>
+
+      <div class="editor-control">
+        <label for="editor-color">Color</label>
+        <input class="editor-color" id="editor-color" type="color" value="#00ffcc">
+      </div>
+
+      <div class="editor-control">
+        <label>Playback</label>
+        <div class="editor-segment">
+          <div>
+            <input id="editor-mode-loop" name="editor-mode" type="radio" value="loop" checked>
+            <label for="editor-mode-loop">Loop</label>
+          </div>
+          <div>
+            <input id="editor-mode-boomerang" name="editor-mode" type="radio" value="boomerang">
+            <label for="editor-mode-boomerang">Boomerang</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-control">
+        <div class="editor-meta">
+          <label class="editor-check" for="editor-loop">
+            <input id="editor-loop" type="checkbox" checked>
+            <span>Animate preview</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="editor-help">
+        Open any card to preview it here, tune the speed and glyph color, switch between loop and boomerang playback, then copy the current version with those settings baked into the code.
+      </div>
+    </div>
+  </div>
+</section>
 
 <div class="grid">
 
@@ -641,6 +1175,476 @@
     <button class="copy-btn" onclick="copyCode('sierpinski')">copy code</button>
   </div>
 
+  <!-- 36. AURORA -->
+  <div class="card">
+    <div class="ascii-bg aurora-bg"><pre id="aurora-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Aurora Curtains</span>
+      <span class="card-tag">polar ribbons</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('aurora')">copy code</button>
+  </div>
+
+  <!-- 37. CIRCUIT -->
+  <div class="card">
+    <div class="ascii-bg circuit-bg"><pre id="circuit-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Circuit Pulse</span>
+      <span class="card-tag">pcb traces</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('circuit')">copy code</button>
+  </div>
+
+  <!-- 38. MOIRE -->
+  <div class="card">
+    <div class="ascii-bg moire-bg"><pre id="moire-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Moire Drift</span>
+      <span class="card-tag">interference</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('moire')">copy code</button>
+  </div>
+
+  <!-- 39. EQUALIZER -->
+  <div class="card">
+    <div class="ascii-bg equalizer-bg"><pre id="equalizer-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Equalizer Bars</span>
+      <span class="card-tag">audio stack</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('equalizer')">copy code</button>
+  </div>
+
+  <!-- 40. HEX -->
+  <div class="card">
+    <div class="ascii-bg hex-bg"><pre id="hex-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Hex Drift</span>
+      <span class="card-tag">honeycomb wave</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('hex')">copy code</button>
+  </div>
+
+  <!-- 41. SUNBURST -->
+  <div class="card">
+    <div class="ascii-bg sunburst-bg"><pre id="sunburst-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Sunburst</span>
+      <span class="card-tag">radial spokes</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('sunburst')">copy code</button>
+  </div>
+
+  <!-- 42. COMETS -->
+  <div class="card">
+    <div class="ascii-bg comets-bg"><pre id="comets-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Comet Trail</span>
+      <span class="card-tag">orbital streaks</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('comets')">copy code</button>
+  </div>
+
+  <!-- 43. SCANLINES -->
+  <div class="card">
+    <div class="ascii-bg scanlines-bg"><pre id="scanlines-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Scanline Drift</span>
+      <span class="card-tag">crt raster</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('scanlines')">copy code</button>
+  </div>
+
+  <!-- 44. TOPOGRAPHY -->
+  <div class="card">
+    <div class="ascii-bg topo-bg"><pre id="topo-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Topography</span>
+      <span class="card-tag">contour map</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('topo')">copy code</button>
+  </div>
+
+  <!-- 45. GLYPH CLOUD -->
+  <div class="card">
+    <div class="ascii-bg glyph-bg"><pre id="glyph-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Glyph Cloud</span>
+      <span class="card-tag">rune drift</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('glyph')">copy code</button>
+  </div>
+
+  <!-- 46. PENDULUM -->
+  <div class="card">
+    <div class="ascii-bg pendulum-bg"><pre id="pendulum-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Pendulum Field</span>
+      <span class="card-tag">chained swing</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('pendulum')">copy code</button>
+  </div>
+
+  <!-- 47. BLOOM -->
+  <div class="card">
+    <div class="ascii-bg bloom-bg"><pre id="bloom-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Bloom Rings</span>
+      <span class="card-tag">pulse bloom</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('bloom')">copy code</button>
+  </div>
+
+  <!-- 48. BRAID -->
+  <div class="card">
+    <div class="ascii-bg braid-bg"><pre id="braid-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Braid Matrix</span>
+      <span class="card-tag">woven waves</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('braid')">copy code</button>
+  </div>
+
+  <!-- 49. SWARM -->
+  <div class="card">
+    <div class="ascii-bg swarm-bg"><pre id="swarm-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Swarm Flow</span>
+      <span class="card-tag">boids-lite</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('swarm')">copy code</button>
+  </div>
+
+  <!-- 50. BITPLANE -->
+  <div class="card">
+    <div class="ascii-bg bitplane-bg"><pre id="bitplane-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Bitplane</span>
+      <span class="card-tag">shifting nibbles</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('bitplane')">copy code</button>
+  </div>
+
+  <!-- 51. BEACON -->
+  <div class="card">
+    <div class="ascii-bg beacon-bg"><pre id="beacon-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Beacon Grid</span>
+      <span class="card-tag">rotating markers</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('beacon')">copy code</button>
+  </div>
+
+  <!-- 52. SHATTER -->
+  <div class="card">
+    <div class="ascii-bg shatter-bg"><pre id="shatter-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Shatter</span>
+      <span class="card-tag">fracture field</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('shatter')">copy code</button>
+  </div>
+
+  <!-- 53. HORIZON -->
+  <div class="card">
+    <div class="ascii-bg horizon-bg"><pre id="horizon-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Horizon Sweep</span>
+      <span class="card-tag">layered range</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('horizon')">copy code</button>
+  </div>
+
+  <!-- 54. LATTICE -->
+  <div class="card">
+    <div class="ascii-bg lattice-bg"><pre id="lattice-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Lattice</span>
+      <span class="card-tag">spring net</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('lattice')">copy code</button>
+  </div>
+
+  <!-- 55. PULSE TUNNEL -->
+  <div class="card">
+    <div class="ascii-bg pulse-bg"><pre id="pulse-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Pulse Tunnel</span>
+      <span class="card-tag">neon depth</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('pulse')">copy code</button>
+  </div>
+
+  <!-- 56. NEBULA -->
+  <div class="card">
+    <div class="ascii-bg nebula-bg"><pre id="nebula-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Nebula Veil</span>
+      <span class="card-tag">gas clouds</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('nebula')">copy code</button>
+  </div>
+
+  <!-- 57. CASCADE -->
+  <div class="card">
+    <div class="ascii-bg cascade-bg"><pre id="cascade-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Cascade Code</span>
+      <span class="card-tag">diagonal fall</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('cascade')">copy code</button>
+  </div>
+
+  <!-- 58. ISOFIELD -->
+  <div class="card">
+    <div class="ascii-bg isofield-bg"><pre id="isofield-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Isofield</span>
+      <span class="card-tag">contour bands</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('isofield')">copy code</button>
+  </div>
+
+  <!-- 59. SPINNER -->
+  <div class="card">
+    <div class="ascii-bg spinner-bg"><pre id="spinner-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Spinner Mesh</span>
+      <span class="card-tag">rotor grid</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('spinner')">copy code</button>
+  </div>
+
+  <!-- 60. QUASAR -->
+  <div class="card">
+    <div class="ascii-bg quasar-bg"><pre id="quasar-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Quasar Core</span>
+      <span class="card-tag">jet burst</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('quasar')">copy code</button>
+  </div>
+
+  <!-- 61. CRYSTALS -->
+  <div class="card">
+    <div class="ascii-bg crystals-bg"><pre id="crystals-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Crystal Spires</span>
+      <span class="card-tag">shard growth</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('crystals')">copy code</button>
+  </div>
+
+  <!-- 62. BRAILLE -->
+  <div class="card">
+    <div class="ascii-bg braille-bg"><pre id="braille-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Braille Rain</span>
+      <span class="card-tag">dot stream</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('braille')">copy code</button>
+  </div>
+
+  <!-- 63. HELIX -->
+  <div class="card">
+    <div class="ascii-bg helix-bg"><pre id="helix-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Helix Ladder</span>
+      <span class="card-tag">vertical twist</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('helix')">copy code</button>
+  </div>
+
+  <!-- 64. ECHO -->
+  <div class="card">
+    <div class="ascii-bg echo-bg"><pre id="echo-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Echo Rings</span>
+      <span class="card-tag">pulse spread</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('echo')">copy code</button>
+  </div>
+
+  <!-- 65. PARALLAX -->
+  <div class="card">
+    <div class="ascii-bg parallax-bg"><pre id="parallax-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Parallax Drift</span>
+      <span class="card-tag">layer scroll</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('parallax')">copy code</button>
+  </div>
+
+  <!-- 66. DUNES -->
+  <div class="card">
+    <div class="ascii-bg dunes-bg"><pre id="dunes-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Dune Sea</span>
+      <span class="card-tag">wind ridges</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('dunes')">copy code</button>
+  </div>
+
+  <!-- 67. KOI -->
+  <div class="card">
+    <div class="ascii-bg koi-bg"><pre id="koi-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Koi Pond</span>
+      <span class="card-tag">fish drift</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('koi')">copy code</button>
+  </div>
+
+  <!-- 68. MONSOON -->
+  <div class="card">
+    <div class="ascii-bg monsoon-bg"><pre id="monsoon-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Monsoon</span>
+      <span class="card-tag">wind rain</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('monsoon')">copy code</button>
+  </div>
+
+  <!-- 69. FRONDS -->
+  <div class="card">
+    <div class="ascii-bg fronds-bg"><pre id="fronds-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Frond Field</span>
+      <span class="card-tag">leaf sway</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('fronds')">copy code</button>
+  </div>
+
+  <!-- 70. SIGNAL -->
+  <div class="card">
+    <div class="ascii-bg signal-bg"><pre id="signal-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Signal Bloom</span>
+      <span class="card-tag">band pulses</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('signal')">copy code</button>
+  </div>
+
+  <!-- 71. LUMEN -->
+  <div class="card">
+    <div class="ascii-bg lumen-bg"><pre id="lumen-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Lumen Sweep</span>
+      <span class="card-tag">moving beams</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('lumen')">copy code</button>
+  </div>
+
+  <!-- 72. KNOTS -->
+  <div class="card">
+    <div class="ascii-bg knots-bg"><pre id="knots-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Knot Field</span>
+      <span class="card-tag">woven paths</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('knots')">copy code</button>
+  </div>
+
+  <!-- 73. VEINS -->
+  <div class="card">
+    <div class="ascii-bg veins-bg"><pre id="veins-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Vein Network</span>
+      <span class="card-tag">branch flow</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('veins')">copy code</button>
+  </div>
+
+  <!-- 74. MARQUEE -->
+  <div class="card">
+    <div class="ascii-bg marquee-bg"><pre id="marquee-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Marquee</span>
+      <span class="card-tag">chase lights</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('marquee')">copy code</button>
+  </div>
+
+  <!-- 75. MONOLITH -->
+  <div class="card">
+    <div class="ascii-bg monolith-bg"><pre id="monolith-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Monoliths</span>
+      <span class="card-tag">fog pillars</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('monolith')">copy code</button>
+  </div>
+
+  <!-- 76. DRIFT GRID -->
+  <div class="card">
+    <div class="ascii-bg driftgrid-bg"><pre id="driftgrid-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Drift Grid</span>
+      <span class="card-tag">warped mesh</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('driftgrid')">copy code</button>
+  </div>
+
+  <!-- 77. CINDERS -->
+  <div class="card">
+    <div class="ascii-bg cinders-bg"><pre id="cinders-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Cinders</span>
+      <span class="card-tag">ember rise</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('cinders')">copy code</button>
+  </div>
+
+  <!-- 78. PHOSPHOR -->
+  <div class="card">
+    <div class="ascii-bg phosphor-bg"><pre id="phosphor-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Phosphor Trails</span>
+      <span class="card-tag">afterimage</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('phosphor')">copy code</button>
+  </div>
+
+  <!-- 79. VAULT -->
+  <div class="card">
+    <div class="ascii-bg vault-bg"><pre id="vault-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Vault Hall</span>
+      <span class="card-tag">arched depth</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('vault')">copy code</button>
+  </div>
+
+  <!-- 80. ZENITH -->
+  <div class="card">
+    <div class="ascii-bg zenith-bg"><pre id="zenith-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Zenith Dome</span>
+      <span class="card-tag">celestial arcs</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('zenith')">copy code</button>
+  </div>
+
+  <!-- 81. PARROT -->
+  <div class="card">
+    <div class="ascii-bg parrot-bg"><pre id="parrot-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Parrot Parade</span>
+      <span class="card-tag">frame sprite</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('parrot')">copy code</button>
+  </div>
+
+  <!-- 82. MASCOT -->
+  <div class="card">
+    <div class="ascii-bg mascot-bg"><pre id="mascot-canvas"></pre></div>
+    <div class="card-info">
+      <span class="card-name">Mascot Bounce</span>
+      <span class="card-tag">sprite bob</span>
+    </div>
+    <button class="copy-btn" onclick="copyCode('mascot')">copy code</button>
+  </div>
+
 </div>
 
 <!-- Usage -->
@@ -688,7 +1692,54 @@
 <span class="fn">asciiTorus</span>(<span class="str">'my-canvas'</span>);  <span class="cmt">// Torus / Donut</span>
 <span class="fn">asciiWaterfall</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Waterfall</span>
 <span class="fn">asciiFountain</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Fountain</span>
-<span class="fn">asciiSierpinski</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Sierpinski</span></pre>
+<span class="fn">asciiSierpinski</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Sierpinski</span>
+<span class="fn">asciiAurora</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Aurora Curtains</span>
+<span class="fn">asciiCircuit</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Circuit Pulse</span>
+<span class="fn">asciiMoire</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Moire Drift</span>
+<span class="fn">asciiEqualizer</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Equalizer Bars</span>
+<span class="fn">asciiHex</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Hex Drift</span>
+<span class="fn">asciiSunburst</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Sunburst</span>
+<span class="fn">asciiComets</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Comet Trail</span>
+<span class="fn">asciiScanlines</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Scanline Drift</span>
+<span class="fn">asciiTopo</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Topography</span>
+<span class="fn">asciiGlyph</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Glyph Cloud</span>
+<span class="fn">asciiPendulum</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Pendulum Field</span>
+<span class="fn">asciiBloom</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Bloom Rings</span>
+<span class="fn">asciiBraid</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Braid Matrix</span>
+<span class="fn">asciiSwarm</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Swarm Flow</span>
+<span class="fn">asciiBitplane</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Bitplane</span>
+<span class="fn">asciiBeacon</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Beacon Grid</span>
+<span class="fn">asciiShatter</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Shatter</span>
+<span class="fn">asciiHorizon</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Horizon Sweep</span>
+<span class="fn">asciiLattice</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Lattice</span>
+<span class="fn">asciiPulseTunnel</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Pulse Tunnel</span>
+<span class="fn">asciiNebula</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Nebula Veil</span>
+<span class="fn">asciiCascade</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Cascade Code</span>
+<span class="fn">asciiIsofield</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Isofield</span>
+<span class="fn">asciiSpinner</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Spinner Mesh</span>
+<span class="fn">asciiQuasar</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Quasar Core</span>
+<span class="fn">asciiCrystals</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Crystal Spires</span>
+<span class="fn">asciiBraille</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Braille Rain</span>
+<span class="fn">asciiHelix</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Helix Ladder</span>
+<span class="fn">asciiEcho</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Echo Rings</span>
+<span class="fn">asciiParallax</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Parallax Drift</span>
+<span class="fn">asciiDunes</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Dune Sea</span>
+<span class="fn">asciiKoi</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Koi Pond</span>
+<span class="fn">asciiMonsoon</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Monsoon</span>
+<span class="fn">asciiFronds</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Frond Field</span>
+<span class="fn">asciiSignal</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Signal Bloom</span>
+<span class="fn">asciiLumen</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Lumen Sweep</span>
+<span class="fn">asciiKnots</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Knot Field</span>
+<span class="fn">asciiVeins</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Vein Network</span>
+<span class="fn">asciiMarquee</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Marquee</span>
+<span class="fn">asciiMonolith</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Monoliths</span>
+<span class="fn">asciiDriftGrid</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Drift Grid</span>
+<span class="fn">asciiCinders</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Cinders</span>
+<span class="fn">asciiPhosphor</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Phosphor Trails</span>
+<span class="fn">asciiVault</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Vault Hall</span>
+<span class="fn">asciiZenith</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Zenith Dome</span>
+<span class="fn">asciiParrot</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Parrot Parade</span>
+<span class="fn">asciiMascot</span>(<span class="str">'my-canvas'</span>); <span class="cmt">// Mascot Bounce</span></pre>
 </div>
 
 <script>
@@ -1674,293 +2725,2284 @@ function asciiSierpinski(id) {
   frame();
 }
 
-/* ─── INIT ALL DEMOS ───────────────────────────── */
-asciiWave('wave-canvas');
-asciiRain('rain-canvas');
-asciiPlasma('plasma-canvas');
-asciiRipple('ripple-canvas');
-asciiNoise('noise-canvas');
-asciiVortex('vortex-canvas');
-asciiFire('fire-canvas');
-asciiStars('stars-canvas');
-asciiDNA('dna-canvas');
-asciiBinary('binary-canvas');
-asciiRadar('radar-canvas');
-asciiWorms('worms-canvas');
-asciiTunnel('tunnel-canvas');
-asciiSand('sand-canvas');
-asciiEKG('ekg-canvas');
-asciiLife('life-canvas');
-asciiCube('cube-canvas');
-asciiLissajous('lissajous-canvas');
-asciiSnow('snow-canvas');
-asciiMandel('mandel-canvas');
-asciiAnt('ant-canvas');
-asciiOrbits('orbits-canvas');
-asciiSmoke('smoke-canvas');
-asciiLightning('lightning-canvas');
-asciiRule30('rule30-canvas');
-asciiMeta('meta-canvas');
-asciiMaze('maze-canvas');
-asciiBubbles('bubbles-canvas');
-asciiReact('react-canvas');
-asciiGlitch('glitch-canvas');
-asciiDLA('dla-canvas');
-asciiTorus('torus-canvas');
-asciiWaterfall('waterfall-canvas');
-asciiFountain('fountain-canvas');
-asciiSierpinski('sierpinski-canvas');
-
-/* ─── COPY CODE ────────────────────────────────── */
-const snippets = {
-  wave: `function asciiWave(id) {
+/* ─── 36. AURORA CURTAINS ───────────────────── */
+function asciiAurora(id) {
   const el = document.getElementById(id);
-  const chars = ['·','∘','○','◦','~','≈','≋','∼','⌇','∿'];
+  const chars = ' .,:;irsXA253hMHGS#9B&@';
   let t = 0;
-  function getDims(el) {
-    return { cols: Math.floor(el.parentElement.clientWidth / 6.3),
-             rows: Math.floor(el.parentElement.clientHeight / 13) };
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      const ny = y / Math.max(1, rows - 1);
+      for (let x = 0; x < cols; x++) {
+        const nx = x / Math.max(1, cols - 1);
+        const curtain = Math.exp(-Math.pow((ny - 0.45 - Math.sin(nx * 2.4 + t) * 0.14 - Math.sin(nx * 6.2 - t * 1.4) * 0.05) * 5.5, 2));
+        const shimmer = Math.sin(nx * 18 - t * 2.3 + ny * 9) * 0.28 + Math.cos(nx * 9 + t + ny * 7) * 0.18;
+        const v = Math.max(0, Math.min(1, curtain * 0.92 + shimmer * 0.35 + 0.08));
+        out += chars[Math.floor(v * (chars.length - 1))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.03;
+    requestAnimationFrame(frame);
   }
+  frame();
+}
+
+/* ─── 37. CIRCUIT PULSE ───────────────────────── */
+function asciiCircuit(id) {
+  const el = document.getElementById(id);
+  let t = 0;
   function frame() {
     const { cols, rows } = getDims(el);
     let out = '';
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        const v = (Math.sin((x*.18)+(y*.25)-t*1.4)
-                 + Math.sin((x*.09)-(y*.15)+t*.9)
-                 + Math.cos((x*.12)+(y*.08)+t*.5)) / 3;
-        const idx = Math.floor(((v+1)/2)*(chars.length-1));
-        out += chars[Math.max(0,Math.min(chars.length-1,idx))];
+        const vx = x % 6 === 0;
+        const hy = y % 4 === 0;
+        const gap = Math.sin(x * 0.9 - y * 0.6 + t * 2.5) < -0.86;
+        const pulse = Math.sin((x + y) * 0.32 - t * 4) + Math.sin((x - y) * 0.18 + t * 3);
+        if (vx && hy) out += pulse > 1 ? '●' : '┼';
+        else if (vx) out += gap ? ' ' : (pulse > 0.7 ? '╪' : '│');
+        else if (hy) out += gap ? ' ' : (pulse > 0.7 ? '═' : '─');
+        else out += ' ';
       }
-      out += '\\n';
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.035;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 38. MOIRE DRIFT ─────────────────────────── */
+function asciiMoire(id) {
+  const el = document.getElementById(id);
+  const chars = ' .,:;ox%#@';
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    const a = t * 0.9;
+    const b = -t * 0.55;
+    const ca = Math.cos(a), sa = Math.sin(a);
+    const cb = Math.cos(b), sb = Math.sin(b);
+    for (let y = -rows / 2; y < rows / 2; y++) {
+      for (let x = -cols / 2; x < cols / 2; x++) {
+        const p1 = Math.sin((x * ca + y * sa) * 0.55);
+        const p2 = Math.sin((x * cb - y * sb) * 0.58 + Math.sin(t * 2) * 2);
+        const p3 = Math.sin(Math.hypot(x, y) * 0.22 - t * 5) * 0.35;
+        const v = Math.max(0, Math.min(1, (p1 + p2 + p3 + 2.35) / 4.7));
+        out += chars[Math.floor(v * (chars.length - 1))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.025;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 39. EQUALIZER BARS ──────────────────────── */
+function asciiEqualizer(id) {
+  const el = document.getElementById(id);
+  let bands = [];
+  let peaks = [];
+  let bandCount = 0;
+  let t = 0;
+  function init(cols) {
+    bandCount = Math.max(4, Math.floor(cols / 3));
+    bands = Array.from({ length: bandCount }, () => 0);
+    peaks = Array.from({ length: bandCount }, () => 0);
+  }
+  function frame() {
+    const { cols, rows } = getDims(el);
+    if (Math.max(4, Math.floor(cols / 3)) !== bandCount) init(cols);
+    for (let i = 0; i < bandCount; i++) {
+      const drive = (Math.sin(t * 0.7 + i * 0.63) + Math.sin(t * 1.15 - i * 0.31) + 2) / 4;
+      bands[i] += (drive - bands[i]) * 0.28;
+      peaks[i] = Math.max(bands[i], peaks[i] - 0.015);
+    }
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    bands.forEach((band, i) => {
+      const x0 = i * 3;
+      const h = Math.floor(band * (rows - 2));
+      const peak = Math.floor(peaks[i] * (rows - 2));
+      for (let y = rows - 1; y >= rows - 1 - h; y--) {
+        if (x0 >= cols || y < 0) continue;
+        const fill = rows - 1 - y;
+        const ch = fill < h * 0.25 ? '▄' : (fill < h * 0.6 ? '▓' : '█');
+        grid[y][x0] = ch;
+        if (x0 + 1 < cols) grid[y][x0 + 1] = ch;
+      }
+      const py = rows - 1 - peak;
+      if (py >= 0 && py < rows && x0 < cols) {
+        grid[py][x0] = '▀';
+        if (x0 + 1 < cols) grid[py][x0 + 1] = '▀';
+      }
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.06;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 40. HEX DRIFT ───────────────────────────── */
+function asciiHex(id) {
+  const el = document.getElementById(id);
+  const chars = ' .:-=+*#@';
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const hx = x / 3.6;
+        const hy = y / 2.1;
+        const q = Math.round(hx - hy * 0.5);
+        const r = Math.round(hy);
+        const cx = q + r * 0.5;
+        const cy = r;
+        const dx = hx - cx;
+        const dy = hy - cy;
+        const edge = Math.max(Math.abs(dy), Math.abs(dx) * 0.866 + Math.abs(dy) * 0.5);
+        if (edge > 0.54) {
+          out += ' ';
+          continue;
+        }
+        const wave = (Math.sin(q * 0.9 + t) + Math.cos(r * 1.1 - t * 1.3) + Math.sin((q - r) * 0.6 + t * 0.7) + 3) / 6;
+        if (edge > 0.46) out += wave > 0.55 ? '#' : '.';
+        else out += chars[Math.floor(Math.max(0, Math.min(1, wave)) * (chars.length - 1))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.035;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 41. SUNBURST ────────────────────────────── */
+function asciiSunburst(id) {
+  const el = document.getElementById(id);
+  const chars = ' .:-=+*#%@';
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const cx = cols * 0.5;
+    const cy = rows * 0.52;
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const dx = (x - cx) / cols;
+        const dy = (y - cy) / rows * 2;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const ang = Math.atan2(dy, dx);
+        const rays = Math.cos(ang * 18 - t * 2.4) * 0.5 + 0.5;
+        const corona = Math.exp(-dist * 7) * (1 + 0.35 * Math.sin(t * 3 - dist * 20));
+        const halo = (Math.sin(dist * 28 - t * 6) * 0.5 + 0.5) * Math.max(0, 1 - dist * 1.25);
+        const v = Math.max(0, Math.min(1, corona * 0.85 + rays * 0.35 + halo * 0.28));
+        out += chars[Math.floor(v * (chars.length - 1))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.03;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 42. COMET TRAIL ─────────────────────────── */
+function asciiComets(id) {
+  const el = document.getElementById(id);
+  let cols = 0;
+  let rows = 0;
+  let comets = [];
+  function spawn(c, r) {
+    return {
+      x: -Math.random() * c * 0.3,
+      y: Math.random() * r * 0.75,
+      vx: 0.45 + Math.random() * 0.9,
+      vy: -0.08 + Math.random() * 0.16,
+      tail: []
+    };
+  }
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    comets = Array.from({ length: 6 }, () => spawn(c, r));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!comets.length || c !== cols || r !== rows) init(c, r);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    comets.forEach(comet => {
+      comet.tail.unshift({ x: comet.x, y: comet.y });
+      if (comet.tail.length > 18) comet.tail.pop();
+      comet.x += comet.vx;
+      comet.y += comet.vy + Math.sin(comet.x * 0.05 + comet.y * 0.08) * 0.04;
+      if (comet.x > cols + 4 || comet.y < -4 || comet.y > rows + 4) Object.assign(comet, spawn(cols, rows));
+      comet.tail.forEach((point, i) => {
+        const gx = Math.floor(point.x);
+        const gy = Math.floor(point.y);
+        if (gx < 0 || gx >= cols || gy < 0 || gy >= rows) return;
+        grid[gy][gx] = i === 0 ? '@' : (i < 4 ? '*' : (i < 8 ? '+' : '.'));
+      });
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 43. SCANLINE DRIFT ──────────────────────── */
+function asciiScanlines(id) {
+  const el = document.getElementById(id);
+  const chars = ' .:-=+*#%@';
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const scanY = Math.floor((t * 1.8) % Math.max(1, rows));
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      const lineBase = y === scanY ? 0.95 : (y % 2 === 0 ? 0.18 : 0.08);
+      for (let x = 0; x < cols; x++) {
+        const signal = Math.sin(x * 0.22 + t * 2.4 + y * 0.05) * 0.35 + Math.cos(x * 0.05 - t * 1.1) * 0.2 + lineBase;
+        if ((x + Math.floor(t * 4)) % 23 === 0 && signal > 0.5) out += '|';
+        else out += chars[Math.max(0, Math.min(chars.length - 1, Math.floor(Math.max(0, Math.min(1, signal)) * (chars.length - 1))))];
+      }
+      out += '\n';
     }
     el.textContent = out;
     t += 0.04;
     requestAnimationFrame(frame);
   }
   frame();
-}`,
-  rain: `function asciiRain(id) {
+}
+
+/* ─── 44. TOPOGRAPHY ──────────────────────────── */
+function asciiTopo(id) {
   const el = document.getElementById(id);
-  const kana = 'ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789';
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  let cols=0, drops=[];
-  function init(){const{cols:c,rows:r}=getDims(el);cols=c;drops=Array.from({length:c},()=>({y:Math.random()*-r,speed:.3+Math.random()*.5,len:4+Math.floor(Math.random()*10),chars:Array.from({length:20},()=>kana[Math.floor(Math.random()*kana.length)])}))}
-  function frame(){const{cols:c,rows:r}=getDims(el);if(c!==cols)init();const grid=Array.from({length:r},()=>Array(c).fill(' '));drops.forEach((d,x)=>{d.y+=d.speed;if(d.y-d.len>r){d.y=-d.len;d.speed=.3+Math.random()*.5;d.len=4+Math.floor(Math.random()*10)}if(Math.random()<.08){const ci=Math.floor(Math.random()*d.chars.length);d.chars[ci]=kana[Math.floor(Math.random()*kana.length)]}for(let i=0;i<d.len;i++){const gy=Math.floor(d.y)-i;if(gy>=0&&gy<r)grid[gy][x]=d.chars[i%d.chars.length]}});el.textContent=grid.map(r=>r.join('')).join('\\n');requestAnimationFrame(frame)}
-  init(); frame();
-}`,
-  plasma: `function asciiPlasma(id) {
-  const el = document.getElementById(id);
-  const chars = ' ░▒▓█▓▒░ ·:;!|I1lL▌▐▀▄';
+  const chars = ' .,:-=+*#@';
   let t = 0;
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
   function frame() {
     const { cols, rows } = getDims(el);
     let out = '';
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        const cx=x/cols, cy=y/rows;
-        const v=(Math.sin(cx*10+t)+Math.sin(cy*8-t*.7)+Math.sin((cx+cy)*7+t*.5)+Math.sin(Math.sqrt((cx-.5)**2+(cy-.5)**2)*14-t)+4)/8;
-        const idx=Math.floor(v*(chars.length-1));
-        out+=chars[Math.max(0,Math.min(chars.length-1,idx))];
+        const v = Math.sin(x * 0.18 + t * 1.3) + Math.cos(y * 0.22 - t * 0.8) + Math.sin((x + y) * 0.08 + t * 0.5) + Math.cos(Math.hypot(x - cols * 0.5, y - rows * 0.55) * 0.15 - t);
+        const elevation = Math.max(0, Math.min(1, (v + 4) / 8));
+        const contour = Math.abs((((v + 4) * 1.2) % 1) - 0.5);
+        if (contour < 0.05) out += '#';
+        else if (contour < 0.1) out += ':';
+        else out += chars[Math.floor(elevation * (chars.length - 1))];
       }
-      out+='\\n';
+      out += '\n';
     }
-    el.textContent=out; t+=0.045; requestAnimationFrame(frame);
+    el.textContent = out;
+    t += 0.03;
+    requestAnimationFrame(frame);
   }
   frame();
-}`,
-  ripple: `function asciiRipple(id) {
+}
+
+/* ─── 45. GLYPH CLOUD ─────────────────────────── */
+function asciiGlyph(id) {
   const el = document.getElementById(id);
-  const chars = ' .·:+*#@';
-  const centers = [{x:.5,y:.5},{x:.25,y:.7},{x:.75,y:.3}];
-  let t = 0;
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  const glyphs = '{}[]<>/\\|=+*ox';
+  let cols = 0;
+  let rows = 0;
+  let motes = [];
+  function spawn(c, r) {
+    return {
+      x: Math.random() * c,
+      y: Math.random() * r,
+      phase: Math.random() * Math.PI * 2,
+      sp: 0.02 + Math.random() * 0.05,
+      ch: glyphs[Math.floor(Math.random() * glyphs.length)]
+    };
+  }
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    motes = Array.from({ length: Math.max(30, Math.floor(c * r * 0.05)) }, () => spawn(c, r));
+  }
   function frame() {
-    const{cols,rows}=getDims(el); let out='';
-    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const cx=x/cols,cy=y/rows;let v=0;centers.forEach((c,i)=>{const dx=cx-c.x,dy=cy-c.y;v+=Math.sin(Math.sqrt(dx*dx+dy*dy*2.5)*20-t*(1+i*.3))});v=(v/centers.length+1)/2;const idx=Math.floor(v*(chars.length-1));out+=chars[Math.max(0,Math.min(chars.length-1,idx))]}out+='\\n'}
-    el.textContent=out; t+=0.06; requestAnimationFrame(frame);
+    const { cols: c, rows: r } = getDims(el);
+    if (!motes.length || c !== cols || r !== rows) init(c, r);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    motes.forEach(mote => {
+      mote.phase += mote.sp;
+      mote.x += Math.sin(mote.phase + mote.y * 0.11) * 0.22;
+      mote.y += 0.03 + Math.cos(mote.phase * 0.8 + mote.x * 0.04) * 0.07;
+      if (mote.y >= rows || mote.x < 0 || mote.x >= cols) Object.assign(mote, spawn(cols, rows), { y: 0 });
+      if (Math.random() < 0.03) mote.ch = glyphs[Math.floor(Math.random() * glyphs.length)];
+      const gx = Math.floor(mote.x);
+      const gy = Math.floor(mote.y);
+      if (gx >= 0 && gx < cols && gy >= 0 && gy < rows) {
+        grid[gy][gx] = mote.ch;
+        if (gy + 1 < rows && Math.random() < 0.2 && grid[gy + 1][gx] === ' ') grid[gy + 1][gx] = '.';
+      }
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    requestAnimationFrame(frame);
   }
   frame();
-}`,
-  noise: `function asciiNoise(id) {
+}
+
+/* ─── 46. PENDULUM FIELD ──────────────────────── */
+function asciiPendulum(id) {
   const el = document.getElementById(id);
-  const chars = ' ·.:!|/\\\\-+*#%@░▒';
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  function noise(x,y,t){return(Math.sin(x*3.1+t)*Math.cos(y*2.7-t*.6)+Math.sin(x*1.5-t*.4)*Math.sin(y*4.2+t*.8)+Math.cos(x*5.3+y*2.1+t*.3))/3}
-  let t=0;
-  function frame(){const{cols,rows}=getDims(el);let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const v=(noise(x*.15,y*.22,t)+1)/2;const idx=Math.floor(v*(chars.length-1));out+=chars[Math.max(0,Math.min(chars.length-1,idx))]}out+='\\n'}el.textContent=out;t+=.025;requestAnimationFrame(frame)}
-  frame();
-}`,
-  vortex: `function asciiVortex(id) {
-  const el = document.getElementById(id);
-  const chars = ' ·∙•◦○◎@#';
   let t = 0;
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
+  function drawLine(grid, x0, y0, x1, y1) {
+    const steps = Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0), 1);
+    const ch = Math.abs(y1 - y0) > Math.abs(x1 - x0) ? '|' : (x1 > x0 ? '/' : '\\');
+    for (let i = 0; i <= steps; i++) {
+      const x = Math.round(x0 + (x1 - x0) * (i / steps));
+      const y = Math.round(y0 + (y1 - y0) * (i / steps));
+      if (grid[y] && grid[y][x] === ' ') grid[y][x] = ch;
+    }
+  }
   function frame() {
-    const{cols,rows}=getDims(el); let out='';
-    const cx=cols*.5, cy=rows*.5;
-    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const dx=(x-cx)/cols,dy=(y-cy)/rows*2;const dist=Math.sqrt(dx*dx+dy*dy),angle=Math.atan2(dy,dx);const v=Math.sin(dist*18-t*2.5+angle*4)*.5+Math.sin(dist*10+angle*2-t)*.5;const idx=Math.floor(((v+1)/2)*(chars.length-1));out+=chars[Math.max(0,Math.min(chars.length-1,idx))]}out+='\\n'}
-    el.textContent=out; t+=.045; requestAnimationFrame(frame);
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const count = Math.max(5, Math.floor(cols / 7));
+    for (let i = 0; i < count; i++) {
+      const ax = Math.round(((i + 1) * cols) / (count + 1));
+      const ay = 1;
+      const len = rows * (0.24 + (i % 4) * 0.05);
+      const ang = Math.sin(t * 0.9 + i * 0.55) * (0.35 + (i % 3) * 0.08);
+      const bx = Math.round(ax + Math.sin(ang) * len * 1.2);
+      const by = Math.round(ay + Math.cos(ang) * len);
+      if (grid[ay] && grid[ay][ax] !== undefined) grid[ay][ax] = '┬';
+      drawLine(grid, ax, ay, bx, by);
+      if (grid[by] && grid[by][bx] !== undefined) grid[by][bx] = 'o';
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.035;
+    requestAnimationFrame(frame);
   }
   frame();
-}`,
-  fire: `function asciiFire(id) {
+}
+
+/* ─── 47. BLOOM RINGS ─────────────────────────── */
+function asciiBloom(id) {
   const el = document.getElementById(id);
-  const chars = ' \`·,:;=+*#%@▒▓█';
-  let grid=null,cols=0,rows=0;
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Float32Array(c))}
-  function frame(){
-    const{cols:c,rows:r}=getDims(el); if(!grid||c!==cols||r!==rows)init(c,r);
-    for(let x=0;x<cols;x++)grid[rows-1][x]=Math.random()>.25?.7+Math.random()*.3:0;
-    for(let y=rows-2;y>=0;y--)for(let x=0;x<cols;x++){const l=x>0?grid[y+1][x-1]:0,m=grid[y+1][x],r2=x<cols-1?grid[y+1][x+1]:0;grid[y][x]=((l+m+m+r2)/4)*.94}
-    let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=chars[Math.floor(Math.max(0,Math.min(1,grid[y][x]))*(chars.length-1))];out+='\\n'}
-    el.textContent=out; requestAnimationFrame(frame);
+  const chars = ' .,:;*#%@';
+  let t = 0;
+  const seeds = [
+    { x: 0.5, y: 0.48, ax: 0.18, ay: 0.12, phase: 0 },
+    { x: 0.28, y: 0.38, ax: 0.1, ay: 0.08, phase: 1.7 },
+    { x: 0.72, y: 0.62, ax: 0.12, ay: 0.09, phase: 3.1 }
+  ];
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      const ny = y / Math.max(1, rows - 1);
+      for (let x = 0; x < cols; x++) {
+        const nx = x / Math.max(1, cols - 1);
+        let v = 0;
+        seeds.forEach(seed => {
+          const sx = seed.x + Math.sin(t * 0.7 + seed.phase) * seed.ax;
+          const sy = seed.y + Math.cos(t * 0.9 + seed.phase) * seed.ay;
+          const dist = Math.hypot(nx - sx, (ny - sy) * 1.3);
+          const ring = 1 - Math.min(1, Math.abs(Math.sin(dist * 24 - t * 4 - seed.phase)) * 1.4);
+          const glow = Math.exp(-dist * 8) * 0.55;
+          v = Math.max(v, ring * 0.75 + glow);
+        });
+        out += chars[Math.max(0, Math.min(chars.length - 1, Math.floor(Math.min(1, v) * (chars.length - 1))))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.03;
+    requestAnimationFrame(frame);
   }
   frame();
-}`,
-  stars: `function asciiStars(id) {
+}
+
+/* ─── 48. BRAID MATRIX ────────────────────────── */
+function asciiBraid(id) {
   const el = document.getElementById(id);
-  const chars = '·∙•*+✦';
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  function mk(){return{x:(Math.random()-.5)*2,y:(Math.random()-.5)*2,z:Math.random()}}
-  let stars=Array.from({length:120},mk);
-  function frame(){
-    const{cols,rows}=getDims(el);const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
-    stars.forEach(s=>{s.z-=.012;if(s.z<=0){Object.assign(s,mk());s.z=1}const sx=Math.floor(s.x/s.z*cols*.35+cols*.5),sy=Math.floor(s.y/s.z*rows*.7+rows*.5);const ci=Math.min(Math.floor((1-s.z)*chars.length),chars.length-1);if(sx>=0&&sx<cols&&sy>=0&&sy<rows)grid[sy][sx]=chars[ci]});
-    el.textContent=grid.map(r=>r.join('')).join('\\n'); requestAnimationFrame(frame);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const mid = rows * 0.5;
+    const amp = rows * 0.22;
+    for (let x = 0; x < cols; x++) {
+      const ys = [
+        Math.round(mid + Math.sin(x * 0.18 + t) * amp),
+        Math.round(mid + Math.sin(x * 0.18 + t + 2.09) * amp),
+        Math.round(mid + Math.sin(x * 0.18 + t + 4.18) * amp)
+      ];
+      const marks = ['/', 'x', '\\'];
+      ys.forEach((y, i) => {
+        if (y >= 0 && y < rows) grid[y][x] = grid[y][x] === ' ' ? marks[i] : 'X';
+      });
+      if (x % 5 === 0) {
+        const sorted = [...ys].sort((a, b) => a - b);
+        for (let y = sorted[0] + 1; y < sorted[2]; y++) {
+          if (y >= 0 && y < rows && grid[y][x] === ' ') grid[y][x] = '|';
+        }
+      }
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.04;
+    requestAnimationFrame(frame);
   }
   frame();
-}`,
-  dna: `function asciiDNA(id) {
+}
+
+/* ─── 49. SWARM FLOW ──────────────────────────── */
+function asciiSwarm(id) {
   const el = document.getElementById(id);
-  const pairs=[['A','T'],['T','A'],['G','C'],['C','G']];
-  const seq=Array.from({length:200},()=>pairs[Math.floor(Math.random()*4)]);
-  let t=0;
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  function frame(){
-    const{cols,rows}=getDims(el);const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
-    const mid=rows*.5,amp=rows*.38;
-    for(let x=0;x<cols;x++){const phase=(x/cols)*Math.PI*2*5-t;const y1=Math.round(mid+Math.sin(phase)*amp),y2=Math.round(mid+Math.sin(phase+Math.PI)*amp);const pi=Math.floor((((x/cols*5-t/(Math.PI*2))%1)+10)%1*200);if(y1>=0&&y1<rows)grid[y1][x]=seq[pi][0];if(y2>=0&&y2<rows)grid[y2][x]=seq[pi][1];if(x%5===0){const mn=Math.min(y1,y2)+1,mx=Math.max(y1,y2)-1;for(let y=mn;y<=mx;y++)if(y>=0&&y<rows&&grid[y][x]===' ')grid[y][x]='─'}}
-    el.textContent=grid.map(r=>r.join('')).join('\\n'); t+=.04; requestAnimationFrame(frame);
+  let cols = 0;
+  let rows = 0;
+  let boids = [];
+  let t = 0;
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    boids = Array.from({ length: Math.max(18, Math.floor(c / 2)) }, () => ({
+      x: Math.random() * c,
+      y: Math.random() * r,
+      vx: Math.random() - 0.5,
+      vy: Math.random() - 0.5
+    }));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!boids.length || c !== cols || r !== rows) init(c, r);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const tx = cols * 0.5 + Math.sin(t * 0.04) * cols * 0.25;
+    const ty = rows * 0.5 + Math.cos(t * 0.03) * rows * 0.2;
+    boids.forEach(boid => {
+      const px = boid.x;
+      const py = boid.y;
+      const ang = Math.atan2(ty - boid.y, tx - boid.x) + Math.sin(t * 0.05 + boid.x * 0.07) * 0.45;
+      boid.vx = boid.vx * 0.86 + Math.cos(ang) * 0.22;
+      boid.vy = boid.vy * 0.86 + Math.sin(ang) * 0.12;
+      const speed = Math.hypot(boid.vx, boid.vy);
+      if (speed > 0.85) {
+        boid.vx *= 0.85 / speed;
+        boid.vy *= 0.85 / speed;
+      }
+      boid.x = (boid.x + boid.vx + cols) % cols;
+      boid.y = (boid.y + boid.vy + rows) % rows;
+      const trailX = Math.floor(px);
+      const trailY = Math.floor(py);
+      if (trailX >= 0 && trailX < cols && trailY >= 0 && trailY < rows) grid[trailY][trailX] = '.';
+      const gx = Math.floor(boid.x);
+      const gy = Math.floor(boid.y);
+      if (gx >= 0 && gx < cols && gy >= 0 && gy < rows) {
+        grid[gy][gx] = Math.abs(boid.vx) > Math.abs(boid.vy) ? (boid.vx > 0 ? '>' : '<') : (boid.vy > 0 ? 'v' : '^');
+      }
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 1;
+    requestAnimationFrame(frame);
   }
   frame();
-}`,
-  binary: `function asciiBinary(id) {
+}
+
+/* ─── 50. BITPLANE ────────────────────────────── */
+function asciiBitplane(id) {
   const el = document.getElementById(id);
-  let cols=0,drops=[];
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  function init(){const{cols:c,rows:r}=getDims(el);cols=c;drops=Array.from({length:Math.ceil(c/2)},(_, i)=>({x:i*2,y:Math.random()*-r,speed:.15+Math.random()*.35,len:5+Math.floor(Math.random()*12),bits:Array.from({length:24},()=>Math.random()>.5?'1':'0')}))}
-  function frame(){
-    const{cols:c,rows:r}=getDims(el);if(Math.ceil(c/2)!==drops.length)init();
-    const grid=Array.from({length:r},()=>Array(c).fill(' '));
-    drops.forEach(d=>{d.y+=d.speed;if(d.y-d.len>r){d.y=-d.len;d.speed=.15+Math.random()*.35;d.len=5+Math.floor(Math.random()*12)}if(Math.random()<.04){const i=Math.floor(Math.random()*d.bits.length);d.bits[i]=d.bits[i]==='0'?'1':'0'}for(let i=0;i<d.len;i++){const gy=Math.floor(d.y)-i;if(gy>=0&&gy<r&&d.x<c)grid[gy][d.x]=d.bits[i%d.bits.length]}});
-    el.textContent=grid.map(r=>r.join('')).join('\\n'); requestAnimationFrame(frame);
-  }
-  init(); frame();
-}`,
-  radar: `function asciiRadar(id) {
-  const el = document.getElementById(id);
-  let t=0,blips=[];
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  function frame(){
-    const{cols,rows}=getDims(el);const cx=cols*.5,cy=rows*.5,maxR=Math.min(cx*.92,cy*.92);
-    const sweep=(t*1.5)%(Math.PI*2);
-    if(Math.random()<.04){const a=sweep+(Math.random()-.5)*.4,r=(.2+Math.random()*.65)*maxR;blips.push({x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r*.5,life:1.0})}
-    blips=blips.filter(b=>b.life>.05);blips.forEach(b=>{b.life*=.975});
-    let out='';
-    for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const dx=(x-cx)/maxR,dy=(y-cy)/(maxR*.5);const dist=Math.sqrt(dx*dx+dy*dy);if(dist>1.05){out+=' ';continue}if(dist>.98){out+='·';continue}let v=0;if((dist*3)%1>.94)v=.2;const angle=Math.atan2(dy,dx),da=((sweep-angle)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);if(da<1.0)v=Math.max(v,(1-da/1.0)*.95);blips.forEach(b=>{const bdx=x-b.x,bdy=y-b.y;if(bdx*bdx+bdy*bdy<3.5)v=Math.max(v,b.life*.9)});if(v<.08){out+=' ';continue}if(v<.22){out+='·';continue}if(v<.4){out+=':';continue}if(v<.6){out+='+';continue}if(v<.8){out+='*';continue}out+='@'}out+='\\n'}
-    el.textContent=out; t+=.025; requestAnimationFrame(frame);
+  const digits = '0123456789ABCDEF';
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      const rowShift = Math.floor(Math.sin(t * 0.9 + y * 0.4) * 6 + Math.cos(t * 0.4 + y * 0.12) * 3);
+      for (let x = 0; x < cols; x++) {
+        const nib = (x * 5 + y * 3 + Math.floor(t * 3) + rowShift + 128) & 15;
+        const gate = Math.sin(x * 0.35 + t * 2 + y * 0.08) + Math.cos(y * 0.5 - t * 1.4);
+        out += gate > 0.65 ? digits[nib] : (gate > 0.15 ? (nib & 1 ? ':' : '.') : ' ');
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.04;
+    requestAnimationFrame(frame);
   }
   frame();
-}`,
-  worms: `function asciiWorms(id) {
+}
+
+/* ─── 51. BEACON GRID ─────────────────────────── */
+function asciiBeacon(id) {
   const el = document.getElementById(id);
-  const tc=' ·∙•○◎'; let grid=null,cols=0,rows=0,worms=[];
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Float32Array(c));worms=Array.from({length:8},()=>({x:Math.random()*c,y:Math.random()*r,a:Math.random()*Math.PI*2,spd:.4+Math.random()*.6,turn:(Math.random()-.5)*.18}))}
-  function frame(){
-    const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);
-    for(let y=0;y<rows;y++)for(let x=0;x<cols;x++)if(grid[y][x]>0)grid[y][x]=Math.max(0,grid[y][x]-.014);
-    worms.forEach(w=>{w.a+=w.turn+(Math.random()-.5)*.1;w.x=(w.x+Math.cos(w.a)*w.spd+cols)%cols;w.y=(w.y+Math.sin(w.a)*w.spd*.5+rows)%rows;const gx=Math.floor(w.x),gy=Math.floor(w.y);if(gx>=0&&gx<cols&&gy>=0&&gy<rows)grid[gy][gx]=1.0});
-    let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const v=grid[y][x];if(v<.05){out+=' ';continue}out+=tc[Math.min(Math.floor(v*(tc.length-1))+1,tc.length-1)]}out+='\\n'}
-    el.textContent=out; requestAnimationFrame(frame);
+  let t = 0;
+  const dirs = [
+    ['|', 0, -1], ['/', 1, -1], ['-', 1, 0], ['\\', 1, 1],
+    ['|', 0, 1], ['/', -1, 1], ['-', -1, 0], ['\\', -1, -1]
+  ];
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    for (let gy = 2; gy < rows; gy += 4) {
+      for (let gx = 3; gx < cols; gx += 6) {
+        const phase = t * 2 + gx * 0.12 + gy * 0.2;
+        const dir = Math.floor(((Math.sin(phase) + 1) / 2) * dirs.length) % dirs.length;
+        const [ch, dx, dy] = dirs[dir];
+        grid[gy][gx] = 'o';
+        for (let step = 1; step <= 2; step++) {
+          const x = gx + dx * step;
+          const y = gy + dy * step;
+          if (grid[y] && grid[y][x] !== undefined) grid[y][x] = ch;
+        }
+        if (Math.sin(phase * 0.6) > 0.92) {
+          const rx = gx + dx * 3;
+          const ry = gy + dy * 3;
+          if (grid[ry] && grid[ry][rx] !== undefined) grid[ry][rx] = '*';
+        }
+      }
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.035;
+    requestAnimationFrame(frame);
   }
   frame();
-}`,
-  tunnel: `function asciiTunnel(id) {
+}
+
+/* ─── 52. SHATTER ─────────────────────────────── */
+function asciiShatter(id) {
   const el = document.getElementById(id);
-  let t=0;
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  function frame(){
-    const{cols,rows}=getDims(el);const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
-    const cx=cols*.5,cy=rows*.5;
-    [[0,0],[cols-1,0],[0,rows-1],[cols-1,rows-1]].forEach(([ex,ey])=>{const steps=Math.max(Math.abs(ex-cx),Math.abs(ey-cy))*2;for(let i=0;i<=steps;i++){const gx=Math.round(cx+(ex-cx)*i/steps),gy=Math.round(cy+(ey-cy)*i/steps);if(gx>=0&&gx<cols&&gy>=0&&gy<rows)grid[gy][gx]='·'}});
-    for(let i=0;i<9;i++){const z=((i/9)+t*.22)%1,W=Math.round(cx*z*1.9),H=Math.round(cy*z*1.9);const x0=Math.round(cx-W),x1=Math.round(cx+W),y0=Math.round(cy-H),y1=Math.round(cy+H);const ch=z<.3?'·':z<.6?'+':z<.85?'─':'█';for(let x=x0;x<=x1;x++){if(x>=0&&x<cols){if(y0>=0&&y0<rows)grid[y0][x]=ch;if(y1>=0&&y1<rows)grid[y1][x]=ch}}for(let y=y0;y<=y1;y++){if(y>=0&&y<rows){if(x0>=0&&x0<cols)grid[y][x0]=ch;if(x1>=0&&x1<cols)grid[y][x1]=ch}}}
-    el.textContent=grid.map(r=>r.join('')).join('\\n'); t+=.015; requestAnimationFrame(frame);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const seeds = Array.from({ length: 6 }, (_, i) => ({
+      x: cols * (0.5 + Math.sin(t * 0.3 + i * 1.1) * 0.35 * Math.cos(i + 1)),
+      y: rows * (0.5 + Math.cos(t * 0.35 + i * 0.9) * 0.32 * Math.sin(i + 1.4))
+    }));
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        let best = 1e9;
+        let second = 1e9;
+        let bx = 0;
+        let by = 0;
+        seeds.forEach(seed => {
+          const dx = x - seed.x;
+          const dy = y - seed.y;
+          const d = Math.hypot(dx, dy);
+          if (d < best) {
+            second = best;
+            best = d;
+            bx = dx;
+            by = dy;
+          } else if (d < second) {
+            second = d;
+          }
+        });
+        const edge = second - best;
+        if (edge < 0.9) out += Math.abs(bx) > Math.abs(by) ? '|' : (bx * by > 0 ? '\\' : '/');
+        else if (edge < 1.8) out += '.';
+        else out += ' ';
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.03;
+    requestAnimationFrame(frame);
   }
   frame();
-}`,
-  sand: `function asciiSand(id) {
+}
+
+/* ─── 53. HORIZON SWEEP ───────────────────────── */
+function asciiHorizon(id) {
   const el = document.getElementById(id);
-  let grid=null,cols=0,rows=0;
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Uint8Array(c))}
-  function step(){for(let y=rows-2;y>=0;y--){for(let x=0;x<cols;x++){if(!grid[y][x])continue;if(!grid[y+1][x]){grid[y+1][x]=grid[y][x];grid[y][x]=0}else{const d=Math.random()>.5?1:-1,nx=x+d;if(nx>=0&&nx<cols&&!grid[y+1][nx]){grid[y+1][nx]=grid[y][x];grid[y][x]=0}}}}if(Math.random()<.38){const x=1+Math.floor(Math.random()*(cols-2));if(!grid[0][x])grid[0][x]=1}}
-  function frame(){
-    const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);step();
-    let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=grid[y][x]?'░':' ';out+='\\n'}
-    el.textContent=out; requestAnimationFrame(frame);
+  let stars = [];
+  let cols = 0;
+  let rows = 0;
+  let t = 0;
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    stars = Array.from({ length: Math.max(20, Math.floor(c * 0.35)) }, () => ({
+      x: Math.floor(Math.random() * c),
+      y: Math.floor(Math.random() * Math.max(1, r * 0.35)),
+      tw: Math.random() * Math.PI * 2
+    }));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!stars.length || c !== cols || r !== rows) init(c, r);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    stars.forEach(star => {
+      star.tw += 0.08;
+      grid[star.y][star.x] = Math.sin(star.tw) > 0.65 ? '*' : '.';
+    });
+    const moonX = Math.floor((Math.sin(t * 0.18) * 0.35 + 0.5) * (cols - 1));
+    const moonY = Math.max(1, Math.floor(rows * 0.18 + Math.cos(t * 0.12) * 2));
+    if (grid[moonY] && grid[moonY][moonX] !== undefined) grid[moonY][moonX] = 'O';
+    const layers = [
+      { base: 0.62, amp: 0.08, freq: 0.12, ch: '.' },
+      { base: 0.7, amp: 0.07, freq: 0.18, ch: ':' },
+      { base: 0.78, amp: 0.06, freq: 0.24, ch: '▒' },
+      { base: 0.86, amp: 0.05, freq: 0.32, ch: '█' }
+    ];
+    layers.forEach((layer, i) => {
+      for (let x = 0; x < cols; x++) {
+        const ridge = Math.floor(rows * layer.base + Math.sin(x * layer.freq + t * (0.8 + i * 0.2)) * rows * layer.amp + Math.cos(x * layer.freq * 0.45 - t * 0.5) * rows * layer.amp * 0.45);
+        for (let y = ridge; y < rows; y++) {
+          if (grid[y] && grid[y][x] === ' ') grid[y][x] = layer.ch;
+        }
+      }
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.02;
+    requestAnimationFrame(frame);
   }
   frame();
-}`,
-  life: `function asciiLife(id){const el=document.getElementById(id);let grid=null,cols=0,rows=0,fc=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>Uint8Array.from({length:c},()=>Math.random()<.3?1:0))}function step(){const n=Array.from({length:rows},()=>new Uint8Array(cols));for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){let nb=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;nb+=grid[(y+dy+rows)%rows][(x+dx+cols)%cols]}n[y][x]=grid[y][x]?(nb===2||nb===3?1:0):(nb===3?1:0)}grid=n}function frame(){const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);if(fc++%200===0)for(let y=0;y<rows;y++)for(let x=0;x<cols;x++)if(Math.random()<.04)grid[y][x]=1;step();let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=grid[y][x]?'█':' ';out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
-  cube: `function asciiCube(id){const el=document.getElementById(id);let t=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}const V=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];const E=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];function rx(p,a){return[p[0],p[1]*Math.cos(a)-p[2]*Math.sin(a),p[1]*Math.sin(a)+p[2]*Math.cos(a)]}function ry(p,a){return[p[0]*Math.cos(a)+p[2]*Math.sin(a),p[1],-p[0]*Math.sin(a)+p[2]*Math.cos(a)]}function rz(p,a){return[p[0]*Math.cos(a)-p[1]*Math.sin(a),p[0]*Math.sin(a)+p[1]*Math.cos(a),p[2]]}function proj(p,cx,cy,c,r){const z=p[2]+3.8,f=2.8/z;return[Math.round(cx+p[0]*f*c*.24),Math.round(cy+p[1]*f*r*.44)]}function line(g,x0,y0,x1,y1,r,c){const dx=Math.abs(x1-x0),dy=Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1;let e=dx-dy;while(1){if(x0>=0&&x0<c&&y0>=0&&y0<r)g[y0][x0]='+';if(x0===x1&&y0===y1)break;const e2=2*e;if(e2>-dy){e-=dy;x0+=sx}if(e2<dx){e+=dx;y0+=sy}}}function frame(){const{cols,rows}=getDims(el);const g=Array.from({length:rows},()=>Array(cols).fill(' '));const cx=cols/2,cy=rows/2;const pts=V.map(v=>{let p=rx(v,t*.7);p=ry(p,t);p=rz(p,t*.4);return proj(p,cx,cy,cols,rows)});E.forEach(([a,b])=>line(g,pts[a][0],pts[a][1],pts[b][0],pts[b][1],rows,cols));pts.forEach(([x,y])=>{if(x>=0&&x<cols&&y>=0&&y<rows)g[y][x]='●'});el.textContent=g.map(r=>r.join('')).join('\\n');t+=.025;requestAnimationFrame(frame)}frame()}`,
-  lissajous: `function asciiLissajous(id){const el=document.getElementById(id);let ph=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function frame(){const{cols,rows}=getDims(el);const g=Array.from({length:rows},()=>Array(cols).fill(' '));const cx=cols/2,cy=rows/2,b=2+Math.sin(ph*.0008)*1.5,d=ph*.008;for(let i=0;i<2400;i++){const t=(i/2400)*Math.PI*2*6,x=Math.floor(cx+Math.sin(3*t+d)*cx*.88),y=Math.floor(cy+Math.sin(b*t)*cy*.82);if(x>=0&&x<cols&&y>=0&&y<rows){const c=g[y][x];g[y][x]=c===' '?'·':c==='·'?':':(c===':'?'+':(c==='+'?'*':'#'))}}el.textContent=g.map(r=>r.join('')).join('\\n');ph++;requestAnimationFrame(frame)}frame()}`,
-  snow: `function asciiSnow(id){const el=document.getElementById(id);const FC=['*','·','+','∗','∘','o'];let cols=0,fl=[];function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;fl=Array.from({length:Math.floor(c*.45)},()=>({x:Math.random()*c,y:Math.random()*r,spd:.06+Math.random()*.14,drift:(Math.random()-.5)*.08,ch:FC[Math.floor(Math.random()*FC.length)],w:Math.random()*Math.PI*2}))}function frame(){const{cols:c,rows:r}=getDims(el);if(c!==cols)init(c,r);const g=Array.from({length:r},()=>Array(c).fill(' '));fl.forEach(f=>{f.y+=f.spd;f.x+=f.drift+Math.sin(f.y*.4+f.w)*.05;if(f.y>=r){f.y=-1;f.x=Math.random()*c}f.x=((f.x%c)+c)%c;const gx=Math.floor(f.x),gy=Math.floor(f.y);if(gx>=0&&gx<c&&gy>=0&&gy<r)g[gy][gx]=f.ch});el.textContent=g.map(r=>r.join('')).join('\\n');requestAnimationFrame(frame)}init(0,0);frame()}`,
-  mandel: `function asciiMandel(id){const el=document.getElementById(id);const chars=' .·:;=+*#%@';let cs=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function mb(cr,ci,max){let zr=0,zi=0,i=0;while(zr*zr+zi*zi<4&&i<max){const tmp=zr*zr-zi*zi+cr;zi=2*zr*zi+ci;zr=tmp;i++}return i}function frame(){const{cols,rows}=getDims(el);let out='';const max=36;for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const cr=(x-cols/2)/(cols*.28)-.745,ci=(y-rows/2)/(rows*.56)+.1;const it=mb(cr,ci,max);if(it===max){out+=' ';continue}const v=((it+cs)%(chars.length-1))/(chars.length-2);out+=chars[Math.floor(v*(chars.length-2))+1]}out+='\\n'}el.textContent=out;cs+=.18;requestAnimationFrame(frame)}frame()}`,
-  ant: `function asciiAnt(id){const el=document.getElementById(id);let grid=null,cols=0,rows=0,ax,ay,ad;const DX=[0,1,0,-1],DY=[-1,0,1,0];function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Uint8Array(c));ax=Math.floor(c/2);ay=Math.floor(r/2);ad=0}function steps(n){for(let i=0;i<n;i++){const cell=grid[ay][ax];ad=cell?(ad+3)%4:(ad+1)%4;grid[ay][ax]=cell?0:1;ax=(ax+DX[ad]+cols)%cols;ay=(ay+DY[ad]+rows)%rows}}function frame(){const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);steps(15);let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=(x===ax&&y===ay)?'@':(grid[y][x]?'·':' ');out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
-  orbits: `function asciiOrbits(id){const el=document.getElementById(id);let t=0;const pl=[{r:.14,spd:4,ch:'·'},{r:.28,spd:2.4,ch:'○'},{r:.44,spd:1.4,ch:'●'},{r:.6,spd:.85,ch:'◎'}];const tr=pl.map(()=>[]);function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function frame(){const{cols,rows}=getDims(el);const cx=cols*.5,cy=rows*.5,mR=Math.min(cx*.9,cy*1.8);const g=Array.from({length:rows},()=>Array(cols).fill(' '));if(cy>0&&cx>0){const sx=Math.floor(cx),sy=Math.floor(cy);if(sy<rows&&sx<cols)g[sy][sx]='✦'}pl.forEach(p=>{for(let a=0;a<Math.PI*2;a+=.18){const ox=Math.round(cx+Math.cos(a)*p.r*mR),oy=Math.round(cy+Math.sin(a)*p.r*mR*.5);if(ox>=0&&ox<cols&&oy>=0&&oy<rows&&g[oy][ox]===' ')g[oy][ox]='·'}});pl.forEach((p,i)=>{const a=t*p.spd*.018,px=cx+Math.cos(a)*p.r*mR,py=cy+Math.sin(a)*p.r*mR*.5;tr[i].push({x:px,y:py});if(tr[i].length>7)tr[i].shift();tr[i].forEach((tp,j)=>{const gx=Math.round(tp.x),gy=Math.round(tp.y);if(gx>=0&&gx<cols&&gy>=0&&gy<rows)g[gy][gx]=j===tr[i].length-1?p.ch:'·'})});el.textContent=g.map(r=>r.join('')).join('\\n');t++;requestAnimationFrame(frame)}frame()}`,
-  smoke: `function asciiSmoke(id){const el=document.getElementById(id);const chars=' ·:;░▒▓';let grid=null,cols=0,rows=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Float32Array(c))}function frame(){const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);const now=performance.now()*.001;for(let y=0;y<r-1;y++)for(let x=0;x<c;x++){const dr=Math.sin(y*.4+now)*.6,sx=x+dr,x0=Math.floor(sx),x1=Math.min(x0+1,c-1),fr=sx-x0;grid[y][x]=((x0>=0?grid[y+1][x0]:0)*(1-fr)+grid[y+1][x1]*fr)*.95}const cx=Math.floor(c/2);for(let x=cx-3;x<=cx+3;x++)if(x>=0&&x<c&&Math.random()<.55)grid[r-1][x]=Math.max(grid[r-1][x],.55+Math.random()*.45);let out='';for(let y=0;y<r;y++){for(let x=0;x<c;x++)out+=chars[Math.floor(Math.max(0,Math.min(1,grid[y][x]))*(chars.length-1))];out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
-  lightning: `function asciiLightning(id){const el=document.getElementById(id);let segs=[],cd=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function bolt(cols,rows){const s=[];function branch(x,y,depth){if(depth<=0||y>=rows)return;const steps=2+Math.floor(Math.random()*3),nx=Math.max(0,Math.min(cols-1,x+Math.floor((Math.random()-.4)*6))),ny=Math.min(rows-1,y+steps),life=.8/(depth*.25+.7);let x0=x,y0=y,x1=nx,y1=ny;const dx=Math.abs(x1-x0),dy=Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1;let e=dx-dy;while(1){s.push({x:x0,y:y0,life});if(x0===x1&&y0===y1)break;const e2=2*e;if(e2>-dy){e-=dy;x0+=sx}if(e2<dx){e+=dx;y0+=sy}}branch(nx,ny,depth-1);if(Math.random()<.28&&depth>2)branch(x+Math.floor((Math.random()-.5)*6),y+1,depth-2)}branch(Math.floor(cols*.2+Math.random()*cols*.6),0,5);return s}function frame(){const{cols,rows}=getDims(el);if(--cd<=0){segs=bolt(cols,rows);cd=35+Math.floor(Math.random()*55)}segs.forEach(s=>s.life*=.91);const ig=Array.from({length:rows},()=>new Float32Array(cols));segs.forEach(s=>{if(s.x>=0&&s.x<cols&&s.y>=0&&s.y<rows)ig[s.y][s.x]=Math.max(ig[s.y][s.x],s.life)});let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const v=ig[y][x];out+=v<.05?' ':v<.2?'│':v<.5?'║':v<.8?'▎':'█'}out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
-  rule30: `function asciiRule30(id){const el=document.getElementById(id);const rs=Array.from({length:8},(_,i)=>(30>>i)&1);let cur=null,hist=[],fc=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function frame(){const{cols:c,rows:r}=getDims(el);if(!cur||cur.length!==c){cur=new Uint8Array(c);cur[Math.floor(c/2)]=1;hist=[]}if(fc++%3===0){const next=cur.map((_,i)=>rs[(cur[(i-1+c)%c]<<2)|(cur[i]<<1)|cur[(i+1)%c]]);cur=next;hist.unshift(cur);if(hist.length>r)hist.pop()}let out='';for(let y=0;y<r;y++){const row=hist[y]||new Uint8Array(c);for(let x=0;x<c;x++)out+=row[x]?'█':' ';out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
-  meta: `function asciiMeta(id){const el=document.getElementById(id);const chars=' ·:+*#@█';const balls=Array.from({length:4},()=>({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.005,vy:(Math.random()-.5)*.003,r:.08+Math.random()*.08}));function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function frame(){const{cols,rows}=getDims(el);balls.forEach(b=>{b.x+=b.vx;b.y+=b.vy;if(b.x<0||b.x>1)b.vx*=-1;if(b.y<0||b.y>1)b.vy*=-1});let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const nx=x/cols,ny=y/rows;let f=0;balls.forEach(b=>{const dx=nx-b.x,dy=(ny-b.y)*(rows/cols*2);f+=(b.r*b.r)/(dx*dx+dy*dy+.001)});out+=chars[Math.floor(Math.min(1,f/2)*(chars.length-1))]}out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
-  maze: `function asciiMaze(id){const el=document.getElementById(id);let vg=null,cols=0,rows=0,vis=null,stack=[],mW,mH,done=false,rst=0;const DX=[1,-1,0,0],DY=[0,0,1,-1];function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;mW=Math.max(1,Math.floor((c-1)/2));mH=Math.max(1,Math.floor((r-1)/2));vg=Array.from({length:r},()=>new Uint8Array(c));vis=Array.from({length:mH},()=>new Uint8Array(mW));const sx=Math.floor(Math.random()*mW),sy=Math.floor(Math.random()*mH);vis[sy][sx]=1;vg[sy*2+1][sx*2+1]=1;stack=[[sx,sy]];done=false}function stepM(n){for(let i=0;i<n&&stack.length;i++){const[cx,cy]=stack[stack.length-1];const dirs=[0,1,2,3].filter(d=>{const nx=cx+DX[d],ny=cy+DY[d];return nx>=0&&nx<mW&&ny>=0&&ny<mH&&!vis[ny][nx]});if(!dirs.length){stack.pop();continue}const d=dirs[Math.floor(Math.random()*dirs.length)];const nx=cx+DX[d],ny=cy+DY[d];vg[cy*2+1+DY[d]][cx*2+1+DX[d]]=1;vg[ny*2+1][nx*2+1]=1;vis[ny][nx]=1;stack.push([nx,ny])}}function frame(){const{cols:c,rows:r}=getDims(el);if(!vg||c!==cols||r!==rows)init(c,r);if(!done){stepM(3);if(!stack.length){done=true;rst=130}}else if(--rst<=0)init(c,r);let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=vg[y][x]?' ':'█';out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
-  bubbles: `function asciiBubbles(id){const el=document.getElementById(id);const BS=['O','o','∘','°','.'];let cols=0,bubs=[];function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;bubs=Array.from({length:Math.floor(c*.3)},()=>({x:Math.random()*c,y:r+Math.random()*r,spd:.08+Math.random()*.18,ch:BS[Math.floor(Math.random()*BS.length)],w:Math.random()*Math.PI*2,ws:.02+Math.random()*.04}))}function frame(){const{cols:c,rows:r}=getDims(el);if(c!==cols)init(c,r);const g=Array.from({length:r},()=>Array(c).fill(' '));bubs.forEach(b=>{b.y-=b.spd;b.w+=b.ws;b.x+=Math.sin(b.w)*.15;if(b.y<0){b.y=r+Math.random()*5;b.x=Math.random()*c}b.x=((b.x%c)+c)%c;const gx=Math.floor(b.x),gy=Math.floor(b.y);if(gx>=0&&gx<c&&gy>=0&&gy<r)g[gy][gx]=b.ch});el.textContent=g.map(r=>r.join('')).join('\\n');requestAnimationFrame(frame)}init(0,0);frame()}`,
-  react: `function asciiReact(id){const el=document.getElementById(id);const chars=' ·:;=+*#%@';let A=null,B=null,cols=0,rows=0;const Da=1,Db=.5,f=.055,k=.062;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;A=Array.from({length:r},()=>new Float32Array(c).fill(1));B=Array.from({length:r},()=>new Float32Array(c).fill(0));for(let i=0;i<4;i++){const sx=Math.floor(Math.random()*c),sy=Math.floor(Math.random()*r);for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){const x=(sx+dx+c)%c,y=(sy+dy+r)%r;A[y][x]=.5;B[y][x]=.25}}}function lap(G,x,y){const c=cols,r=rows;return G[y][x]*-1+G[y][(x-1+c)%c]*.2+G[y][(x+1)%c]*.2+G[(y-1+r)%r][x]*.2+G[(y+1)%r][x]*.2+G[(y-1+r)%r][(x-1+c)%c]*.05+G[(y-1+r)%r][(x+1)%c]*.05+G[(y+1)%r][(x-1+c)%c]*.05+G[(y+1)%r][(x+1)%c]*.05}function step(){const nA=Array.from({length:rows},()=>new Float32Array(cols)),nB=Array.from({length:rows},()=>new Float32Array(cols));for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const a=A[y][x],b=B[y][x],lA=lap(A,x,y),lB=lap(B,x,y),rxn=a*b*b;nA[y][x]=Math.max(0,Math.min(1,a+Da*lA-rxn+f*(1-a)));nB[y][x]=Math.max(0,Math.min(1,b+Db*lB+rxn-(k+f)*b))}A=nA;B=nB}function frame(){const{cols:c,rows:r}=getDims(el);if(!A||c!==cols||r!==rows)init(c,r);for(let i=0;i<4;i++)step();let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++){const v=A[y][x]-B[y][x];out+=chars[Math.max(0,Math.min(chars.length-1,Math.floor(((v+1)/2)*(chars.length-1))))]}out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
-  glitch: `function asciiGlitch(id){const el=document.getElementById(id);const chars='▓▒░│─┼╪═║╔╗╚╝◊▮▯▌▐';let t=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function base(x,y,t){const v=Math.sin(x*.3+t*.08)*Math.cos(y*.4-t*.06)+Math.sin((x+y)*.18-t*.04)*.5;return chars[Math.max(0,Math.min(chars.length-1,Math.floor(((v+1.5)/3)*(chars.length-1))))]}function frame(){const{cols,rows}=getDims(el);const g=Array.from({length:rows},(_,y)=>Array.from({length:cols},(_,x)=>base(x,y,t)));for(let i=0;i<Math.floor(Math.random()*5);i++)if(Math.random()<.5){const gy=Math.floor(Math.random()*rows),off=Math.floor((Math.random()-.5)*14);g[gy]=Array.from({length:cols},(_,x)=>base(((x-off)%cols+cols)%cols,gy,t))}if(Math.random()<.07){const gy=Math.floor(Math.random()*rows);for(let x=0;x<cols;x++)g[gy][x]=chars[Math.floor(Math.random()*chars.length)]}if(Math.random()<.05){const bx=Math.floor(Math.random()*cols),by=Math.floor(Math.random()*rows),bw=2+Math.floor(Math.random()*10),bc=chars[Math.floor(Math.random()*chars.length)];for(let y=by;y<Math.min(rows,by+3);y++)for(let x=bx;x<Math.min(cols,bx+bw);x++)g[y][x]=bc}el.textContent=g.map(r=>r.join('')).join('\\n');t++;requestAnimationFrame(frame)}frame()}`,
-  dla: `function asciiDLA(id){const el=document.getElementById(id);let grid=null,cols=0,rows=0,walkers=[];const D8X=[-1,0,1,-1,1,-1,0,1],D8Y=[-1,-1,-1,0,0,1,1,1];function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;grid=Array.from({length:r},()=>new Uint8Array(c));for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const x=Math.floor(c/2)+dx,y=Math.floor(r/2)+dy;if(x>=0&&x<c&&y>=0&&y<r)grid[y][x]=1}walkers=Array.from({length:40},()=>({x:Math.random()*c,y:Math.random()*r}))}function step(n){for(let i=0;i<n;i++){const nw=[];walkers.forEach(w=>{const d=Math.floor(Math.random()*8);w.x=(w.x+D8X[d]+cols)%cols;w.y=(w.y+D8Y[d]+rows)%rows;const gx=Math.floor(w.x),gy=Math.floor(w.y);let stuck=false;for(let k=0;k<8;k++){const nx=(gx+D8X[k]+cols)%cols,ny=(gy+D8Y[k]+rows)%rows;if(grid[ny][nx]){stuck=true;break}}if(stuck&&!grid[gy][gx]){grid[gy][gx]=1;nw.push({x:Math.random()*cols,y:Math.random()*rows})}else nw.push(w)});walkers=nw}}function frame(){const{cols:c,rows:r}=getDims(el);if(!grid||c!==cols||r!==rows)init(c,r);step(4);let cnt=0;for(let y=0;y<rows;y++)for(let x=0;x<cols;x++)if(grid[y][x])cnt++;if(cnt>cols*rows*.35)init(c,r);let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=grid[y][x]?'·':' ';out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
-  torus: `function asciiTorus(id){const el=document.getElementById(id);const chars='.,-~:;=!*#$@';let A=0,B=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function frame(){const{cols,rows}=getDims(el);const out=new Array(rows*cols).fill(' '),zb=new Float32Array(rows*cols);for(let j=0;j<Math.PI*2;j+=.07)for(let i=0;i<Math.PI*2;i+=.02){const sI=Math.sin(i),cI=Math.cos(i),sJ=Math.sin(j),cJ=Math.cos(j),sA=Math.sin(A),cA=Math.cos(A),sB=Math.sin(B),cB=Math.cos(B),h=cJ+2,D=1/(sI*h*sA+sJ*cA+5),t2=sI*h*cA-sJ*sA,x=Math.floor(cols/2+(cols*.35)*D*(cI*h*cB-t2*sB)),y=Math.floor(rows/2+(rows*.45)*D*(cI*h*sB+t2*cB)),o=x+cols*y,L=cI*cJ*sB-cA*cJ*sI-sA*sJ+cB*(cA*sJ-sA*cJ*sI);if(y>=0&&y<rows&&x>=0&&x<cols&&D>zb[o]){zb[o]=D;out[o]=chars[Math.max(0,Math.floor(L*8))]||' '}}let res='';for(let y=0;y<rows;y++)res+=out.slice(y*cols,(y+1)*cols).join('')+'\\n';el.textContent=res;A+=.07;B+=.03;requestAnimationFrame(frame)}frame()}`,
-  waterfall: `function asciiWaterfall(id){const el=document.getElementById(id);const chars=' ▁▂▃▄▅▆▇█';let hist=[],t=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function spec(c){return Array.from({length:c},(_,x)=>{const f=x/c;let v=Math.exp(-Math.pow((f-.2)*10,2))*(.5+.5*Math.sin(t*.15))+Math.exp(-Math.pow((f-.52)*14,2))*(.6+.4*Math.sin(t*.09+1))+Math.exp(-Math.pow((f-.76)*11,2))*(.4+.4*Math.cos(t*.19+2))+Math.random()*.07;return Math.min(1,v)})}function frame(){const{cols,rows}=getDims(el);hist.unshift(spec(cols));if(hist.length>rows)hist.pop();let out='';for(let y=0;y<rows;y++){const row=hist[y]||[];for(let x=0;x<cols;x++)out+=chars[Math.floor((row[x]||0)*(chars.length-1))];out+='\\n'}el.textContent=out;t++;requestAnimationFrame(frame)}frame()}`,
-  fountain: `function asciiFountain(id){const el=document.getElementById(id);const PC='·∘○◦*+';let parts=[],cols=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function emit(c,r){if(parts.length<100)parts.push({x:c/2+(Math.random()-.5)*4,y:r-1,vx:(Math.random()-.5)*.55,vy:-(1.6+Math.random()*2.4),life:1,ch:PC[Math.floor(Math.random()*PC.length)]})}function frame(){const{cols:c,rows:r}=getDims(el);if(c!==cols)cols=c;emit(c,r);emit(c,r);const g=Array.from({length:r},()=>Array(c).fill(' '));parts=parts.filter(p=>{p.vy+=.1;p.x+=p.vx;p.y+=p.vy;p.life-=.014;if(p.life<=0||p.y>=r||p.y<0||p.x<0||p.x>=c)return false;const gx=Math.floor(p.x),gy=Math.floor(p.y);if(gx>=0&&gx<c&&gy>=0&&gy<r)g[gy][gx]=p.life>.5?p.ch:'·';return true});el.textContent=g.map(r=>r.join('')).join('\\n');requestAnimationFrame(frame)}frame()}`,
-  sierpinski: `function asciiSierpinski(id){const el=document.getElementById(id);let dots=null,cols=0,rows=0,cx=0,cy=0,fc=0;function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}function init(c,r){cols=c;rows=r;dots=Array.from({length:r},()=>new Uint8Array(c));cx=c/2;cy=r/2}function step(n,c,r){const v=[[c/2,1],[1,r-1],[c-1,r-1]];for(let i=0;i<n;i++){const vi=v[Math.floor(Math.random()*3)];cx=(cx+vi[0])/2;cy=(cy+vi[1])/2;const gx=Math.floor(cx),gy=Math.floor(cy);if(gx>=0&&gx<c&&gy>=0&&gy<r)dots[gy][gx]=1}}function frame(){const{cols:c,rows:r}=getDims(el);if(!dots||c!==cols||r!==rows)init(c,r);step(300,c,r);if(fc++%400===399)init(c,r);let out='';for(let y=0;y<rows;y++){for(let x=0;x<cols;x++)out+=dots[y][x]?'·':' ';out+='\\n'}el.textContent=out;requestAnimationFrame(frame)}frame()}`,
-  ekg: `function asciiEKG(id) {
+}
+
+/* ─── 54. LATTICE ─────────────────────────────── */
+function asciiLattice(id) {
   const el = document.getElementById(id);
-  let offset=0;
-  function getDims(e){return{cols:Math.floor(e.parentElement.clientWidth/6.3),rows:Math.floor(e.parentElement.clientHeight/13)}}
-  function hb(p){p=((p%1)+1)%1;if(p<.30)return Math.sin(p*Math.PI/.30)*.18;if(p<.42)return 0;if(p<.46)return-.55;if(p<.51)return 1.0;if(p<.56)return-.40;if(p<.62)return 0;if(p<.82)return Math.sin((p-.62)*Math.PI/.20)*.30;return 0}
-  function frame(){
-    const{cols,rows}=getDims(el);const grid=Array.from({length:rows},()=>Array(cols).fill(' '));
-    const mid=Math.floor(rows*.5),cycleLen=Math.max(18,Math.round(cols*.38));
-    for(let x=0;x<cols;x++)grid[mid][x]='·';
-    let prevY=null;
-    for(let x=0;x<cols;x++){const v=hb((x+offset)/cycleLen),y=Math.round(mid-v*rows*.38);if(y>=0&&y<rows){const b=x>cols*.72;grid[y][x]=b?'█':(Math.abs(v)>.4?'#':'─');if(prevY!==null&&Math.abs(y-prevY)>1){const mn=Math.min(y,prevY),mx=Math.max(y,prevY);for(let yy=mn;yy<=mx;yy++)if(yy>=0&&yy<rows)grid[yy][x]=b?'█':'|'}}prevY=y}
-    el.textContent=grid.map(r=>r.join('')).join('\\n'); offset+=.55; requestAnimationFrame(frame);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const vLine = Math.abs(Math.sin(x * 0.18 + Math.sin(y * 0.07 + t) * 2 + t * 1.3));
+        const hLine = Math.abs(Math.cos(y * 0.28 + Math.cos(x * 0.05 - t) * 2 - t));
+        const d1 = Math.abs(Math.sin((x + y) * 0.17 + t * 1.5));
+        const d2 = Math.abs(Math.cos((x - y) * 0.15 - t * 1.3));
+        if (vLine < 0.06 && hLine < 0.06) out += '+';
+        else if (vLine < 0.05) out += '|';
+        else if (hLine < 0.05) out += '-';
+        else if (d1 < 0.04) out += '/';
+        else if (d2 < 0.04) out += '\\';
+        else out += ' ';
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.03;
+    requestAnimationFrame(frame);
   }
   frame();
-}`
+}
+
+/* ─── 55. PULSE TUNNEL ────────────────────────── */
+function asciiPulseTunnel(id) {
+  const el = document.getElementById(id);
+  const chars = ' .,:;irsXA253hMHGS#9B&@';
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const cx = cols * 0.5;
+    const cy = rows * 0.5;
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const dx = (x - cx) / cols;
+        const dy = (y - cy) / rows * 2;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const ang = Math.atan2(dy, dx);
+        const depth = Math.sin((1 / (dist + 0.12)) * 2.4 - t * 4 + Math.sin(ang * 6) * 0.8);
+        const spokes = Math.cos(ang * 12 + t * 2.5) * 0.4 + 0.6;
+        const falloff = Math.max(0, 1 - dist * 1.8);
+        const v = Math.max(0, Math.min(1, depth * 0.35 + spokes * 0.25 + falloff * 0.7));
+        out += chars[Math.floor(v * (chars.length - 1))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.03;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+
+/* ─── 56. NEBULA VEIL ─────────────────────────── */
+function asciiNebula(id) {
+  const el = document.getElementById(id);
+  const chars = ' .,:;irsXA253hMHGS#9B&@';
+  let t = 0;
+  const clouds = [
+    { x: 0.25, y: 0.42, sx: 0.12, sy: 0.1, phase: 0 },
+    { x: 0.58, y: 0.35, sx: 0.16, sy: 0.12, phase: 1.8 },
+    { x: 0.76, y: 0.56, sx: 0.1, sy: 0.08, phase: 3.4 }
+  ];
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      const ny = y / Math.max(1, rows - 1);
+      for (let x = 0; x < cols; x++) {
+        const nx = x / Math.max(1, cols - 1);
+        let v = 0;
+        clouds.forEach((cloud, i) => {
+          const cx = cloud.x + Math.sin(t * 0.35 + cloud.phase) * cloud.sx;
+          const cy = cloud.y + Math.cos(t * 0.28 + cloud.phase * 1.4) * cloud.sy;
+          const dx = (nx - cx) * 1.25;
+          const dy = ny - cy;
+          const g = Math.exp(-(dx * dx * 9 + dy * dy * 14));
+          v += g * (0.75 + 0.25 * Math.sin(t * 2 + i + nx * 8));
+        });
+        v += (Math.sin(nx * 14 + t) + Math.cos(ny * 18 - t * 1.4) + Math.sin((nx + ny) * 12 + t * 0.7) + 3) / 12;
+        v = Math.max(0, Math.min(1, v * 0.8));
+        out += chars[Math.floor(v * (chars.length - 1))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.024;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 57. CASCADE CODE ────────────────────────── */
+function asciiCascade(id) {
+  const el = document.getElementById(id);
+  let cols = 0;
+  let rows = 0;
+  let streams = [];
+  function spawn(c, r) {
+    return {
+      x: Math.random() * c,
+      y: Math.random() * -r,
+      speed: 0.35 + Math.random() * 0.55,
+      len: 6 + Math.floor(Math.random() * 12),
+      drift: -0.08 - Math.random() * 0.12,
+      phase: Math.random() * Math.PI * 2
+    };
+  }
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    streams = Array.from({ length: Math.max(10, Math.floor(c / 3)) }, () => spawn(c, r));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!streams.length || c !== cols || r !== rows) init(c, r);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    streams.forEach(stream => {
+      stream.phase += 0.06;
+      stream.y += stream.speed;
+      stream.x += stream.drift + Math.sin(stream.phase) * 0.08;
+      if (stream.y - stream.len > rows || stream.x < -4) Object.assign(stream, spawn(cols, rows), { x: cols + Math.random() * 6 });
+      for (let i = 0; i < stream.len; i++) {
+        const gx = Math.floor(stream.x - i * 0.6);
+        const gy = Math.floor(stream.y - i);
+        if (gx < 0 || gx >= cols || gy < 0 || gy >= rows) continue;
+        grid[gy][gx] = i === 0 ? '@' : (i < 3 ? '╲' : (i < 8 ? '\\' : '.'));
+      }
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 58. ISOFIELD ────────────────────────────── */
+function asciiIsofield(id) {
+  const el = document.getElementById(id);
+  const chars = ' .:-=+*#@';
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const v = Math.sin(x * 0.18 + t * 1.2) + Math.cos(y * 0.24 - t * 0.7) + Math.sin((x + y) * 0.09 + t * 0.45) + Math.cos(Math.hypot(x - cols * 0.4, y - rows * 0.55) * 0.16 - t * 1.1);
+        const band = Math.abs((((v + 4) * 1.6) % 1) - 0.5);
+        const level = Math.max(0, Math.min(1, (v + 4) / 8));
+        if (band < 0.05) out += '#';
+        else if (band < 0.09) out += ':';
+        else out += chars[Math.floor(level * (chars.length - 1))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.028;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 59. SPINNER MESH ────────────────────────── */
+function asciiSpinner(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  const dirs = [
+    { dx: 0, dy: -1, ch: '|' },
+    { dx: 1, dy: -1, ch: '/' },
+    { dx: 1, dy: 0, ch: '-' },
+    { dx: 1, dy: 1, ch: '\\' },
+    { dx: 0, dy: 1, ch: '|' },
+    { dx: -1, dy: 1, ch: '/' },
+    { dx: -1, dy: 0, ch: '-' },
+    { dx: -1, dy: -1, ch: '\\' }
+  ];
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    for (let gy = 2; gy < rows; gy += 4) {
+      for (let gx = 3; gx < cols; gx += 6) {
+        const phase = t * 2.2 + gx * 0.15 + gy * 0.19;
+        const dir = dirs[Math.floor(((Math.sin(phase) + 1) / 2) * dirs.length) % dirs.length];
+        grid[gy][gx] = 'o';
+        for (let step = 1; step <= 2; step++) {
+          const x = gx + dir.dx * step;
+          const y = gy + dir.dy * step;
+          if (grid[y] && grid[y][x] !== undefined) grid[y][x] = dir.ch;
+        }
+      }
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.03;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 60. QUASAR CORE ─────────────────────────── */
+function asciiQuasar(id) {
+  const el = document.getElementById(id);
+  const chars = ' .,:;irsXA253hMHGS#9B&@';
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const cx = cols * 0.5;
+    const cy = rows * 0.5;
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const dx = (x - cx) / cols;
+        const dy = (y - cy) / rows * 2;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const ang = Math.atan2(dy, dx);
+        const jets = Math.pow(Math.max(0, Math.cos(ang * 2 - t * 0.8)), 6) * Math.exp(-dist * 4.8);
+        const core = Math.exp(-dist * 10) * (0.9 + 0.2 * Math.sin(t * 4));
+        const ring = Math.max(0, 1 - Math.abs(dist - 0.22 - Math.sin(t * 1.2) * 0.03) * 14) * 0.35;
+        const orbit = Math.exp(-Math.pow(x - (cx + Math.cos(t * 1.7) * cols * 0.18), 2) / 18 - Math.pow(y - (cy + Math.sin(t * 1.7) * rows * 0.2), 2) / 12) * 0.7;
+        const v = Math.max(0, Math.min(1, core + jets + ring + orbit));
+        out += chars[Math.floor(v * (chars.length - 1))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.026;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 61. CRYSTAL SPIRES ──────────────────────── */
+function asciiCrystals(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const count = Math.max(5, Math.floor(cols / 12));
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        let best = 1e9;
+        let lean = 0;
+        for (let i = 0; i < count; i++) {
+          const base = ((i + 0.5) * cols) / count + Math.sin(t * 0.7 + i * 1.4) * 2.5;
+          const slope = Math.sin(t * 0.5 + i * 1.2) * 0.18;
+          const lineX = base + (rows - y) * slope + Math.sin((rows - y) * 0.12 + t + i) * 1.4;
+          const d = Math.abs(x - lineX);
+          if (d < best) {
+            best = d;
+            lean = slope;
+          }
+        }
+        if (y > rows * 0.78 && best < 3) out += '█';
+        else if (best < 0.35) out += Math.abs(lean) < 0.04 ? '|' : (lean > 0 ? '/' : '\\');
+        else if (best < 0.8) out += '.';
+        else out += ' ';
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.024;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 62. BRAILLE RAIN ────────────────────────── */
+function asciiBraille(id) {
+  const el = document.getElementById(id);
+  const dots = '⠁⠂⠄⡀⢀⠠⠐⠈⠘⠨⠰⢰⣀⣄⣤⣶';
+  let cols = 0;
+  let rows = 0;
+  let drops = [];
+  function spawn(c, r, x) {
+    return {
+      x,
+      y: Math.random() * -r,
+      speed: 0.18 + Math.random() * 0.35,
+      len: 4 + Math.floor(Math.random() * 10),
+      chars: Array.from({ length: 20 }, () => dots[Math.floor(Math.random() * dots.length)])
+    };
+  }
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    drops = Array.from({ length: Math.max(8, Math.floor(c / 2)) }, (_, i) => spawn(c, r, i * 2));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!drops.length || c !== cols || r !== rows) init(c, r);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    drops.forEach(drop => {
+      drop.y += drop.speed;
+      if (drop.y - drop.len > rows) Object.assign(drop, spawn(cols, rows, drop.x));
+      if (Math.random() < 0.08) drop.chars[Math.floor(Math.random() * drop.chars.length)] = dots[Math.floor(Math.random() * dots.length)];
+      for (let i = 0; i < drop.len; i++) {
+        const gy = Math.floor(drop.y) - i;
+        if (gy >= 0 && gy < rows && drop.x < cols) grid[gy][drop.x] = drop.chars[i % drop.chars.length];
+      }
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 63. HELIX LADDER ────────────────────────── */
+function asciiHelix(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const mid = cols * 0.5;
+    const amp = cols * 0.18;
+    for (let y = 0; y < rows; y++) {
+      const phase = y * 0.36 - t * 3.2;
+      const x1 = Math.round(mid + Math.sin(phase) * amp);
+      const x2 = Math.round(mid + Math.sin(phase + Math.PI) * amp);
+      if (grid[y] && grid[y][x1] !== undefined) grid[y][x1] = 'o';
+      if (grid[y] && grid[y][x2] !== undefined) grid[y][x2] = 'O';
+      if (y % 3 === 0) {
+        const start = Math.min(x1, x2);
+        const end = Math.max(x1, x2);
+        for (let x = start + 1; x < end; x++) if (grid[y][x] === ' ') grid[y][x] = '-';
+      }
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.03;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 64. ECHO RINGS ──────────────────────────── */
+function asciiEcho(id) {
+  const el = document.getElementById(id);
+  let pulses = [];
+  let tick = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    if (tick++ % 34 === 0) pulses.push({ x: Math.random() * cols, y: Math.random() * rows, r: 0 });
+    pulses.forEach(pulse => { pulse.r += 0.45; });
+    pulses = pulses.filter(pulse => pulse.r < Math.max(cols, rows) * 0.9);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        let v = 0;
+        pulses.forEach(pulse => {
+          const d = Math.hypot(x - pulse.x, (y - pulse.y) * 2);
+          v = Math.max(v, Math.max(0, 1 - Math.abs(d - pulse.r) / 1.4));
+        });
+        out += v > 0.9 ? '@' : (v > 0.65 ? 'O' : (v > 0.35 ? 'o' : (v > 0.15 ? '.' : ' ')));
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 65. PARALLAX DRIFT ──────────────────────── */
+function asciiParallax(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    for (let i = 0; i < Math.max(18, Math.floor(cols * 0.4)); i++) {
+      const sx = (i * 17) % cols;
+      const sy = Math.floor(((Math.sin(i * 9.1) + 1) * 0.18 + 0.02) * rows);
+      if (grid[sy] && grid[sy][sx] !== undefined) grid[sy][sx] = (i + Math.floor(t * 6)) % 7 === 0 ? '*' : '.';
+    }
+    for (let layer = 0; layer < 3; layer++) {
+      const speed = 0.6 + layer * 0.35;
+      const yBase = rows * (0.18 + layer * 0.11);
+      for (let i = 0; i < 6; i++) {
+        const cx = (((i * (cols + 24)) / 5) + t * speed * 8) % (cols + 24) - 12;
+        const cy = yBase + Math.sin(t * 0.7 + i + layer) * 1.5;
+        for (let y = Math.max(0, Math.floor(cy - 2)); y < Math.min(rows, Math.ceil(cy + 3)); y++) {
+          for (let x = Math.max(0, Math.floor(cx - 8)); x < Math.min(cols, Math.ceil(cx + 9)); x++) {
+            const dx = (x - cx) / 8;
+            const dy = (y - cy) / 2.6;
+            if (dx * dx + dy * dy < 1 && grid[y][x] === ' ') grid[y][x] = layer === 0 ? '·' : '~';
+          }
+        }
+      }
+    }
+    const layers = [
+      { base: 0.66, amp: 0.05, freq: 0.12, ch: '.' },
+      { base: 0.76, amp: 0.06, freq: 0.17, ch: ':' },
+      { base: 0.86, amp: 0.04, freq: 0.23, ch: '█' }
+    ];
+    layers.forEach((layer, i) => {
+      for (let x = 0; x < cols; x++) {
+        const ridge = Math.floor(rows * layer.base + Math.sin(x * layer.freq - t * (0.9 + i * 0.3)) * rows * layer.amp + Math.cos(x * layer.freq * 0.4 + t * 0.4) * rows * layer.amp * 0.4);
+        for (let y = ridge; y < rows; y++) if (grid[y][x] === ' ') grid[y][x] = layer.ch;
+      }
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.018;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 66. DUNE SEA ────────────────────────────── */
+function asciiDunes(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const layers = [
+      { base: 0.62, amp: 0.05, freq: 0.1, ch: '·' },
+      { base: 0.74, amp: 0.06, freq: 0.14, ch: ':' },
+      { base: 0.86, amp: 0.04, freq: 0.2, ch: '▒' }
+    ];
+    layers.forEach((layer, i) => {
+      const ridge = new Array(cols);
+      for (let x = 0; x < cols; x++) ridge[x] = Math.floor(rows * layer.base + Math.sin(x * layer.freq + t * (0.5 + i * 0.2)) * rows * layer.amp + Math.cos(x * layer.freq * 0.35 - t) * rows * layer.amp * 0.35);
+      for (let x = 0; x < cols; x++) {
+        for (let y = ridge[x]; y < rows; y++) grid[y][x] = layer.ch;
+        if ((x + Math.floor(t * 20)) % 5 === 0 && ridge[x] >= 0 && ridge[x] < rows) grid[ridge[x]][x] = '~';
+      }
+    });
+    for (let i = 0; i < Math.floor(cols * 0.25); i++) {
+      const x = (i * 11 + Math.floor(t * 22)) % cols;
+      const y = Math.floor(rows * 0.38 + Math.sin(i + t * 1.5) * rows * 0.05);
+      if (grid[y] && grid[y][x] === ' ') grid[y][x] = '.';
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.022;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 67. KOI POND ────────────────────────────── */
+function asciiKoi(id) {
+  const el = document.getElementById(id);
+  let cols = 0;
+  let rows = 0;
+  let fish = [];
+  function spawn(c, r, dir = Math.random() > 0.5 ? 1 : -1) {
+    return {
+      dir,
+      x: dir > 0 ? -4 - Math.random() * 8 : c + 4 + Math.random() * 8,
+      y: r * (0.25 + Math.random() * 0.5),
+      vx: dir * (0.18 + Math.random() * 0.25),
+      wobble: Math.random() * Math.PI * 2
+    };
+  }
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    fish = Array.from({ length: 5 }, () => spawn(c, r));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!fish.length || c !== cols || r !== rows) init(c, r);
+    const grid = Array.from({ length: rows }, (_, y) => Array.from({ length: cols }, (_, x) => ((Math.sin(x * 0.18 + y * 0.22 + Date.now() * 0.002) + Math.cos(y * 0.35 - x * 0.1)) > 1.65 ? '·' : ' ')));
+    fish.forEach(koi => {
+      koi.wobble += 0.08;
+      koi.x += koi.vx;
+      koi.y += Math.sin(koi.wobble) * 0.14;
+      if (koi.dir > 0 && koi.x > cols + 5) Object.assign(koi, spawn(cols, rows, 1));
+      if (koi.dir < 0 && koi.x < -5) Object.assign(koi, spawn(cols, rows, -1));
+      const gx = Math.floor(koi.x);
+      const gy = Math.floor(koi.y);
+      const head = koi.dir > 0 ? '>' : '<';
+      const tail = '~';
+      if (grid[gy] && grid[gy][gx] !== undefined) grid[gy][gx] = head;
+      if (grid[gy] && grid[gy][gx - koi.dir] !== undefined) grid[gy][gx - koi.dir] = tail;
+      if (grid[gy] && grid[gy][gx - koi.dir * 2] !== undefined) grid[gy][gx - koi.dir * 2] = '.';
+      if (Math.random() < 0.02) {
+        const by = gy - 1;
+        if (grid[by] && grid[by][gx] !== undefined) grid[by][gx] = 'o';
+      }
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 68. MONSOON ─────────────────────────────── */
+function asciiMonsoon(id) {
+  const el = document.getElementById(id);
+  let cols = 0;
+  let rows = 0;
+  let drops = [];
+  let t = 0;
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    drops = Array.from({ length: Math.max(20, Math.floor(c * 0.8)) }, () => ({ x: Math.random() * c, y: Math.random() * r, speed: 0.8 + Math.random() * 1.2 }));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!drops.length || c !== cols || r !== rows) init(c, r);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const wind = -1.4 + Math.sin(t * 0.7) * 0.4;
+    for (let x = 0; x < cols; x++) {
+      const cloud = Math.sin(x * 0.14 + t * 0.6) + Math.cos(x * 0.06 - t * 0.5);
+      if (cloud > 1.0) {
+        grid[1][x] = '▓';
+        if (grid[2] && grid[2][x] !== undefined) grid[2][x] = '▒';
+      }
+    }
+    drops.forEach(drop => {
+      drop.y += drop.speed;
+      drop.x += wind * 0.08;
+      if (drop.y > rows + 2 || drop.x < -3) {
+        drop.y = -Math.random() * 6;
+        drop.x = Math.random() * cols + cols * 0.2;
+      }
+      for (let i = 0; i < 3; i++) {
+        const gx = Math.floor(drop.x + wind * i * 0.6);
+        const gy = Math.floor(drop.y - i);
+        if (gx >= 0 && gx < cols && gy >= 0 && gy < rows) grid[gy][gx] = '/';
+      }
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.03;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 69. FROND FIELD ─────────────────────────── */
+function asciiFronds(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const count = Math.max(6, Math.floor(cols / 10));
+    for (let i = 0; i < count; i++) {
+      const root = Math.floor(((i + 0.5) * cols) / count);
+      const height = rows * (0.4 + 0.2 * Math.sin(i * 1.1 + t * 0.6));
+      let px = root;
+      let py = rows - 1;
+      for (let s = 0; s < height; s += 0.6) {
+        const y = Math.floor(rows - 1 - s);
+        const x = Math.round(root + Math.sin(s * 0.18 + t * 2 + i) * (1 + s * 0.08));
+        if (grid[y] && grid[y][x] !== undefined) {
+          const dx = x - px;
+          grid[y][x] = dx === 0 ? '|' : (dx > 0 ? '/' : '\\');
+          if (s > 3 && Math.floor(s) % 4 === 0) {
+            const lx = x + (dx >= 0 ? 1 : -1);
+            if (grid[y] && grid[y][lx] !== undefined && grid[y][lx] === ' ') grid[y][lx] = ',';
+          }
+        }
+        px = x;
+        py = y;
+      }
+      if (grid[py] && grid[py][px] !== undefined) grid[py][px] = 'v';
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.024;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 70. SIGNAL BLOOM ────────────────────────── */
+function asciiSignal(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const bands = 4;
+    for (let i = 0; i < bands; i++) {
+      const mid = Math.floor(((i + 1) * rows) / (bands + 1));
+      for (let x = 0; x < cols; x++) if (grid[mid] && grid[mid][x] === ' ') grid[mid][x] = '·';
+      let prevY = mid;
+      for (let x = 0; x < cols; x++) {
+        const wave = Math.sin(x * 0.16 + t * 2.4 + i) + Math.sin(x * 0.05 - t * 1.6 + i * 0.7) * 0.7;
+        const y = Math.round(mid + wave * (1.4 + i * 0.35));
+        if (grid[y] && grid[y][x] !== undefined) grid[y][x] = Math.abs(y - mid) > 2 ? '#' : '-';
+        if (Math.abs(y - prevY) > 1) {
+          for (let yy = Math.min(y, prevY); yy <= Math.max(y, prevY); yy++) if (grid[yy] && grid[yy][x] !== undefined) grid[yy][x] = '|';
+        }
+        prevY = y;
+      }
+      const packet = Math.floor((t * 10 + i * 9) % (cols + 8)) - 4;
+      if (grid[mid] && grid[mid][packet] !== undefined) grid[mid][packet] = '●';
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.028;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 71. LUMEN SWEEP ─────────────────────────── */
+function asciiLumen(id) {
+  const el = document.getElementById(id);
+  const chars = ' .,:;irsXA253hMHGS#9B&@';
+  let t = 0;
+  const lights = [
+    { x: 0.18, phase: 0 },
+    { x: 0.5, phase: 1.7 },
+    { x: 0.82, phase: 3.2 }
+  ];
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        let v = 0.02;
+        lights.forEach(light => {
+          const lx = cols * (light.x + Math.sin(t * 0.5 + light.phase) * 0.08);
+          const tx = lx + Math.sin(t * 1.1 + light.phase) * cols * 0.18;
+          const center = lx + (tx - lx) * (y / Math.max(1, rows - 1));
+          const radius = 1.5 + y * 0.24;
+          const beam = Math.max(0, 1 - Math.abs(x - center) / radius);
+          v += beam * beam * 0.9;
+        });
+        v += (Math.sin(x * 0.07 + y * 0.11 + t) + 1) * 0.03;
+        v = Math.max(0, Math.min(1, v));
+        out += chars[Math.floor(v * (chars.length - 1))];
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.024;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 72. KNOT FIELD ──────────────────────────── */
+function asciiKnots(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    const tick = Math.floor(t * 10);
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const v = Math.abs(Math.sin(y * 0.34 + Math.sin(x * 0.11 + t) * 1.7));
+        const h = Math.abs(Math.cos(x * 0.24 + Math.cos(y * 0.08 - t) * 1.4));
+        const d1 = Math.abs(Math.sin((x + y) * 0.18 + t));
+        const d2 = Math.abs(Math.cos((x - y) * 0.17 - t));
+        if (v < 0.05 && h < 0.05) out += (x + y + tick) % 2 === 0 ? 'O' : 'X';
+        else if (v < 0.04) out += '|';
+        else if (h < 0.04) out += '-';
+        else if (d1 < 0.03) out += '/';
+        else if (d2 < 0.03) out += '\\';
+        else out += ' ';
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.024;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 73. VEIN NETWORK ────────────────────────── */
+function asciiVeins(id) {
+  const el = document.getElementById(id);
+  const chars = ' .,:;+*#@';
+  let cols = 0;
+  let rows = 0;
+  let field = null;
+  let walkers = [];
+  function spawn(c, r) {
+    return {
+      x: c * (0.35 + Math.random() * 0.3),
+      y: r * (0.35 + Math.random() * 0.3),
+      ang: Math.random() * Math.PI * 2,
+      age: 0,
+      life: 80 + Math.random() * 120
+    };
+  }
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    field = Array.from({ length: r }, () => new Float32Array(c));
+    walkers = Array.from({ length: 6 }, () => spawn(c, r));
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!field || c !== cols || r !== rows) init(c, r);
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) field[y][x] *= 0.94;
+    for (let i = walkers.length - 1; i >= 0; i--) {
+      const w = walkers[i];
+      if (Math.random() < 0.015 && walkers.length < 18) walkers.push({ ...w, ang: w.ang + (Math.random() - 0.5) * 0.9, age: 0, life: 40 + Math.random() * 90 });
+      w.ang += (Math.random() - 0.5) * 0.45;
+      w.x += Math.cos(w.ang) * 0.7;
+      w.y += Math.sin(w.ang) * 0.5;
+      w.age += 1;
+      const gx = Math.floor(w.x);
+      const gy = Math.floor(w.y);
+      if (gx >= 0 && gx < cols && gy >= 0 && gy < rows) field[gy][gx] = 1;
+      if (gx < 0 || gx >= cols || gy < 0 || gy >= rows || w.age > w.life) walkers.splice(i, 1, spawn(cols, rows));
+    }
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) out += chars[Math.max(0, Math.min(chars.length - 1, Math.floor(field[y][x] * (chars.length - 1))))];
+      out += '\n';
+    }
+    el.textContent = out;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 74. MARQUEE ─────────────────────────────── */
+function asciiMarquee(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function borderAt(idx, cols, rows) {
+    const top = cols;
+    const right = rows - 1;
+    const bottom = cols - 1;
+    if (idx < top) return [idx, 0];
+    idx -= top;
+    if (idx < right) return [cols - 1, idx + 1];
+    idx -= right;
+    if (idx < bottom) return [cols - 2 - idx, rows - 1];
+    idx -= bottom;
+    return [0, rows - 2 - idx];
+  }
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const per = Math.max(1, cols * 2 + rows * 2 - 4);
+    const step = Math.floor(t * 18);
+    for (let i = 0; i < per; i += 2) {
+      const [x, y] = borderAt(i, cols, rows);
+      grid[y][x] = (i + step) % 16 < 6 ? '●' : '·';
+    }
+    const mid = Math.floor(rows * 0.5);
+    for (let x = 2; x < cols - 2; x++) {
+      const phase = (x + step) % 12;
+      if (grid[mid] && grid[mid][x] === ' ') grid[mid][x] = phase < 4 ? '>' : (phase < 8 ? '-' : '<');
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.03;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 75. MONOLITHS ───────────────────────────── */
+function asciiMonolith(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  const towers = [
+    { x: 0.18, w: 0.08, h: 0.42 },
+    { x: 0.42, w: 0.12, h: 0.58 },
+    { x: 0.64, w: 0.09, h: 0.48 },
+    { x: 0.82, w: 0.1, h: 0.66 }
+  ];
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    towers.forEach((tower, i) => {
+      const left = Math.floor(cols * tower.x - cols * tower.w * 0.5 + Math.sin(t * 0.2 + i) * 1.5);
+      const width = Math.max(2, Math.floor(cols * tower.w));
+      const top = Math.max(1, Math.floor(rows * (1 - tower.h)));
+      const scan = top + ((Math.floor(t * 12) + i * 5) % Math.max(1, rows - top));
+      for (let y = top; y < rows; y++) {
+        for (let x = left; x < left + width; x++) {
+          if (grid[y] && grid[y][x] !== undefined) grid[y][x] = y === scan ? '▓' : '█';
+        }
+      }
+    });
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        if (grid[y][x] !== ' ') continue;
+        const fog = Math.sin(x * 0.08 + t + y * 0.2) + Math.cos(y * 0.3 - t * 0.7);
+        if (y > rows * 0.6 && fog > 1.2) grid[y][x] = '░';
+        else if (y > rows * 0.5 && fog > 0.95) grid[y][x] = '.';
+      }
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.02;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 76. DRIFT GRID ──────────────────────────── */
+function asciiDriftGrid(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const dx = x + Math.sin(y * 0.22 + t * 2) * 2.3 + Math.cos(y * 0.07 - t) * 1.2;
+        const dy = y + Math.cos(x * 0.17 - t * 1.4) * 1.6;
+        const vx = Math.abs((dx % 6 + 6) % 6 - 3);
+        const hy = Math.abs((dy % 4 + 4) % 4 - 2);
+        if (vx < 0.18 && hy < 0.18) out += '+';
+        else if (vx < 0.14) out += '|';
+        else if (hy < 0.14) out += '-';
+        else out += ' ';
+      }
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.022;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 77. CINDERS ─────────────────────────────── */
+function asciiCinders(id) {
+  const el = document.getElementById(id);
+  let cols = 0;
+  let rows = 0;
+  let sparks = [];
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    sparks = [];
+  }
+  function emit() {
+    if (sparks.length < 140) sparks.push({ x: cols * (0.2 + Math.random() * 0.6), y: rows - 1, vx: (Math.random() - 0.5) * 0.25, vy: -(0.3 + Math.random() * 0.7), life: 1 });
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (c !== cols || r !== rows) init(c, r);
+    emit();
+    emit();
+    emit();
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    sparks = sparks.filter(spark => {
+      spark.vx += Math.sin(spark.y * 0.15) * 0.01;
+      spark.x += spark.vx;
+      spark.y += spark.vy;
+      spark.life -= 0.012;
+      const gx = Math.floor(spark.x);
+      const gy = Math.floor(spark.y);
+      if (spark.life <= 0 || gx < 0 || gx >= cols || gy < 0 || gy >= rows) return false;
+      grid[gy][gx] = spark.life > 0.66 ? '@' : (spark.life > 0.4 ? '*' : (spark.life > 0.2 ? ':' : '.'));
+      return true;
+    });
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 78. PHOSPHOR TRAILS ─────────────────────── */
+function asciiPhosphor(id) {
+  const el = document.getElementById(id);
+  const chars = ' .,:;irsXA253hMHGS#9B&@';
+  let cols = 0;
+  let rows = 0;
+  let field = null;
+  let points = [];
+  let t = 0;
+  function init(c, r) {
+    cols = c;
+    rows = r;
+    field = Array.from({ length: r }, () => new Float32Array(c));
+    points = [0, 1.7, 3.1, 4.6].map(phase => ({ phase, px: c * 0.5, py: r * 0.5 }));
+  }
+  function plotLine(x0, y0, x1, y1) {
+    const steps = Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0), 1);
+    for (let i = 0; i <= steps; i++) {
+      const x = Math.round(x0 + (x1 - x0) * (i / steps));
+      const y = Math.round(y0 + (y1 - y0) * (i / steps));
+      if (field[y] && field[y][x] !== undefined) field[y][x] = 1;
+    }
+  }
+  function frame() {
+    const { cols: c, rows: r } = getDims(el);
+    if (!field || c !== cols || r !== rows) init(c, r);
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) field[y][x] *= 0.9;
+    points.forEach(point => {
+      const x = Math.round(cols * 0.5 + Math.sin(t * 1.3 + point.phase) * cols * 0.26 + Math.sin(t * 0.4 + point.phase * 2) * cols * 0.08);
+      const y = Math.round(rows * 0.5 + Math.cos(t * 1.6 + point.phase) * rows * 0.3);
+      plotLine(point.px, point.py, x, y);
+      point.px = x;
+      point.py = y;
+    });
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) out += chars[Math.max(0, Math.min(chars.length - 1, Math.floor(field[y][x] * (chars.length - 1))))];
+      out += '\n';
+    }
+    el.textContent = out;
+    t += 0.028;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 79. VAULT HALL ──────────────────────────── */
+function asciiVault(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const cx = cols * 0.5;
+    const baseY = rows - 2;
+    const shift = (t * 0.8) % 1;
+    for (let i = 8; i >= 0; i--) {
+      const depth = (i + shift) / 9;
+      const w = Math.max(2, Math.floor(cols * (0.08 + depth * 0.42)));
+      const h = Math.max(2, Math.floor(rows * (0.08 + depth * 0.65)));
+      const top = Math.floor(baseY - h);
+      const left = Math.floor(cx - w);
+      const right = Math.floor(cx + w);
+      for (let y = top + 1; y <= baseY; y++) {
+        if (grid[y] && grid[y][left] !== undefined) grid[y][left] = '|';
+        if (grid[y] && grid[y][right] !== undefined) grid[y][right] = '|';
+      }
+      for (let x = left; x <= right; x++) {
+        const norm = (x - cx) / Math.max(1, w);
+        const y = Math.floor(top + Math.abs(norm) * Math.abs(norm) * h * 0.45);
+        if (grid[y] && grid[y][x] !== undefined) grid[y][x] = '-';
+      }
+      const floorY = Math.min(rows - 1, baseY + 1);
+      if (grid[floorY]) {
+        if (grid[floorY][left] !== undefined) grid[floorY][left] = '/';
+        if (grid[floorY][right] !== undefined) grid[floorY][right] = '\\';
+      }
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.024;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 80. ZENITH DOME ─────────────────────────── */
+function asciiZenith(id) {
+  const el = document.getElementById(id);
+  let t = 0;
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, () => Array(cols).fill(' '));
+    const cx = cols * 0.5;
+    const cy = rows * 1.15;
+    const radii = [cols * 0.22, cols * 0.34, cols * 0.47, cols * 0.62];
+    radii.forEach((r, i) => {
+      for (let x = Math.max(0, Math.floor(cx - r)); x < Math.min(cols, Math.ceil(cx + r)); x++) {
+        const dx = x - cx;
+        const inside = r * r - dx * dx;
+        if (inside < 0) continue;
+        const y = Math.floor(cy - Math.sqrt(inside) * (0.22 + i * 0.05));
+        if (grid[y] && grid[y][x] !== undefined) grid[y][x] = i % 2 === 0 ? '.' : '-';
+      }
+    });
+    for (let m = 0; m < 7; m++) {
+      const ang = -1.1 + (m / 6) * 2.2 + Math.sin(t * 0.4 + m) * 0.08;
+      for (let s = 0; s < rows * 0.9; s += 0.6) {
+        const x = Math.round(cx + Math.sin(ang) * s * 1.1);
+        const y = Math.round(cy - Math.cos(ang) * s * 0.45);
+        if (grid[y] && grid[y][x] !== undefined) grid[y][x] = (m + Math.floor(t * 10)) % 2 === 0 ? '|' : ':';
+      }
+    }
+    for (let i = 0; i < Math.max(16, Math.floor(cols * 0.25)); i++) {
+      const sx = Math.floor(((i * 19) + t * 8) % cols);
+      const sy = Math.floor(rows * 0.08 + (Math.sin(i * 3.7 + t) + 1) * rows * 0.2);
+      if (grid[sy] && grid[sy][sx] !== undefined) grid[sy][sx] = (i + Math.floor(t * 5)) % 6 === 0 ? '*' : '.';
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 0.02;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 81. PARROT PARADE ───────────────────────── */
+function asciiParrot(id) {
+  const el = document.getElementById(id);
+  const frames = [
+`                         .cccc;;cc;';c.
+                      .,:dkdc:;;:c:,:d:.
+                     .loc'.,cc::c:::,..;:.
+                   .cl;....;dkdccc::,...c;
+                  .c:,';:'..ckc',;::;....;c.
+                .c:'.,dkkoc:ok:;llllc,,c,';:.
+               .;c,';okkkkkkkk:;lllll,:kd;.;:,.
+               co..:kkkkkkkkkk:;llllc':kkc..oNc
+             .cl;.,oxkkkkkkkkkc,:cll;,okkc'.cO;
+             ;k:..ckkkkkkkkkkkl..,;,.;xkko:',l'
+            .,...';dkkkkkkkkkkd;.....ckkkl'.cO;
+         .,,:,.;oo:ckkkkkkkkkkkdoc;;cdkkkc..cd,
+      .cclo;,ccdkkl;llccdkkkkkkkkkkkkkkkd,.c;
+     .lol:;;okkkkkxooc::coodkkkkkkkkkkkko'.oc
+   .c:'..lkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkd,.oc
+  .lo;,:cdkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkd,.c;
+,dx:..;lllllllllllllllllllllllllllllllllc'...
+cNO;........................................`,
+`                .ckx;'........':c.
+             .,:c:::::oxxocoo::::,',.
+            .odc'..:lkkoolllllo;..;d,
+            ;c..:o:..;:..',;'.......;.
+           ,c..:0Xx::o:.,cllc:,'::,.,c.
+           ;c;lkXKXXXXl.;lllll;lKXOo;':c.
+         ,dc.oXXXXXXXXl.,lllll;lXXXXx,c0:
+         ;Oc.oXXXXXXXXo.':ll:;'oXXXXO;,l'
+         'l;;kXXXXXXXXd'.'::'..dXXXXO;,l'
+         'l;:0XXXXXXXX0x:...,:o0XXXXx,:x,
+         'l;;kXXXXXXXXXKkol;oXXXXXXXO;oNc
+        ,c'..ckk0XXXXXXXXXX00XXXXXXX0:;o:.
+      .':;..:do::ooookXXXXXXXXXXXXXXXo..c;
+    .',',:co0XX0kkkxxOXXXXXXXXXXXXXXXOc..;l.
+  .:;'..oXXXXXXXXXXXXXXXXXXXXXXXXXXXXXko;';:.
+.ldc..:oOXKXXXXXXKXXKXXXXXXXXXXXXXXXXXXXo..oc
+:0o...:dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxo,.:,
+cNo........................................;'`,
+`            .cc;.  ...  .;c.
+         .,,cc:cc:lxxxl:ccc:;,.
+        .lo;...lKKklllookl..cO;
+      .cl;.,:'.okl;..''.;,..';:.
+     .:o;;dkd,.ll..,cc::,..,'.;:,.
+     co..lKKKkokl.':lloo;''ol..;dl.
+   .,c;.,xKKKKKKo.':llll;.'oOxl,.cl,.
+   cNo..lKKKKKKKo'';llll;;okKKKl..oNc
+   cNo..lKKKKKKKko;':c:,'lKKKKKo'.oNc
+   cNo..lKKKKKKKKKl.....'dKKKKKxc,l0:
+   .c:'.lKKKKKKKKKk;....lKKKKKKo'.oNc
+     ,:.'oxOKKKKKKKOxxxxOKKKKKKxc,;ol:.
+     ;c..'':oookKKKKKKKKKKKKKKKKKk:.'clc.
+   ,xl'.,oxo;'';oxOKKKKKKKKKKKKKKKOxxl:::;,.
+  .dOc..lKKKkoooookKKKKKKKKKKKKKKKKKKKxl,;ol.
+  cx,';okKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKl..;lc.
+  co..:dddddddddddddddddddddddddddddddddl::',::.
+  co...........................................`,
+`           .ccccccc.
+      .,,,;cooolccoo;;,,.
+     .dOx;..;lllll;..;xOd.
+   .cdo;',loOXXXXXkll;';odc.
+  ,ol:;c,':oko:cccccc,...ckl.
+  ;c.;kXo..::..;c::'.......oc
+,dc..oXX0kk0o.':lll;..cxxc.,ld,
+kNo.'oXXXXXXo',:lll;..oXXOo;cOd.
+KOc;oOXXXXXXo.':lol;..dXXXXl';xc
+Ol,:k0XXXXXX0c.,clc'.:0XXXXx,.oc
+KOc;dOXXXXXXXl..';'..lXXXXXo..oc
+dNo..oXXXXXXXOx:..'lxOXXXXXk,.:; ..
+cNo..lXXXXXXXXXOolkXXXXXXXXXkl,..;:';.
+.,;'.,dkkkkk0XXXXXXXXXXXXXXXXXOxxl;,;,;l:.
+  ;c.;:''''':doOXXXXXXXXXXXXXXXXXXOdo;';clc.
+  ;c.lOdood:'''oXXXXXXXXXXXXXXXXXXXXXk,..;ol.
+  ';.:xxxxxocccoxxxxxxxxxxxxxxxxxxxxxxl::'.';;.
+  ';........................................;l'`,
+`
+        .;:;;,.,;;::,.
+     .;':;........'co:.
+   .clc;'':cllllc::,.':c.
+  .lo;;o:coxdllllllc;''::,,.
+.c:'.,cl,.'l:',,;;'......cO;
+do;';oxoc;:l;;llllc'.';;'.,;.
+c..ckkkkkkkd,;llllc'.:kkd;.':c.
+'.,okkkkkkkkc;lllll,.:kkkdl,cO;
+..;xkkkkkkkkc,ccll:,;okkkkk:,co,
+..,dkkkkkkkkc..,;,'ckkkkkkkc;ll.
+..'okkkkkkkko,....'okkkkkkkc,:c.
+c..ckkkkkkkkkdl;,:okkkkkkkkd,.',';.
+d..':lxkkkkkkkkxxkkkkkkkkkkkdoc;,;'..'.,.
+o...'';llllldkkkkkkkkkkkkkkkkkkdll;..'cdo.
+o..,l;'''''';dkkkkkkkkkkkkkkkkkkkkdlc,..;lc.
+o..;lc;;;;;;,,;clllllllllllllllllllllc'..,:c.
+o..........................................;'`,
+`
+           .,,,,,,,,,.
+         .ckKxodooxOOdcc.
+      .cclooc'....';;cool.
+     .loc;;;;clllllc;;;;;:;,.
+   .c:'.,okd;;cdo:::::cl,..oc
+  .:o;';okkx;';;,';::;'....,:,.
+  co..ckkkkkddkc,cclll;.,c:,:o:.
+  co..ckkkkkkkk:,cllll;.:kkd,.':c.
+.,:;.,okkkkkkkk:,cclll;.ckkkdl;;o:.
+cNo..ckkkkkkkkko,.;loc,.ckkkkkc..oc
+,dd;.:kkkkkkkkkx;..;:,.'lkkkkko,.:,
+  ;:.ckkkkkkkkkkc.....;ldkkkkkk:.,'
+,dc..'okkkkkkkkkxoc;;cxkkkkkkkkc..,;,.
+kNo..':lllllldkkkkkkkkkkkkkkkkkdcc,.;l.
+KOc,c;''''''';lldkkkkkkkkkkkkkkkkkc..;lc.
+xx:':;;;;,.,,...,;;cllllllllllllllc;'.;od,
+cNo.....................................oc`,
+`
+
+                   .ccccccc.
+               .ccckNKOOOOkdcc.
+            .;;cc:ccccccc:,:c::,,.
+         .c;:;.,cccllxOOOxlllc,;ol.
+        .lkc,coxo:;oOOxooooooo;..:,
+      .cdc.,dOOOc..cOd,.',,;'....':l.
+      cNx'.lOOOOxlldOc..;lll;.....cO;
+     ,do;,:dOOOOOOOOOl'':lll;..:d:''c,
+     co..lOOOOOOOOOOOl'':lll;.'lOd,.cd.
+     co.'dOOOOOOOOOOOo,.;llc,.,dOOc..dc
+     co..lOOOOOOOOOOOOc.';:,..cOOOl..oc
+   .,:;.'::lxOOOOOOOOOo:'...,:oOOOc.'dc
+   ;Oc..cl'':lldOOOOOOOOdcclxOOOOx,.cd.
+  .:;';lxl''''':lldOOOOOOOOOOOOOOc..oc
+,dl,.'cooc:::,....,::coooooooooooc'.c:
+cNo.................................oc`,
+`
+
+
+                        .cccccccc.
+                  .,,,;;cc:cccccc:;;,.
+                .cdxo;..,::cccc::,..;l.
+               ,do:,,:c:coxxdllll:;,';:,.
+             .cl;.,oxxc'.,cc,.';;;'...oNc
+             ;Oc..cxxxc'.,c;..;lll;...cO;
+           .;;',:ldxxxdoldxc..;lll:'...'c,
+           ;c..cxxxxkxxkxxxc'.;lll:'','.cdc.
+         .c;.;odxxxxxxxxxxxd;.,cll;.,l:.'dNc
+        .:,''ccoxkxxkxxxxxxx:..,:;'.:xc..oNc
+      .lc,.'lc':dxxxkxxxxxxxol,...',lx:..dNc
+     .:,',coxoc;;ccccoxxxxxxxxo:::oxxo,.cdc.
+  .;':;.'oxxxxxc''''';cccoxxxxxxxxxxxc..oc
+,do:'..,:llllll:;;;;;;,..,;:lllllllll;..oc
+cNo.....................................oc`,
+`
+
+                              .ccccc.
+                         .cc;'coooxkl;.
+                     .:c:::c:,,,,,;c;;,.'.
+                   .clc,',:,..:xxocc;'..c;
+                  .c:,';:ox:..:c,,,,,,...cd,
+                .c:'.,oxxxxl::l:.,loll;..;ol.
+                ;Oc..:xxxxxxxxx:.,llll,....oc
+             .,;,',:loxxxxxxxxx:.,llll;.,,.'ld,
+            .lo;..:xxxxxxxxxxxx:.'cllc,.:l:'cO;
+           .:;...'cxxxxxxxxxxxxoc;,::,..cdl;;l'
+         .cl;':,'';oxxxxxxdxxxxxx:....,cooc,cO;
+     .,,,::;,lxoc:,,:lxxxxxxxxxxxo:,,;lxxl;'oNc
+   .cdxo;':lxxxxxxc'';cccccoxxxxxxxxxxxxo,.;lc.
+  .loc'.'lxxxxxxxxocc;''''';ccoxxxxxxxxx:..oc
+olc,..',:cccccccccccc:;;;;;;;;:ccccccccc,.'c,
+Ol;......................................;l'`,
+`                              ,ddoodd,
+                         .cc' ,ooccoo,'cc.
+                      .ccldo;...',,...;oxdc.
+                   .,,:cc;.,'..;lol;;,'..lkl.
+                  .dOc';:ccl;..;dl,.''.....oc
+                .,lc',cdddddlccld;.,;c::'..,cc:.
+                cNo..:ddddddddddd;':clll;,c,';xc
+               .lo;,clddddddddddd;':clll;:kc..;'
+             .,c;..:ddddddddddddd:';clll,;ll,..
+             ;Oc..';:ldddddddddddl,.,c:;';dd;..
+           .''',:c:,'cdddddddddddo:,''..'cdd;..
+         .cdc';lddd:';lddddddddddddd;.';lddl,..
+      .,;::;,cdddddol;;lllllodddddddlcldddd:.'l;
+     .dOc..,lddddddddlcc:;'';cclddddddddddd;;ll.
+   .coc,;::ldddddddddddddlcccc:ldddddddddl:,cO;
+,xl::,..,cccccccccccccccccccccccccccccccc:;':xx,
+cNd.........................................;lOc`
+  ];
+  const cleanFrames = frames.map(frame => frame.replace(/^\n+/, '').split('\n').map(line => line.replace(/\s+$/,'')).join('\n'));
+  let tick = 0;
+  let confetti = 0;
+  function drawFrame(grid, frame, ox, oy) {
+    const lines = frame.split('\n');
+    for (let y = 0; y < lines.length; y++) {
+      const line = lines[y];
+      for (let x = 0; x < line.length; x++) {
+        const ch = line[x];
+        if (ch === ' ') continue;
+        const gx = ox + x;
+        const gy = oy + y;
+        if (grid[gy] && grid[gy][gx] !== undefined) grid[gy][gx] = ch;
+      }
+    }
+  }
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, (_, y) => Array.from({ length: cols }, (_, x) => {
+      const sparkle = Math.sin(x * 0.28 + confetti * 0.18 + y * 0.12) + Math.cos(y * 0.4 - confetti * 0.13);
+      return y < rows * 0.35 && sparkle > 1.82 ? '·' : ' ';
+    }));
+    for (let x = 0; x < cols; x++) {
+      const beat = Math.sin(x * 0.18 + confetti * 0.12);
+      const floorY = rows - 1 - Math.max(0, Math.floor((beat + 1) * 1.2));
+      for (let y = floorY; y < rows; y++) if (grid[y] && grid[y][x] === ' ') grid[y][x] = y === floorY ? '=' : '.';
+    }
+    const parrot = cleanFrames[tick % cleanFrames.length];
+    const lines = parrot.split('\n');
+    const fw = Math.max(...lines.map(line => line.length));
+    const fh = lines.length;
+    const ox = Math.floor((cols - fw) * 0.5 + Math.sin(confetti * 0.08) * Math.max(1, Math.floor((cols - fw) * 0.12)));
+    const oy = Math.max(0, Math.floor((rows - fh) * 0.5 - 1 + Math.sin(confetti * 0.2) * 1));
+    drawFrame(grid, parrot, ox, oy);
+    const banner = '♪';
+    for (let i = 0; i < 5; i++) {
+      const bx = Math.floor((cols * (0.14 + i * 0.17) + confetti * (0.6 + i * 0.08)) % cols);
+      const by = Math.max(0, Math.floor(rows * 0.12 + Math.sin(confetti * 0.15 + i) * 2));
+      if (grid[by] && grid[by][bx] !== undefined) grid[by][bx] = banner;
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    tick = (tick + 1) % cleanFrames.length;
+    confetti += 1;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── 82. MASCOT BOUNCE ───────────────────────── */
+function asciiMascot(id) {
+  const el = document.getElementById(id);
+  const sprite = [
+    "                    ▐▛███▜▌                    ",
+    "                   ▝▜█████▛▘                  ",
+    "                     ▘▘ ▝▝                    "
+  ];
+  let t = 0;
+  function draw(grid, ox, oy, lines) {
+    for (let y = 0; y < lines.length; y++) {
+      const line = lines[y];
+      for (let x = 0; x < line.length; x++) {
+        const ch = line[x];
+        if (ch === ' ') continue;
+        const gx = ox + x;
+        const gy = oy + y;
+        if (grid[gy] && grid[gy][gx] !== undefined) grid[gy][gx] = ch;
+      }
+    }
+  }
+  function frame() {
+    const { cols, rows } = getDims(el);
+    const grid = Array.from({ length: rows }, (_, y) => Array.from({ length: cols }, (_, x) => {
+      const sparkle = Math.sin(x * 0.23 + t * 0.08) + Math.cos(y * 0.41 - t * 0.05);
+      return y < rows * 0.42 && sparkle > 1.88 ? '·' : ' ';
+    }));
+
+    const platformTop = Math.max(3, rows - 4);
+    const scroll = t;
+    for (let x = 0; x < cols; x++) {
+      if (grid[platformTop + 1] && grid[platformTop + 1][x] === ' ') grid[platformTop + 1][x] = ((x + scroll) % 6 < 3) ? '█' : '▓';
+      if (grid[platformTop + 2] && grid[platformTop + 2][x] === ' ') grid[platformTop + 2][x] = ((x + scroll) % 4 < 2) ? '▓' : '▒';
+      if (grid[platformTop + 3] && grid[platformTop + 3][x] === ' ') grid[platformTop + 3][x] = '▒';
+      if ((x + scroll) % 11 === 0 && grid[platformTop] && grid[platformTop][x] === ' ') grid[platformTop][x] = '_';
+    }
+
+    for (let i = 0; i < 4; i++) {
+      const cloudX = Math.floor((cols + 18) - ((t * (0.45 + i * 0.08) + i * 17) % (cols + 24))) - 8;
+      const cloudY = 2 + (i % 2) * 2;
+      const cloud = i % 2 === 0 ? ['.~~.', '~~~~~'] : ['.~.', '~~~'];
+      draw(grid, cloudX, cloudY, cloud);
+    }
+
+    for (let i = 0; i < 3; i++) {
+      const obsX = Math.floor(cols + 10 - ((t * (1.2 + i * 0.2) + i * 23) % (cols + 20)));
+      const obsH = 1 + ((Math.floor(t / 9) + i) % 2);
+      for (let y = 0; y < obsH; y++) {
+        const gy = platformTop - y;
+        if (grid[gy] && grid[gy][obsX] !== undefined) grid[gy][obsX] = '▌';
+        if (grid[gy] && grid[gy][obsX + 1] !== undefined) grid[gy][obsX + 1] = '▐';
+      }
+    }
+
+    const fw = sprite[0].length;
+    const fh = sprite.length;
+    const mascotX = Math.max(1, Math.floor(cols * 0.18));
+    const cycle = t % 72;
+    let jump = 0;
+    if (cycle >= 18 && cycle <= 42) {
+      const p = (cycle - 18) / 24;
+      jump = Math.sin(p * Math.PI) * Math.max(2, Math.floor(rows * 0.18));
+    }
+    const centerY = Math.max(1, Math.floor(platformTop - fh + 1 - jump));
+    draw(grid, mascotX, centerY, sprite);
+    const shadowWidth = Math.max(4, 12 - Math.floor(jump * 1.4));
+    const shadowY = Math.min(rows - 1, platformTop + 1);
+    for (let i = -shadowWidth; i <= shadowWidth; i++) {
+      const gx = mascotX + Math.floor(fw / 2) + i;
+      if (grid[shadowY] && grid[shadowY][gx] === ' ') grid[shadowY][gx] = i % 2 === 0 ? '_' : '.';
+    }
+
+    for (let i = 0; i < 5; i++) {
+      const coinX = Math.floor(cols + 8 - ((t * (1.6 + i * 0.1) + i * 19) % (cols + 18)));
+      const coinBase = platformTop - 4 - (i % 2);
+      const coinY = Math.max(1, Math.floor(coinBase - Math.sin((t + i * 7) * 0.18) * 1.2));
+      if (grid[coinY] && grid[coinY][coinX] !== undefined) grid[coinY][coinX] = ((t + i * 3) % 8 < 4) ? '○' : '◌';
+    }
+    el.textContent = grid.map(row => row.join('')).join('\n');
+    t += 1;
+    requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+/* ─── INIT ALL DEMOS ───────────────────────────── */
+const animations = [
+  { name: 'wave', canvasId: 'wave-canvas', fn: asciiWave },
+  { name: 'rain', canvasId: 'rain-canvas', fn: asciiRain },
+  { name: 'plasma', canvasId: 'plasma-canvas', fn: asciiPlasma },
+  { name: 'ripple', canvasId: 'ripple-canvas', fn: asciiRipple },
+  { name: 'noise', canvasId: 'noise-canvas', fn: asciiNoise },
+  { name: 'vortex', canvasId: 'vortex-canvas', fn: asciiVortex },
+  { name: 'fire', canvasId: 'fire-canvas', fn: asciiFire },
+  { name: 'stars', canvasId: 'stars-canvas', fn: asciiStars },
+  { name: 'dna', canvasId: 'dna-canvas', fn: asciiDNA },
+  { name: 'binary', canvasId: 'binary-canvas', fn: asciiBinary },
+  { name: 'radar', canvasId: 'radar-canvas', fn: asciiRadar },
+  { name: 'worms', canvasId: 'worms-canvas', fn: asciiWorms },
+  { name: 'tunnel', canvasId: 'tunnel-canvas', fn: asciiTunnel },
+  { name: 'sand', canvasId: 'sand-canvas', fn: asciiSand },
+  { name: 'ekg', canvasId: 'ekg-canvas', fn: asciiEKG },
+  { name: 'life', canvasId: 'life-canvas', fn: asciiLife },
+  { name: 'cube', canvasId: 'cube-canvas', fn: asciiCube },
+  { name: 'lissajous', canvasId: 'lissajous-canvas', fn: asciiLissajous },
+  { name: 'snow', canvasId: 'snow-canvas', fn: asciiSnow },
+  { name: 'mandel', canvasId: 'mandel-canvas', fn: asciiMandel },
+  { name: 'ant', canvasId: 'ant-canvas', fn: asciiAnt },
+  { name: 'orbits', canvasId: 'orbits-canvas', fn: asciiOrbits },
+  { name: 'smoke', canvasId: 'smoke-canvas', fn: asciiSmoke },
+  { name: 'lightning', canvasId: 'lightning-canvas', fn: asciiLightning },
+  { name: 'rule30', canvasId: 'rule30-canvas', fn: asciiRule30 },
+  { name: 'meta', canvasId: 'meta-canvas', fn: asciiMeta },
+  { name: 'maze', canvasId: 'maze-canvas', fn: asciiMaze },
+  { name: 'bubbles', canvasId: 'bubbles-canvas', fn: asciiBubbles },
+  { name: 'react', canvasId: 'react-canvas', fn: asciiReact },
+  { name: 'glitch', canvasId: 'glitch-canvas', fn: asciiGlitch },
+  { name: 'dla', canvasId: 'dla-canvas', fn: asciiDLA },
+  { name: 'torus', canvasId: 'torus-canvas', fn: asciiTorus },
+  { name: 'waterfall', canvasId: 'waterfall-canvas', fn: asciiWaterfall },
+  { name: 'fountain', canvasId: 'fountain-canvas', fn: asciiFountain },
+  { name: 'sierpinski', canvasId: 'sierpinski-canvas', fn: asciiSierpinski },
+  { name: 'aurora', canvasId: 'aurora-canvas', fn: asciiAurora },
+  { name: 'circuit', canvasId: 'circuit-canvas', fn: asciiCircuit },
+  { name: 'moire', canvasId: 'moire-canvas', fn: asciiMoire },
+  { name: 'equalizer', canvasId: 'equalizer-canvas', fn: asciiEqualizer },
+  { name: 'hex', canvasId: 'hex-canvas', fn: asciiHex },
+  { name: 'sunburst', canvasId: 'sunburst-canvas', fn: asciiSunburst },
+  { name: 'comets', canvasId: 'comets-canvas', fn: asciiComets },
+  { name: 'scanlines', canvasId: 'scanlines-canvas', fn: asciiScanlines },
+  { name: 'topo', canvasId: 'topo-canvas', fn: asciiTopo },
+  { name: 'glyph', canvasId: 'glyph-canvas', fn: asciiGlyph },
+  { name: 'pendulum', canvasId: 'pendulum-canvas', fn: asciiPendulum },
+  { name: 'bloom', canvasId: 'bloom-canvas', fn: asciiBloom },
+  { name: 'braid', canvasId: 'braid-canvas', fn: asciiBraid },
+  { name: 'swarm', canvasId: 'swarm-canvas', fn: asciiSwarm },
+  { name: 'bitplane', canvasId: 'bitplane-canvas', fn: asciiBitplane },
+  { name: 'beacon', canvasId: 'beacon-canvas', fn: asciiBeacon },
+  { name: 'shatter', canvasId: 'shatter-canvas', fn: asciiShatter },
+  { name: 'horizon', canvasId: 'horizon-canvas', fn: asciiHorizon },
+  { name: 'lattice', canvasId: 'lattice-canvas', fn: asciiLattice },
+  { name: 'pulse', canvasId: 'pulse-canvas', fn: asciiPulseTunnel },
+  { name: 'nebula', canvasId: 'nebula-canvas', fn: asciiNebula },
+  { name: 'cascade', canvasId: 'cascade-canvas', fn: asciiCascade },
+  { name: 'isofield', canvasId: 'isofield-canvas', fn: asciiIsofield },
+  { name: 'spinner', canvasId: 'spinner-canvas', fn: asciiSpinner },
+  { name: 'quasar', canvasId: 'quasar-canvas', fn: asciiQuasar },
+  { name: 'crystals', canvasId: 'crystals-canvas', fn: asciiCrystals },
+  { name: 'braille', canvasId: 'braille-canvas', fn: asciiBraille },
+  { name: 'helix', canvasId: 'helix-canvas', fn: asciiHelix },
+  { name: 'echo', canvasId: 'echo-canvas', fn: asciiEcho },
+  { name: 'parallax', canvasId: 'parallax-canvas', fn: asciiParallax },
+  { name: 'dunes', canvasId: 'dunes-canvas', fn: asciiDunes },
+  { name: 'koi', canvasId: 'koi-canvas', fn: asciiKoi },
+  { name: 'monsoon', canvasId: 'monsoon-canvas', fn: asciiMonsoon },
+  { name: 'fronds', canvasId: 'fronds-canvas', fn: asciiFronds },
+  { name: 'signal', canvasId: 'signal-canvas', fn: asciiSignal },
+  { name: 'lumen', canvasId: 'lumen-canvas', fn: asciiLumen },
+  { name: 'knots', canvasId: 'knots-canvas', fn: asciiKnots },
+  { name: 'veins', canvasId: 'veins-canvas', fn: asciiVeins },
+  { name: 'marquee', canvasId: 'marquee-canvas', fn: asciiMarquee },
+  { name: 'monolith', canvasId: 'monolith-canvas', fn: asciiMonolith },
+  { name: 'driftgrid', canvasId: 'driftgrid-canvas', fn: asciiDriftGrid },
+  { name: 'cinders', canvasId: 'cinders-canvas', fn: asciiCinders },
+  { name: 'phosphor', canvasId: 'phosphor-canvas', fn: asciiPhosphor },
+  { name: 'vault', canvasId: 'vault-canvas', fn: asciiVault },
+  { name: 'zenith', canvasId: 'zenith-canvas', fn: asciiZenith },
+  { name: 'parrot', canvasId: 'parrot-canvas', fn: asciiParrot },
+  { name: 'mascot', canvasId: 'mascot-canvas', fn: asciiMascot }
+];
+
+const animationRegistry = Object.fromEntries(animations.map(({ name, fn }) => [name, fn]));
+animations.forEach(({ canvasId, fn }) => fn(canvasId));
+const COPY_HELPERS = getDims.toString();
+
+/* ─── EDITOR ───────────────────────────────────── */
+const editorEls = {
+  drawer: document.getElementById('editor-drawer'),
+  backdrop: document.getElementById('editor-backdrop'),
+  title: document.getElementById('editor-title'),
+  copy: document.getElementById('editor-copy'),
+  close: document.getElementById('editor-close'),
+  preview: document.getElementById('editor-preview'),
+  animation: document.getElementById('editor-animation'),
+  speed: document.getElementById('editor-speed'),
+  speedValue: document.getElementById('editor-speed-value'),
+  color: document.getElementById('editor-color'),
+  loop: document.getElementById('editor-loop'),
+  playback: Array.from(document.querySelectorAll('input[name="editor-mode"]'))
 };
 
-function copyCode(name) {
-  navigator.clipboard.writeText(snippets[name]).then(() => {
-    const btns = document.querySelectorAll('.copy-btn');
-    btns.forEach(b => { if (b.getAttribute('onclick').includes(name)) {
-      b.textContent = 'copied ✓';
-      b.classList.add('copied');
-      setTimeout(() => { b.textContent = 'copy code'; b.classList.remove('copied'); }, 2000);
-    }});
+const editorState = {
+  currentName: animations[0].name,
+  speed: 1,
+  accumulator: 0,
+  rafId: 0,
+  useThemeColor: true,
+  open: false,
+  frames: [],
+  frameIndex: 0,
+  frameDirection: 1,
+  playbackMode: 'loop'
+};
+
+function componentToHex(value) {
+  return value.toString(16).padStart(2, '0');
+}
+
+function rgbToHex(rgb) {
+  const match = rgb && rgb.match(/\d+/g);
+  if (!match || match.length < 3) return '#00ffcc';
+  return `#${componentToHex(Number(match[0]))}${componentToHex(Number(match[1]))}${componentToHex(Number(match[2]))}`;
+}
+
+function getCardForAnimation(name) {
+  return document.querySelector(`button[onclick="copyCode('${name}')"]`)?.closest('.card') || null;
+}
+
+function getAnimationTheme(name) {
+  const card = getCardForAnimation(name);
+  const preview = card?.querySelector('.ascii-bg');
+  const pre = card?.querySelector('pre');
+  return {
+    label: card?.querySelector('.card-name')?.textContent?.trim() || name,
+    background: preview ? getComputedStyle(preview).backgroundColor : '#060610',
+    color: pre ? rgbToHex(getComputedStyle(pre).color) : '#00ffcc',
+    lineHeight: pre ? getComputedStyle(pre).lineHeight : '1.3'
+  };
+}
+
+function resetEditorCanvas() {
+  const canvas = document.createElement('pre');
+  canvas.id = 'editor-canvas';
+  editorEls.preview.replaceChildren(canvas);
+  return canvas;
+}
+
+function makeEditorStep(name) {
+  const fn = animationRegistry[name];
+  if (!fn) return null;
+  const source = fn.toString()
+    .replace(/requestAnimationFrame\(frame\);?/g, '')
+    .replace(/frame\(\);\s*}$/, 'return frame;\n}');
+  const factory = new Function(`${COPY_HELPERS}\n${source}\nreturn ${fn.name};`);
+  const previewFn = factory();
+  return previewFn('editor-canvas');
+}
+
+function buildEditorFrames(name, totalFrames = 72) {
+  const step = makeEditorStep(name);
+  const canvas = document.getElementById('editor-canvas');
+  if (!step || !canvas) return [];
+  const frames = [];
+  for (let i = 0; i < totalFrames; i++) {
+    step();
+    frames.push(canvas.textContent);
+  }
+  return frames;
+}
+
+function applyEditorTheme(name) {
+  const theme = getAnimationTheme(name);
+  editorEls.title.textContent = theme.label;
+  editorEls.preview.style.background = theme.background;
+  if (editorState.useThemeColor) editorEls.color.value = theme.color;
+  const canvas = document.getElementById('editor-canvas');
+  if (canvas) {
+    canvas.style.color = editorEls.color.value;
+    canvas.style.lineHeight = theme.lineHeight;
+  }
+}
+
+function renderEditorFrame(index) {
+  const canvas = document.getElementById('editor-canvas');
+  if (!canvas || !editorState.frames.length) return;
+  const safeIndex = Math.max(0, Math.min(editorState.frames.length - 1, index));
+  editorState.frameIndex = safeIndex;
+  canvas.textContent = editorState.frames[safeIndex];
+  canvas.style.color = editorEls.color.value;
+}
+
+function loadEditorAnimation(name) {
+  editorState.currentName = name;
+  editorState.accumulator = 0;
+  editorState.frameIndex = 0;
+  editorState.frameDirection = 1;
+  editorEls.animation.value = name;
+  resetEditorCanvas();
+  applyEditorTheme(name);
+  editorState.frames = buildEditorFrames(name);
+  renderEditorFrame(0);
+}
+
+function openEditor(name = editorState.currentName) {
+  editorState.useThemeColor = true;
+  loadEditorAnimation(name);
+  editorState.open = true;
+  editorEls.drawer.classList.add('open');
+  editorEls.backdrop.classList.add('open');
+  editorEls.drawer.setAttribute('aria-hidden', 'false');
+}
+
+function closeEditor() {
+  editorState.open = false;
+  editorEls.drawer.classList.remove('open');
+  editorEls.backdrop.classList.remove('open');
+  editorEls.drawer.setAttribute('aria-hidden', 'true');
+}
+
+function advanceEditorFrame() {
+  if (!editorState.frames.length) return;
+  if (editorState.playbackMode === 'boomerang') {
+    if (editorState.frames.length === 1) return;
+    let next = editorState.frameIndex + editorState.frameDirection;
+    if (next >= editorState.frames.length) {
+      editorState.frameDirection = -1;
+      next = editorState.frames.length - 2;
+    } else if (next < 0) {
+      editorState.frameDirection = 1;
+      next = 1;
+    }
+    renderEditorFrame(next);
+    return;
+  }
+  renderEditorFrame((editorState.frameIndex + 1) % editorState.frames.length);
+}
+
+function tickEditor() {
+  if (editorState.frames.length && editorEls.loop.checked) {
+    editorState.accumulator += editorState.speed;
+    let steps = Math.floor(editorState.accumulator);
+    editorState.accumulator -= steps;
+    steps = Math.min(steps, 8);
+    for (let i = 0; i < steps; i++) advanceEditorFrame();
+  }
+  editorState.rafId = requestAnimationFrame(tickEditor);
+}
+
+animations.forEach(({ name }) => {
+  const option = document.createElement('option');
+  option.value = name;
+  option.textContent = getAnimationTheme(name).label;
+  editorEls.animation.appendChild(option);
+});
+
+editorEls.animation.addEventListener('change', event => {
+  editorState.useThemeColor = true;
+  loadEditorAnimation(event.target.value);
+});
+
+editorEls.speed.addEventListener('input', event => {
+  editorState.speed = Number(event.target.value);
+  editorEls.speedValue.textContent = `${editorState.speed.toFixed(2)}x`;
+});
+
+editorEls.color.addEventListener('input', event => {
+  editorState.useThemeColor = false;
+  const canvas = document.getElementById('editor-canvas');
+  if (canvas) canvas.style.color = event.target.value;
+});
+
+editorEls.playback.forEach(input => {
+  input.addEventListener('change', event => {
+    editorState.playbackMode = event.target.value;
+    editorState.accumulator = 0;
+    editorState.frameDirection = 1;
+    renderEditorFrame(0);
   });
+});
+
+editorEls.loop.addEventListener('change', () => {
+  editorState.accumulator = 0;
+});
+
+function getConfiguredSource(name) {
+  const fn = animationRegistry[name];
+  if (!fn) return '';
+  const color = editorEls.color.value;
+  const speed = Number(editorEls.speed.value).toFixed(2).replace(/\.00$/, '');
+  const lineHeight = getAnimationTheme(name).lineHeight;
+  const source = fn.toString()
+    .replace(
+      /const el = document\.getElementById\(id\);/,
+      `const el = document.getElementById(id);\n  if (el) {\n    el.style.color = '${color}';\n    el.style.lineHeight = '${lineHeight}';\n  }`
+    )
+    .replace(/t \+= 1;/g, `t += ${speed};`);
+  return `${COPY_HELPERS}\n\n${source}`;
+}
+
+function flashEditorCopy() {
+  editorEls.copy.textContent = 'copied';
+  editorEls.copy.classList.add('copied');
+  setTimeout(() => {
+    editorEls.copy.textContent = 'copy';
+    editorEls.copy.classList.remove('copied');
+  }, 1800);
+}
+
+function copyEditedAnimation() {
+  const source = getConfiguredSource(editorState.currentName);
+  if (!source) return;
+  navigator.clipboard.writeText(source).then(flashEditorCopy);
+}
+
+editorEls.copy.addEventListener('click', copyEditedAnimation);
+editorEls.close.addEventListener('click', closeEditor);
+editorEls.backdrop.addEventListener('click', closeEditor);
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && editorState.open) closeEditor();
+});
+
+editorEls.speedValue.textContent = `${editorState.speed.toFixed(2)}x`;
+loadEditorAnimation(editorState.currentName);
+tickEditor();
+
+/* ─── COPY CODE ────────────────────────────────── */
+function copyCode(name) {
+  openEditor(name);
 }
 </script>
 </body>
